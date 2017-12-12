@@ -8,6 +8,17 @@
 
  'use strict'
 
+ const template = document.createElement('template')
+
+ template.innerHTML = `
+ <style>
+   :host {
+       background-color: red;
+ }
+ </style>
+
+ <ul id="dock"></ul>
+`
  /**
   * Class representing a desktop dock.
   */
@@ -19,9 +30,13 @@
    */
    constructor () {
      super()
+
+     this.attachShadow({mode: 'open'})
+     this.shadowRoot.appendChild(template.content.cloneNode(true))
    }
 
    connectedCallback () {
+     console.log('test')
    }
 
    disconnectedCallback () {
