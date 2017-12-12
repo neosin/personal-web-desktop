@@ -24,20 +24,22 @@
    createWindow () {
      let template = document.querySelector('#window')
      let windowTemplate = document.importNode(template.content, true)
-     let container = document.querySelector('#container')
-     container.appendChild(windowTemplate)
-
-     let windows = document.querySelectorAll('.window')
-     windows[windows.length - 1].id = windows.length
-
-     let windowCloseButtons = document.querySelectorAll('#close')
-     windowCloseButtons[windows.length - 1].id = windows.length
+     document.body.appendChild(windowTemplate)
 
      dragDrop.dragDrop()
 
-     container.addEventListener('click', event => {
-       console.log(event.target.id)
-     })
+     document.addEventListener('click', this.removeWindow)
+   }
+
+   /**
+    *
+    * @param {object} event The event from the object that fired it.
+    */
+   removeWindow (event) {
+     if (event.target.id === 'close') {
+       document.body.removeChild(event.target.parentNode.parentNode)
+       document.removeEventListener('click', this.removeWindow)
+     }
    }
 }
 
