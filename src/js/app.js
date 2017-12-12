@@ -9,3 +9,6 @@
  'use strict'
 
  require('./desktop-dock')
+ const DesktopWindow = require('./DesktopWindow')
+
+ new DesktopWindow().createWindow()
