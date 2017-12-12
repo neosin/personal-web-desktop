@@ -8,30 +8,23 @@ body {
     color: rgb(44, 44, 44);
     border-radius: 5px;
     border: 2px solid rgb(206, 36, 36);
-    height: 400px;
-    width: 300px;
     position: absolute;
 }
 
 #windowHeader {
-    width: 300px;
+    width: 100%;
     border-bottom: 2px solid red;
-}
-
-#windowHeader ul {
-    display: inline;
-    padding: 0px;
-    margin: 0px;
-}
-
-#windowHeader li {
-    display: inline;
-}
-
-#windowHeader p {
-    display: inline-block;
+    height: 50px;
 }
 
 #windowHeader button {
     float: right;
+}
+
+.memory img {
+    width: 100px;
+}
+.memory {
+    width: 450px;
+    margin: 0 auto;
 }
