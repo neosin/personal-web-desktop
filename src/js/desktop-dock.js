@@ -9,7 +9,7 @@
  'use strict'
 
  const template = document.createElement('template')
- const DesktopWindow = require('./DesktopWindow')
+ const MemoryGame = require('./MemoryGame')
 
  template.innerHTML = `
  <style>
@@ -57,7 +57,7 @@
     */
    connectedCallback () {
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       new DesktopWindow().createWindow()
+       new MemoryGame().createMemory()
      })
 
      this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
