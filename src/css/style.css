@@ -1,3 +1,10 @@
 body {
-    background-color: green;
+    background-color: rgb(230, 230, 230);
+}
+
+.window {
+    background-color: black;
+    color: white;
+    height: 300px;
+    width: 200px;
 }

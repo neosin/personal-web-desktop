@@ -16,7 +16,9 @@
    }
 
    createWindow () {
-     console.log('skapat fönster')
+     let template = document.querySelector('#window')
+     let windowTemplate = document.importNode(template.content, true)
+     document.body.appendChild(windowTemplate)
    }
 }
 
