@@ -24,9 +24,20 @@
    createWindow () {
      let template = document.querySelector('#window')
      let windowTemplate = document.importNode(template.content, true)
-     document.body.appendChild(windowTemplate)
+     let container = document.querySelector('#container')
+     container.appendChild(windowTemplate)
+
+     let windows = document.querySelectorAll('.window')
+     windows[windows.length - 1].id = windows.length
+
+     let windowCloseButtons = document.querySelectorAll('#close')
+     windowCloseButtons[windows.length - 1].id = windows.length
 
      dragDrop.dragDrop()
+
+     container.addEventListener('click', event => {
+       console.log(event.target.id)
+     })
    }
 }
 

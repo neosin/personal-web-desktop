@@ -17,6 +17,8 @@
    document.addEventListener('dragstart', event => {
      offsetX = event.clientX - event.target.offsetLeft
      offsetY = event.clientY - event.target.offsetTop
+
+     event.target.style.opacity = 0.3
    })
 
    document.addEventListener('drag', event => {
@@ -26,6 +28,10 @@
 
    document.addEventListener('dragover', event => {
      event.preventDefault()
+   })
+
+   document.addEventListener('dragend', event => {
+     event.target.style.opacity = 1
    })
  }
 

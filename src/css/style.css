@@ -1,10 +1,11 @@
 body {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(51, 51, 51);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .window {
     background-color: rgb(255, 255, 255);
-    color: rgb(82, 81, 81);
+    color: rgb(44, 44, 44);
     border-radius: 5px;
     border: 2px solid rgb(206, 36, 36);
     height: 400px;
@@ -12,11 +13,25 @@ body {
     position: absolute;
 }
 
-#wHeader ul {
-    margin: 0px;
-    padding: 0px;
+#windowHeader {
+    width: 300px;
+    border-bottom: 2px solid red;
 }
 
-#wHeader li {
+#windowHeader ul {
     display: inline;
+    padding: 0px;
+    margin: 0px;
+}
+
+#windowHeader li {
+    display: inline;
+}
+
+#windowHeader p {
+    display: inline-block;
+}
+
+#windowHeader button {
+    float: right;
 }

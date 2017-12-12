@@ -6,16 +6,21 @@
         <link rel="stylesheet" href="/css/style.css">
         <template id="window">
             <div class="window" draggable="true">
-                <div id="wHeader">
+                <div id="windowHeader">
                     <ul>
-                        <li id="closeW"><button>X</button></li>
-                        <li>Titel</li>
+                        <li><p>Titel...</p></li>
+                        <li><button id="close">X</button></li>
                     </ul>
+                </div>
+                <div id="windowContent" draggable="false">
+                    <p>Lorem Ipsum Lorem Ipsum</p>
                 </div>
             </div>
         </template>
     </head>
     <body>
+        <div id="container">
+        </div>
         <desktop-dock></desktop-dock>
         <script src="build.js"></script>
     </body>
