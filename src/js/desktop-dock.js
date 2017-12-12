@@ -12,13 +12,27 @@
 
  template.innerHTML = `
  <style>
-   :host {
+   :host ul {
        background-color: red;
- }
+       margin: 0px;
+       padding: 0px;
+       text-align: center;
+   }
+   :host li {
+       display: inline-block;
+       padding: 10px;
+       margin-left: 20px;
+   }
  </style>
 
- <ul id="dock"></ul>
+ <ul id="dock">
+   <li><a>Memory</a></li>
+   <li><a>Chat</a></li>
+   <li><a>Settings</a></li>
+   <li><a>Music</a></li>
+ </ul>
 `
+
  /**
   * Class representing a desktop dock.
   */
