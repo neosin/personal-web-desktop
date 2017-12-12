@@ -16,7 +16,7 @@
        margin: 0px;
        padding: 0px;
        text-align: center;
-       border-bottom: 2px solid red;;
+       border-bottom: 2px solid red;
    }
    :host li {
        display: inline-block;
