@@ -11,3 +11,12 @@ body {
     width: 300px;
     position: absolute;
 }
+
+#wHeader ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+#wHeader li {
+    display: inline;
+}

@@ -9,6 +9,7 @@
  'use strict'
 
  const template = document.createElement('template')
+ const DesktopWindow = require('./DesktopWindow')
 
  template.innerHTML = `
  <style>
@@ -52,9 +53,12 @@
      this.shadowRoot.appendChild(template.content.cloneNode(true))
    }
 
+   /**
+    * The code that runs when the element is added to the DOM.
+    */
    connectedCallback () {
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       console.log('open memory...')
+       new DesktopWindow().createWindow()
      })
 
      this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
@@ -70,6 +74,9 @@
      })
    }
 
+   /**
+    * The code that runs when the element is removed from the DOM.
+    */
    disconnectedCallback () {
    }
  }
