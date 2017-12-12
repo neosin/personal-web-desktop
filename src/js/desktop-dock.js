@@ -13,23 +13,26 @@
  template.innerHTML = `
  <style>
    :host ul {
-       background-color: red;
        margin: 0px;
        padding: 0px;
        text-align: center;
+       border-bottom: 2px solid red;;
    }
    :host li {
        display: inline-block;
        padding: 10px;
        margin-left: 20px;
    }
+   :host img {
+       width: 80px;
+   }
  </style>
 
  <ul id="dock">
-   <li><a>Memory</a></li>
-   <li><a>Chat</a></li>
-   <li><a>Settings</a></li>
-   <li><a>Music</a></li>
+   <li id="memory"><a><image src="/image/brain.png"></a></li>
+   <li id="chat"><a><img src="/image/chat.png"></a></li>
+   <li id="settings"><a><img src="/image/settings.png"></a></li>
+   <li id="music"><a><img src="/image/music.png"></a></li>
  </ul>
 `
 
@@ -50,7 +53,21 @@
    }
 
    connectedCallback () {
-     console.log('test')
+     this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
+       console.log('open memory...')
+     })
+
+     this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
+       console.log('open chat...')
+     })
+
+     this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
+       console.log('open settings...')
+     })
+
+     this.shadowRoot.querySelector('#music').addEventListener('click', event => {
+       console.log('open music...')
+     })
    }
 
    disconnectedCallback () {
