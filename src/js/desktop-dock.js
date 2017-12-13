@@ -13,26 +13,33 @@
 
  template.innerHTML = `
  <style>
+   :host {
+       position: fixed;
+       bottom: 0px;
+       width: 100%;
+    }
+
    :host ul {
        margin: 0px;
        padding: 0px;
        text-align: center;
    }
+
    :host li {
        display: inline-block;
        padding: 10px;
-       margin-left: 20px;
    }
+
    :host img {
-       width: 80px;
+       width: 60px;
    }
  </style>
 
  <ul id="dock">
-   <li id="memory"><a><image src="/image/brain.png"></a></li>
-   <li id="chat"><a><img src="/image/chat.png"></a></li>
-   <li id="settings"><a><img src="/image/settings.png"></a></li>
-   <li id="music"><a><img src="/image/music.png"></a></li>
+   <li id="memory"><a><image src="/image/icons/brain.png"></a></li>
+   <li id="chat"><a><img src="/image/icons/chat.png"></a></li>
+   <li id="settings"><a><img src="/image/icons/settings.png"></a></li>
+   <li id="music"><a><img src="/image/icons/music.png"></a></li>
  </ul>
 `
 

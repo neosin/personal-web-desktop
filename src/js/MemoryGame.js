@@ -33,6 +33,9 @@
      this.clickRef = this.clickBrickEvent.bind(this)
    }
 
+   /**
+    * Creates a new memory game window.
+    */
    createMemory () {
      this.createWindow()
      let allWindows = document.querySelectorAll('.window')
@@ -111,7 +114,7 @@
      let element = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
 
      if (element.nodeName === 'IMG' && element !== this.prevBrick) {
-       element.src = `image/${element.id.slice(1)}.png`
+       element.src = `image/memory/${element.id.slice(1)}.png`
        this.clickedBricks.push(element)
 
        this.checkClickedBricks(element)
@@ -136,7 +139,7 @@
          this.brickCounter += 2
        } else {
          setTimeout(() => {
-           bricksClicked.forEach(current => { current.src = 'image/0.png' })
+           bricksClicked.forEach(current => { current.src = 'image/memory/0.png' })
            this.prevBrick = null
          }, 1000)
        }
