@@ -17,7 +17,6 @@
  class DesktopWindow {
    constructor () {
      this.windowId = undefined
-     this.currentWindow = null
    }
 
    /**
@@ -31,6 +30,8 @@
      let windows = document.querySelectorAll('.window')
      let window = windows[windows.length - 1]
      window.id = windows.length - 1
+
+     this.windowId = window.id
 
      document.addEventListener('click', this.removeWindow)
    }

@@ -9,7 +9,6 @@
  'use strict'
 
  const DesktopWindow = require('./DesktopWindow')
- const setup = require('./setup')
 
  /**
   * Class representing a memory game.
@@ -24,6 +23,9 @@
      super()
 
      this.desktopWindow = null
+     this.memoryContent = null
+     this.windowContent = null
+     this.memoryControlls = null
      this.x = x
      this.y = y
      this.bricks = []
@@ -40,12 +42,9 @@
    createMemory () {
      this.createWindow()
 
-     let allWindows = document.querySelectorAll('.window')
-     this.desktopWindow = allWindows[allWindows.length - 1]
+     this.desktopWindow = document.querySelectorAll('.window')
+     this.desktopWindow = this.desktopWindow[this.windowId]
      this.desktopWindow.classList.add('memory')
-
-     let windowTitle = this.desktopWindow.querySelector('#windowHeader p')
-     windowTitle.textContent = 'Memory Game'
 
      this.startGame()
    }
@@ -54,22 +53,27 @@
     * Starts the memory game.
     */
    startGame () {
-     setup.addTemplateWindow('#memory', this.desktopWindow)
+     let template = document.querySelector('#memory')
+     this.desktopWindow.querySelector('#windowContent').appendChild(document.importNode(template.content, true))
+
+     this.memoryContent = this.desktopWindow.querySelector('#memoryContent')
+     this.windowContent = this.desktopWindow.querySelector('#windowContent')
+     this.memoryControlls = this.desktopWindow.querySelector('#memoryControlls')
+
+     this.desktopWindow.querySelector('#start').addEventListener('click', event => {
+       this.windowContent.removeChild(this.memoryContent)
+       this.windowContent.removeChild(this.memoryControlls)
+
+       this.bricks.length = 0
+       this.brickCounter = 0
+       this.attempts = 0
+
+       this.startGame()
+     })
 
      this.createBricks()
      this.shuffleBricks()
      this.printGameboard()
-   }
-
-  /**
-   * Resets the game.
-   */
-   resetGame () {
-     this.bricks.length = 0
-     this.brickCounter = 0
-     this.attempts = 0
-
-     this.startGame()
    }
 
    /**
@@ -100,15 +104,13 @@
      let template = document.querySelector('#memoryBricks')
      let aTag
 
-     let div = this.desktopWindow.children[1]
-
      for (let i = 0; i < this.bricks.length; i++) {
        aTag = document.importNode(template.content, true)
-       div.firstElementChild.appendChild(aTag)
-       div.querySelectorAll('img')[i].id = `b${this.bricks[i] + 1}`
+       this.memoryContent.appendChild(aTag)
+       this.memoryContent.querySelectorAll('img')[i].id = `b${this.bricks[i] + 1}`
      }
 
-     div.addEventListener('click', this.clickRef)
+     this.memoryContent.addEventListener('click', this.clickRef)
    }
 
    /**
@@ -134,12 +136,11 @@
     * @param {object} event The brick that was clicked.
     */
    checkClickedBricks (event) {
-     let div = this.desktopWindow.children[1]
      let bricksClicked = this.clickedBricks.slice()
 
      if (this.clickedBricks.length === 2) {
        if (this.clickedBricks[0].src === this.clickedBricks[1].src) {
-         let remove = div.querySelectorAll(`#${event.id}`)
+         let remove = this.memoryContent.querySelectorAll(`#${event.id}`)
 
          remove.forEach(current => { current.parentElement.style.visibility = 'hidden' })
          this.brickCounter += 2
@@ -150,9 +151,10 @@
          }, 1000)
        }
 
-       let tries = div.querySelector('#tries')
-       tries.textContent = `Försök: ${++this.attempts}`
        this.clickedBricks.length = 0
+
+       if (this.brickCounter === this.bricks.length) {
+       }
      }
    }
  }

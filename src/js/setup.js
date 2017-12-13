@@ -8,23 +8,6 @@
 
  'use strict'
 
- /**
- * Adds a given template to the window content div.
- *
- * @param {string} id The ID of the template that will be added.
- * @param {object} currWindow The current window that the function is being used on.
- */
- function addTemplateWindow (id, currWindow) {
-   if (currWindow.firstElementChild.firstElementChild.nodeName === 'DIV') {
-     currWindow.document.querySelector('#windowContent').removeChild(currWindow.firstElementChild.firstElementChild)
-   }
-
-   let templateClone = document.querySelector(id)
-   let template = document.importNode(templateClone.content, true)
-
-   currWindow.querySelector('#windowContent').appendChild(template)
- }
-
 /**
  * Adds a given template to the DOM.
  *
@@ -38,5 +21,4 @@
  }
 
  // Exports
- module.exports.addTemplateWindow = addTemplateWindow
  module.exports.addTemplateBody = addTemplateBody
