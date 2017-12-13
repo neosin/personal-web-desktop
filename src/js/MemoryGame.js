@@ -9,6 +9,7 @@
  'use strict'
 
  const DesktopWindow = require('./DesktopWindow')
+ const setup = require('./setup')
 
  /**
   * Class representing a memory game.
@@ -38,9 +39,14 @@
     */
    createMemory () {
      this.createWindow()
+
      let allWindows = document.querySelectorAll('.window')
      this.desktopWindow = allWindows[allWindows.length - 1]
      this.desktopWindow.classList.add('memory')
+
+     let windowTitle = this.desktopWindow.querySelector('#windowHeader p')
+     windowTitle.textContent = 'Memory Game'
+
      this.startGame()
    }
 
@@ -48,7 +54,7 @@
     * Starts the memory game.
     */
    startGame () {
-     this._addTemplate('#memory')
+     setup.addTemplateWindow('#memory', this.desktopWindow)
 
      this.createBricks()
      this.shuffleBricks()
@@ -98,7 +104,7 @@
 
      for (let i = 0; i < this.bricks.length; i++) {
        aTag = document.importNode(template.content, true)
-       div.appendChild(aTag)
+       div.firstElementChild.appendChild(aTag)
        div.querySelectorAll('img')[i].id = `b${this.bricks[i] + 1}`
      }
 
@@ -144,34 +150,10 @@
          }, 1000)
        }
 
-       this.attempts++
+       let tries = div.querySelector('#tries')
+       tries.textContent = `Försök: ${++this.attempts}`
        this.clickedBricks.length = 0
      }
-
-     if (this.brickCounter === this.bricks.length) {
-       this._addTemplate('#completed')
-       div.querySelector('h2').textContent = `Attempts: ${this.attempts}`
-
-       div.querySelector('button').addEventListener('click', event => {
-         this.resetGame()
-       })
-     }
-   }
-
-   /**
-    * Adds a given template to the DOM.
-    *
-    * @param {string} id The ID of the template that will be added.
-    */
-   _addTemplate (id) {
-     if (this.desktopWindow.firstElementChild.firstElementChild.nodeName === 'DIV') {
-       this.desktopWindow.document.querySelector('#windowContent').removeChild(this.desktopWindow.firstElementChild.firstElementChild)
-     }
-
-     let templateClone = document.querySelector(id)
-     let template = document.importNode(templateClone.content, true)
-
-     this.desktopWindow.querySelector('#windowContent').appendChild(template)
    }
  }
 

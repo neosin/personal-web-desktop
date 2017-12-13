@@ -9,24 +9,28 @@
  'use strict'
 
  const dragDrop = require('./dragDrop')
+ const setup = require('./setup')
 
  /**
   * Class representing a window.
   */
  class DesktopWindow {
    constructor () {
-     this.prop = null
+     this.windowId = undefined
+     this.currentWindow = null
    }
 
    /**
     * Creates a new window and adds it to the DOM.
     */
    createWindow () {
-     let template = document.querySelector('#window')
-     let windowTemplate = document.importNode(template.content, true)
-     document.body.appendChild(windowTemplate)
+     setup.addTemplateBody('#window')
 
      dragDrop.dragDrop()
+
+     let windows = document.querySelectorAll('.window')
+     let window = windows[windows.length - 1]
+     window.id = windows.length - 1
 
      document.addEventListener('click', this.removeWindow)
    }

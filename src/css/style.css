@@ -1,5 +1,8 @@
+/* Global */
+
 body {
     background-image: url('/image/wallpapers/bg1.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -10,30 +13,46 @@ body {
     background-color: rgb(255, 255, 255);
     color: rgb(44, 44, 44);
     border-radius: 5px;
-    border: 2px solid rgb(206, 36, 36);
     position: absolute;
+}
+
+.windowDrag {
+    opacity: 0.3;
 }
 
 #windowHeader {
     width: 100%;
-    border-bottom: 2px solid red;
-    height: 50px;
+    border-bottom: 2px solid rgb(56, 56, 56);
+    height: 38px;
 }
 
 #windowHeader button {
     float: right;
+    padding: 0px;
+    margin-bottom: 10px;
     margin-top: 10px;
+    margin-right: 20px;
 }
 
 #windowHeader p {
     float: left;
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+#windowContent {
+    margin: 0 auto;
+    padding: 10px;
 }
 
 /* Memory */
 
-.memory img {
-    width: 100px;
-}
 .memory {
-    width: 414px;
+    width: 314px;
+}
+
+.memory img {
+    width: 70px;
 }

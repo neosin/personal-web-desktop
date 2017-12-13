@@ -18,7 +18,7 @@
      offsetX = event.clientX - event.target.offsetLeft
      offsetY = event.clientY - event.target.offsetTop
 
-     event.target.style.opacity = 0.3
+     event.target.classList.add('windowDrag')
    })
 
    document.addEventListener('drag', event => {
@@ -31,7 +31,7 @@
    })
 
    document.addEventListener('dragend', event => {
-     event.target.style.opacity = 1
+     event.target.classList.remove('windowDrag')
    })
  }
 
