@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>PWD</title>
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="build.js" defer></script>
 
-        <template id="window">
-            <div class="window" draggable="true">
-                <div id="windowHeader">
-                    <p>Program title...</p>
-                    <button id="close">X</button>
-                </div>
-                <div id="windowContent">
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <title>PWD</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="build.js" defer></script>
+
+    <template id="window">
+        <div class="window" draggable="true">
+            <div id="windowHeader">
+                <button id="close"></button>
+                <p>Program title...</p>
             </div>
-        </template>
-
-        <template id="memoryDefault">
-            <div id="controlls">
-                <button id="settings">Settings</button>
+            <div id="windowContent">
             </div>
-            <div id="content">
-            </div>
-        </template>
+        </div>
+    </template>
 
-        <template id="memoryCompleted">
-            <div id="content">
-                <h2>Congratulations!</h2>
-                <p id="attempts">Attempts: </p>
-                <button id="reset">Play again?</button>
-            </div>
-        </template>
+    <template id="memoryDefault">
+        <div id="controlls">
+            <select>
+                <option value="44">4 x 4</option>
+                <option value="43">4 x 3</option>
+                <option value="32">3 x 2</option>
+                <option value="22">2 x 2</option>
+            </select>
+            <button id="change">Change</button>
+        </div>
+        <div id="content">
+        </div>
+    </template>
 
-        <template id="memorySettings">
-            <div id="content">
-                <select>
-                    <option value="44">4 x 4</option>
-                    <option value="33">3 x 3</option>
-                    <option value="32">3 x 2</option>
-                    <option value="22">2 x 2</option>
-                </select>
+    <template id="memoryCompleted">
+        <div id="content">
+            <h2>Congratulations!</h2>
+            <p id="attempts">Attempts: </p>
+            <button id="reset">Play again?</button>
+        </div>
+    </template>
 
-                    <button id="change">Change</button>
-            </div>
-        </template>
+    <template id="memorySettings">
+        <div id="content">
+        </div>
+    </template>
 
-        <template id="memoryBricks">
-                <a href="#"><img src="image/memory/0.png"></a>
-        </template>
-    </head>
-    <body>
-        <desktop-dock></desktop-dock>
-    </body>
+    <template id="memoryBricks">
+        <a href="#">
+            <img src="/image/memory/0.png">
+        </a>
+    </template>
+</head>
+
+<body>
+    <desktop-dock></desktop-dock>
+</body>
+
 </html>

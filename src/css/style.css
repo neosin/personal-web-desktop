@@ -3,8 +3,14 @@
 body {
     background-image: url('/image/wallpapers/bg1.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;  
+    position: center;
+    background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
 }
 
 /* Window */
@@ -29,13 +35,13 @@ body {
     background: linear-gradient(#e0e0e0, #bababa);
 }
 
-#windowHeader button {
+#windowHeader #close {
     padding: 0px;
     margin: 0px;
-    float: left;
 }
 
 #windowHeader p {
+    display: inline-block;
     font-size: 14px;
     padding: 5px;
     margin: 0px;
@@ -53,6 +59,14 @@ body {
     text-align: center;
 }
 
+.memory #content {
+    clear: both;
+}
+
 .memory img {
     width: 70px;
+}
+
+.memory #controlls {
+    margin-bottom: 10px;
 }
