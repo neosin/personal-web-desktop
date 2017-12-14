@@ -19,7 +19,7 @@
 
         <template id="memoryDefault">
             <div id="controlls">
-                <button>Settings</button>
+                <button id="settings">Settings</button>
             </div>
             <div id="content">
             </div>
@@ -34,14 +34,16 @@
         </template>
 
         <template id="memorySettings">
-            <select>
-                <option value="44">4 x 4</option>
-                <option value="33">3 x 3</option>
-                <option value="32">3 x 2</option>
-                <option value="22">2 x 2</option>
-            </select>
+            <div id="content">
+                <select>
+                    <option value="44">4 x 4</option>
+                    <option value="33">3 x 3</option>
+                    <option value="32">3 x 2</option>
+                    <option value="22">2 x 2</option>
+                </select>
 
-            <button>Change</button>
+                    <button id="change">Change</button>
+            </div>
         </template>
 
         <template id="memoryBricks">

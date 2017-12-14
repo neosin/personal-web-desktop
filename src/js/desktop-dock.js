@@ -64,7 +64,7 @@
     */
    connectedCallback () {
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       new MemoryGame(2, 2).createMemory()
+       new MemoryGame().createMemory()
      })
 
      this.shadowRoot.querySelector('#chat').addEventListener('click', event => {

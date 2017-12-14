@@ -64,6 +64,23 @@
 
      this.appContent = this.currentWindow.querySelector('#content')
 
+     let settings = this.currentWindow.querySelector('#settings')
+
+     settings.addEventListener('click', event => {
+       setup.editAppContent('#memorySettings', this.currentWindow)
+
+       let change = this.currentWindow.querySelector('#change')
+
+       change.addEventListener('click', event => {
+         let select = this.currentWindow.querySelector('select')
+         let option = select.value
+
+         this.x = option.slice(0, 1)
+         this.y = option.slice(1)
+         this.resetGame()
+       })
+     })
+
      this.createBricks()
      this.shuffleBricks()
      this.printGameboard()
