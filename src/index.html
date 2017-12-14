@@ -17,13 +17,31 @@
             </div>
         </template>
 
-        <template id="memory">
+        <template id="memoryDefault">
             <div id="controlls">
-                <button id="start">Start</button>
-                <button id="settings">Settings</button>
+                <button>Settings</button>
             </div>
             <div id="content">
             </div>
+        </template>
+
+        <template id="memoryCompleted">
+            <div id="content">
+                <h2>Congratulations!</h2>
+                <p id="attempts">Attempts: </p>
+                <button id="reset">Play again?</button>
+            </div>
+        </template>
+
+        <template id="memorySettings">
+            <select>
+                <option value="44">4 x 4</option>
+                <option value="33">3 x 3</option>
+                <option value="32">3 x 2</option>
+                <option value="22">2 x 2</option>
+            </select>
+
+            <button>Change</button>
         </template>
 
         <template id="memoryBricks">

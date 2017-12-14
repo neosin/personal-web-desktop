@@ -26,6 +26,10 @@
      let removeParent = window.querySelector('#windowContent')
 
      removeParent.removeChild(remove)
+
+     if (window.querySelector('#controlls')) {
+       removeParent.removeChild(document.querySelector('#controlls'))
+     }
    }
 
    let windowContent = window.querySelector('#windowContent')

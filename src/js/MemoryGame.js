@@ -24,6 +24,7 @@
      super()
 
      this.currentWindow = null
+     this.appContent = null
      this.x = x
      this.y = y
      this.bricks = []
@@ -47,24 +48,21 @@
      this.startGame()
    }
 
+   resetGame () {
+     this.attempts = 0
+     this.brickCounter = 0
+     this.bricks.length = 0
+
+     this.startGame()
+   }
+
    /**
     * Starts the memory game.
     */
    startGame () {
-     setup.editAppContent('#memory', this.currentWindow)
+     setup.editAppContent('#memoryDefault', this.currentWindow)
 
      this.appContent = this.currentWindow.querySelector('#content')
-
-    //  this.currentWindow.querySelector('#start').addEventListener('click', event => {
-    //    this.windowContent.removeChild(this.appContent)
-    //    this.windowContent.removeChild(this.appControlls)
-
-    //    this.bricks.length = 0
-    //    this.brickCounter = 0
-    //    this.attempts = 0
-
-    //    this.startGame()
-    //  })
 
      this.createBricks()
      this.shuffleBricks()
@@ -147,8 +145,19 @@
        }
 
        this.clickedBricks.length = 0
+       this.attempts++
 
        if (this.brickCounter === this.bricks.length) {
+         setup.editAppContent('#memoryCompleted', this.currentWindow)
+
+         let attempts = this.currentWindow.querySelector('#attempts')
+         attempts.textContent += this.attempts
+
+         let button = this.currentWindow.querySelector('#reset')
+
+         button.addEventListener('click', event => {
+           this.resetGame()
+         })
        }
      }
    }
