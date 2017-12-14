@@ -22,6 +22,10 @@ a {
     position: absolute;
 }
 
+.windowMinimize {
+    display: none;
+}
+
 .windowDrag {
     opacity: 0.3;
 }

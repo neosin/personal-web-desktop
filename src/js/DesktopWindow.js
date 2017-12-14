@@ -28,19 +28,18 @@
    createWindow () {
      setup.addTemplateBody('#window')
 
-     dragDrop.dragDrop()
-
      let windows = document.querySelectorAll('.window')
      let window = windows[windows.length - 1]
      window.id = windows.length - 1
-
      this.windowId = window.id
 
      this.currentWindow = document.querySelectorAll('.window')
      this.currentWindow = this.currentWindow[this.windowId]
 
-     document.addEventListener('click', this.removeRef)
-     document.addEventListener('click', this.minimizeRef)
+     this.currentWindow.addEventListener('click', this.removeRef)
+     this.currentWindow.addEventListener('click', this.minimizeRef)
+
+     dragDrop.dragDrop()
    }
 
    /**
@@ -50,14 +49,13 @@
    removeWindow (event) {
      if (event.target.id === 'close') {
        document.body.removeChild(this.currentWindow)
-       document.removeEventListener('click', this.removeWindow)
      }
    }
 
    minimizeWindow (event) {
      if (event.target.id === 'minimize') {
        let content = this.currentWindow.querySelector('#windowContent')
-       content.style.display = 'none'
+       content.classList.toggle('windowMinimize')
      }
    }
 }

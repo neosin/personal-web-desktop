@@ -15,10 +15,16 @@
    let offsetX, offsetY
 
    document.addEventListener('dragstart', event => {
+     event.dataTransfer.effectAllowed = 'move'
+
      offsetX = event.clientX - event.target.offsetLeft
      offsetY = event.clientY - event.target.offsetTop
 
      event.target.classList.add('windowDrag')
+   })
+
+   document.addEventListener('dragenter', event => {
+     event.dataTransfer.dropEffect = 'move'
    })
 
    document.addEventListener('drag', event => {
