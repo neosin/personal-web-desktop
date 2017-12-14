@@ -13,10 +13,6 @@ a {
     text-decoration: none;
 }
 
-.window:focus {
-    z-index: 100;
-}
-
 /* Window */
 
 .window {
@@ -25,6 +21,10 @@ a {
     border-radius: 5px;
     position: absolute;
     box-shadow: 4px 6px 24px 0px rgba(0,0,0,0.75);
+}
+
+.window:focus {
+    z-index: 100;
 }
 
 .windowMinimize {
