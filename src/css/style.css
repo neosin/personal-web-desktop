@@ -27,7 +27,6 @@ a {
 }
 
 #windowHeader {
-    text-align: center;
     width: 100%;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -35,16 +34,18 @@ a {
     background: linear-gradient(#e0e0e0, #bababa);
 }
 
-#windowHeader #close {
-    padding: 0px;
-    margin: 0px;
-}
-
 #windowHeader p {
     display: inline-block;
     font-size: 14px;
     padding: 5px;
     margin: 0px;
+    text-align: center;
+}
+
+#windowHeader img {
+    width: 25px;
+    padding: 3px;
+    vertical-align: middle;
 }
 
 #windowContent {

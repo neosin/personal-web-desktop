@@ -17,6 +17,9 @@
  class DesktopWindow {
    constructor () {
      this.windowId = undefined
+     this.currentWindow = null
+     this.removeRef = this.removeWindow.bind(this)
+     this.minimizeRef = this.minimizeWindow.bind(this)
    }
 
    /**
@@ -33,7 +36,11 @@
 
      this.windowId = window.id
 
-     document.addEventListener('click', this.removeWindow)
+     this.currentWindow = document.querySelectorAll('.window')
+     this.currentWindow = this.currentWindow[this.windowId]
+
+     document.addEventListener('click', this.removeRef)
+     document.addEventListener('click', this.minimizeRef)
    }
 
    /**
@@ -42,8 +49,15 @@
     */
    removeWindow (event) {
      if (event.target.id === 'close') {
-       document.body.removeChild(event.target.parentNode.parentNode)
+       document.body.removeChild(this.currentWindow)
        document.removeEventListener('click', this.removeWindow)
+     }
+   }
+
+   minimizeWindow (event) {
+     if (event.target.id === 'minimize') {
+       let content = this.currentWindow.querySelector('#windowContent')
+       content.style.display = 'none'
      }
    }
 }

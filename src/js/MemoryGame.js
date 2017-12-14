@@ -40,11 +40,7 @@
     */
    createMemory () {
      this.createWindow()
-
-     this.currentWindow = document.querySelectorAll('.window')
-     this.currentWindow = this.currentWindow[this.windowId]
      this.currentWindow.classList.add('memory')
-
      this.startGame()
    }
 
