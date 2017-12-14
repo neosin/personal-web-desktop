@@ -65,7 +65,7 @@
     */
    connectedCallback () {
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       new MemoryGame().createMemory()
+       new MemoryGame().createMemory('Memory', '/image/icons/brain.png')
      })
 
      this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
@@ -79,12 +79,6 @@
      this.shadowRoot.querySelector('#music').addEventListener('click', event => {
        console.log('open music...')
      })
-   }
-
-   /**
-    * The code that runs when the element is removed from the DOM.
-    */
-   disconnectedCallback () {
    }
  }
 

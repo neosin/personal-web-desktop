@@ -23,7 +23,6 @@
    constructor (x = 4, y = 4) {
      super()
 
-     this.currentWindow = null
      this.appContent = null
      this.x = x
      this.y = y
@@ -38,8 +37,8 @@
    /**
     * Creates a new memory game window.
     */
-   createMemory () {
-     this.createWindow()
+   createMemory (title, icon) {
+     this.createWindow(title, icon)
      this.currentWindow.classList.add('memory')
      this.startGame()
    }
@@ -49,7 +48,6 @@
     */
    startGame () {
      setup.editAppContent('#memoryDefault', this.currentWindow)
-
      this.appContent = this.currentWindow.querySelector('#content')
 
      this.currentWindow.querySelector('#change').addEventListener('click', event => {
@@ -66,6 +64,9 @@
      this.printGameboard()
    }
 
+   /**
+    * Resets the game.
+    */
    resetGame () {
      this.attempts = 0
      this.brickCounter = 0

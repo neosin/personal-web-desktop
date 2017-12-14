@@ -16,9 +16,7 @@ class Settings extends DesktopWindow {
 
     this.currentWindow.classList.add('settings')
 
-    let content = this.currentWindow.querySelector('#content')
-
-    content.addEventListener('click', event => {
+    this.currentWindow.querySelector('#content').addEventListener('click', event => {
       if (event.target.nodeName === 'IMG') {
         this.selectedImg = event.target.src
       }

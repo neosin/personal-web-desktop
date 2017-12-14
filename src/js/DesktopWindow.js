@@ -15,8 +15,7 @@
   * Class representing a window.
   */
  class DesktopWindow {
-   constructor () {
-     this.windowId = undefined
+   constructor (title, icon) {
      this.currentWindow = null
      this.removeRef = this.removeWindow.bind(this)
      this.minimizeRef = this.minimizeWindow.bind(this)
@@ -25,16 +24,17 @@
    /**
     * Creates a new window and adds it to the DOM.
     */
-   createWindow () {
+   createWindow (title, icon) {
      setup.addTemplateBody('#window')
 
-     let windows = document.querySelectorAll('.window')
-     let window = windows[windows.length - 1]
-     window.id = windows.length - 1
-     this.windowId = window.id
-
      this.currentWindow = document.querySelectorAll('.window')
-     this.currentWindow = this.currentWindow[this.windowId]
+     this.currentWindow = this.currentWindow[this.currentWindow.length - 1]
+
+     let titleElement = this.currentWindow.querySelector('p')
+     let iconElement = this.currentWindow.querySelector('img')
+
+     titleElement.textContent = title
+     iconElement.src = icon
 
      this.currentWindow.addEventListener('click', this.removeRef)
      this.currentWindow.addEventListener('click', this.minimizeRef)
@@ -43,6 +43,7 @@
    }
 
    /**
+    * Removes the current window.
     *
     * @param {object} event The event from the object that fired it.
     */
@@ -52,6 +53,11 @@
      }
    }
 
+   /**
+    * Closes the current window.
+    *
+    * @param {object} event The event from the object that fired it.
+    */
    minimizeWindow (event) {
      if (event.target.id === 'minimize') {
        let content = this.currentWindow.querySelector('#windowContent')
