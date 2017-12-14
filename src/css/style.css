@@ -86,3 +86,9 @@ a {
 .memory #controlls {
     margin-bottom: 10px;
 }
+
+/* Settings */
+
+.settings img {
+    width: 200px;
+}

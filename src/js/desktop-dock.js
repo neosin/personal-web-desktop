@@ -10,6 +10,7 @@
 
  const template = document.createElement('template')
  const MemoryGame = require('./MemoryGame')
+ const Settings = require('./Settings')
 
  template.innerHTML = `
  <style>
@@ -72,7 +73,7 @@
      })
 
      this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
-       console.log('open settings...')
+       new Settings().createSettingsWindow()
      })
 
      this.shadowRoot.querySelector('#music').addEventListener('click', event => {
