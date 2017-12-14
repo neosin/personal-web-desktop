@@ -20,5 +20,19 @@
    document.body.appendChild(template)
  }
 
+ function editAppContent (id, window) {
+   if (window.querySelector('#content')) {
+     let remove = window.querySelector('#content')
+     let removeParent = window.querySelector('#windowContent')
+
+     removeParent.removeChild(remove)
+   }
+
+   let windowContent = window.querySelector('#windowContent')
+   let template = document.querySelector(id)
+   windowContent.appendChild(document.importNode(template.content, true))
+ }
+
  // Exports
  module.exports.addTemplateBody = addTemplateBody
+ module.exports.editAppContent = editAppContent
