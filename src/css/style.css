@@ -13,6 +13,10 @@ a {
     text-decoration: none;
 }
 
+.window:focus {
+    z-index: 100;
+}
+
 /* Window */
 
 .window {
@@ -20,6 +24,7 @@ a {
     color: rgb(44, 44, 44);
     border-radius: 5px;
     position: absolute;
+    box-shadow: 4px 6px 24px 0px rgba(0,0,0,0.75);
 }
 
 .windowMinimize {
@@ -31,6 +36,7 @@ a {
 }
 
 #windowHeader {
+    height: 30px;
     width: 100%;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -38,18 +44,27 @@ a {
     background: linear-gradient(#e0e0e0, #bababa);
 }
 
-#windowHeader p {
-    display: inline-block;
-    font-size: 14px;
-    padding: 5px;
-    margin: 0px;
-    text-align: center;
+#close, #minimize {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    text-indent: -9999px;
+    float: left;
+    margin-left: 15px;
+    margin-top: 6.5px;
+    margin-bottom: 6.5px;
 }
 
-#windowHeader img {
-    width: 25px;
-    padding: 3px;
-    vertical-align: middle;
+#close {
+    background-color: rgb(255, 47, 0);
+}
+
+#minimize {
+    background-color: rgb(255, 208, 0);
+}
+
+#close:hover, #minimize:hover {
+    opacity: 0.7;
 }
 
 #windowContent {
@@ -62,10 +77,6 @@ a {
 .memory {
     width: 314px;
     text-align: center;
-}
-
-.memory #content {
-    clear: both;
 }
 
 .memory img {

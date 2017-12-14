@@ -8,12 +8,12 @@
     <script src="build.js" defer></script>
 
     <template id="window">
-        <div class="window" draggable="true">
+        <div class="window" draggable="true" tabindex="0">
             <div id="windowHeader">
                 <button id="close">X</button>
                 <button id="minimize">-</button>
-                <img src="/image/icons/brain.png">
-                <p>Program title...</p>
+                <div id="details">
+                </div>
             </div>
             <div id="windowContent">
             </div>
