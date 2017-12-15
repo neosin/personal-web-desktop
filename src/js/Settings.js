@@ -10,8 +10,8 @@ class Settings extends DesktopWindow {
     this.selectedImg = `/image/wallpapers/bg1.jpg'`
   }
 
-  createSettingsWindow () {
-    this.createWindow()
+  createSettingsWindow (title, icon) {
+    this.createWindow(title, icon)
     setup.editAppContent('#settings', this.currentWindow)
 
     this.currentWindow.classList.add('settings')

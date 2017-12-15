@@ -37,6 +37,17 @@
    windowContent.appendChild(document.importNode(template.content, true))
  }
 
+ function windowFocus (currentWindow, previousWindow) {
+   if (document.querySelectorAll('.window').length > 1) {
+     if (currentWindow !== previousWindow) {
+       console.log('öka zindex')
+     } else {
+       console.log('ta bort z index från förra')
+     }
+   }
+ }
+
  // Exports
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
+ module.exports.windowFocus = windowFocus

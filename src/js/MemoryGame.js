@@ -8,13 +8,13 @@
 
  'use strict'
 
- const currentWindow = require('./DesktopWindow')
+ const DesktopWindow = require('./DesktopWindow')
  const setup = require('./setup')
 
  /**
   * Class representing a memory game.
   */
- class MemoryGame extends currentWindow {
+ class MemoryGame extends DesktopWindow {
   /**
    * Creates an instance of MemoryGame.
    *
@@ -40,6 +40,7 @@
    createMemory (title, icon) {
      this.createWindow(title, icon)
      this.currentWindow.classList.add('memory')
+
      this.startGame()
    }
 

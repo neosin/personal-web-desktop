@@ -73,7 +73,7 @@
      })
 
      this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
-       new Settings().createSettingsWindow()
+       new Settings().createSettingsWindow('Settings', '/image/icons/settings.png')
      })
 
      this.shadowRoot.querySelector('#music').addEventListener('click', event => {
