@@ -123,6 +123,16 @@ a {
 
 .chat #content {
     height: 200px;
-    background-color: rgb(245, 180, 150);
+    background-color: rgb(226, 226, 226);
     overflow: scroll;
+    text-align: left;
+    padding: 10px;
+}
+
+.chat #content p {
+    margin: 0px;
+}
+
+.chat textarea {
+    margin-top: 10px;
 }
