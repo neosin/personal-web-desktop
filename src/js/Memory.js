@@ -1,7 +1,7 @@
 /**
  * Module for the Memory Game.
  *
- * @module src/js/MemoryGame.js
+ * @module src/js/Memory.js
  * @author Rasmus Falk
  * @version 1.0.0
  */
@@ -37,7 +37,7 @@
    /**
     * Creates a new memory game window.
     */
-   createMemory (title, icon) {
+   createMemoryWindow (title, icon) {
      this.createWindow(title, icon)
      this.currentWindow.classList.add('memory')
 

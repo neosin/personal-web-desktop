@@ -9,8 +9,9 @@
  'use strict'
 
  const template = document.createElement('template')
- const MemoryGame = require('./MemoryGame')
+ const Memory = require('./Memory')
  const Settings = require('./Settings')
+ const Chat = require('./Chat')
 
  template.innerHTML = `
  <style>
@@ -65,11 +66,11 @@
     */
    connectedCallback () {
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       new MemoryGame().createMemory('Memory', '/image/icons/brain.png')
+       new Memory().createMemoryWindow('Memory', '/image/icons/brain.png')
      })
 
      this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
-       console.log('open chat...')
+       new Chat().createChatWindow('Chat', '/image/icons/chat.png')
      })
 
      this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
