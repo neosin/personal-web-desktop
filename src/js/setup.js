@@ -28,7 +28,7 @@
      removeParent.removeChild(remove)
 
      if (window.querySelector('#controlls')) {
-       removeParent.removeChild(document.querySelector('#controlls'))
+       removeParent.removeChild(window.querySelector('#controlls'))
      }
    }
 
@@ -37,14 +37,14 @@
    windowContent.appendChild(document.importNode(template.content, true))
  }
 
- function windowFocus (currentWindow, previousWindow) {
-   if (document.querySelectorAll('.window').length > 1) {
-     if (currentWindow !== previousWindow) {
-       console.log('öka zindex')
-     } else {
-       console.log('ta bort z index från förra')
-     }
+ function windowFocus (currentWindow) {
+   let allWindows = document.querySelectorAll('.window')
+
+   for (let i = 0; i < allWindows.length; i++) {
+     allWindows[i].style.zIndex = 0
    }
+
+   currentWindow.style.zIndex = 100
  }
 
  // Exports

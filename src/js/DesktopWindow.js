@@ -36,7 +36,13 @@
      let allWindows = document.querySelectorAll('.window')
      this.currentWindow = allWindows[allWindows.length - 1]
 
+     this.currentWindow.style.zIndex = 200
+
      this.addInformation()
+
+     this.currentWindow.addEventListener('focus', event => {
+       setup.windowFocus(this.currentWindow)
+     })
 
      this.currentWindow.addEventListener('click', this.removeRef)
      this.currentWindow.addEventListener('click', this.minimizeRef)

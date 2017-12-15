@@ -22,6 +22,7 @@ a {
     position: absolute;
     box-shadow: 4px 6px 24px 0px rgba(0,0,0,0.75);
     text-align: center;
+    z-index: 0;
 }
 
 .windowMinimize {
