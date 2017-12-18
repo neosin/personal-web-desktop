@@ -23,7 +23,7 @@ class Chat extends DesktopWindow {
 
     let data = {
       type: 'message',
-      data: message.value,
+      data: message.value + '\uD83D\uDE00',
       username: this.nickname,
       channel: 'chat',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
@@ -35,10 +35,9 @@ class Chat extends DesktopWindow {
 
   addMessageToWindow () {
     if (this.response.type === 'message') {
-      let message = document.createElement('p')
+      let message = this.currentWindow.querySelector('#content p')
 
-      this.chatMessageWindow.appendChild(message)
-      message.textContent = `${this.response.username}: ${this.response.data}`
+      message.textContent += `\n${this.response.username}: ${this.response.data}`
     }
   }
 
@@ -77,6 +76,14 @@ class Chat extends DesktopWindow {
     this.webSocket.addEventListener('message', event => {
       this.response = JSON.parse(event.data)
       this.addMessageToWindow()
+    })
+
+    this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
+      this.currentWindow.querySelector('#emojis').classList.toggle('emojiToggle')
+    })
+
+    this.currentWindow.querySelector('#emojis').addEventListener('click', event => {
+      this.currentWindow.querySelector('textarea').value += event.target.getAttribute('data-custom-value')
     })
   }
 }

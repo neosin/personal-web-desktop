@@ -132,6 +132,8 @@ a {
 
 .chat #content p {
     margin: 0px;
+    white-space: pre-line;
+    line-height: 1.5;
 }
 
 .chat textarea {
@@ -174,4 +176,16 @@ a {
     margin-bottom: 5px;
     height: 30px;
     padding: 0px;
+}
+
+.chat #emojis {
+    list-style: none;
+}
+
+.chat #emojis li {
+    display: inline;
+}
+
+.emojiToggle {
+    display: none;
 }
