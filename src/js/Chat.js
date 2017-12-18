@@ -102,8 +102,6 @@ class Chat extends DesktopWindow {
     if (message.value.search('/:cool:/')) {
       message.value = message.value.replace(/:cool:/g, '\uD83D\uDE0E')
     }
-
-    console.log(message.value)
   }
 }
 
