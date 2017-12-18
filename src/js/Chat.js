@@ -23,7 +23,7 @@ class Chat extends DesktopWindow {
 
     let data = {
       type: 'message',
-      data: message.value + '\uD83D\uDE00',
+      data: message.value,
       username: this.nickname,
       channel: 'chat',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
@@ -69,6 +69,7 @@ class Chat extends DesktopWindow {
       this.chatMessageWindow.appendChild(p)
 
       this.currentWindow.querySelector('#send').addEventListener('click', event => {
+        this.addEmojis()
         this.sendMessage()
       })
     })
@@ -85,6 +86,24 @@ class Chat extends DesktopWindow {
     this.currentWindow.querySelector('#emojis').addEventListener('click', event => {
       this.currentWindow.querySelector('textarea').value += event.target.getAttribute('data-custom-value')
     })
+  }
+
+  addEmojis () {
+    let message = this.currentWindow.querySelector('textarea')
+
+    if (message.value.search('/:happy:/')) {
+      message.value = message.value.replace(/:happy:/g, '\uD83D\uDE00')
+    }
+
+    if (message.value.search('/:smile:/')) {
+      message.value = message.value.replace(/:smile:/g, '\uD83D\uDE42')
+    }
+
+    if (message.value.search('/:cool:/')) {
+      message.value = message.value.replace(/:cool:/g, '\uD83D\uDE0E')
+    }
+
+    console.log(message.value)
   }
 }
 
