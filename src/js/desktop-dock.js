@@ -12,6 +12,7 @@
  const Memory = require('./Memory')
  const Settings = require('./Settings')
  const Chat = require('./Chat')
+ const Weather = require('./Weather')
  const setup = require('./setup')
 
  template.innerHTML = `
@@ -38,6 +39,7 @@
    <li id="memory"><a><image src="/image/icons/game.png"></a></li>
    <li id="chat"><a><img src="/image/icons/chat.png"></a></li>
    <li id="settings"><a><img src="/image/icons/settings.png"></a></li>
+   <li id="weather"><a><img src="/image/icons/weather.png"></a></li>
  </ul>
 `
 
@@ -73,6 +75,10 @@
 
      this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
        new Settings().createSettingsWindow('Settings', '/image/icons/settings.png')
+     })
+
+     this.shadowRoot.querySelector('#weather').addEventListener('click', event => {
+       new Weather().createWeatherWindow('Weather', '/image/icons/weather.png')
      })
    }
  }
