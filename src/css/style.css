@@ -3,7 +3,7 @@
 body {
     background-image: url('/image/wallpapers/bg1.jpg');
     background-repeat: no-repeat;
-    background-size: cover;  
+    background-size: cover;
     position: center;
     background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
@@ -20,7 +20,7 @@ a {
     color: rgb(44, 44, 44);
     border-radius: 5px;
     position: absolute;
-    box-shadow: 4px 6px 24px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 6px 24px 0px rgba(0, 0, 0, 0.75);
     text-align: center;
     z-index: 200;
 }
@@ -62,7 +62,8 @@ a {
     height: 100%;
 }
 
-#close, #minimize {
+#close,
+#minimize {
     width: 15px;
     height: 15px;
     border-radius: 100%;
@@ -82,13 +83,15 @@ a {
     margin-left: 25px;
 }
 
-#close:hover, #minimize:hover {
+#close:hover,
+#minimize:hover {
     opacity: 0.7;
 }
 
 #windowContent {
     padding: 10px;
 }
+
 
 /* Memory */
 
@@ -104,6 +107,7 @@ a {
     margin-bottom: 10px;
 }
 
+
 /* Settings */
 
 .settings {
@@ -114,6 +118,7 @@ a {
     width: 350px;
     height: 200px;
 }
+
 
 /* Chat */
 
@@ -170,7 +175,8 @@ a {
     margin-bottom: 5px;
 }
 
-.chat #set, .chat input {
+.chat #set,
+.chat input {
     display: block;
     margin: 0 auto;
     margin-bottom: 5px;

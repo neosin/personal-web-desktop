@@ -8,7 +8,6 @@
 
  'use strict'
 
- const dragDrop = require('./dragDrop')
  const setup = require('./setup')
 
  /**
@@ -19,9 +18,6 @@
      this.title = null
      this.icon = null
      this.currentWindow = null
-     this.previouslyClickedWindow = null
-     this.removeRef = this.removeWindow.bind(this)
-     this.minimizeRef = this.minimizeWindow.bind(this)
    }
 
    /**
@@ -41,33 +37,6 @@
      this.currentWindow.addEventListener('focus', event => {
        setup.windowFocus(this.currentWindow)
      })
-
-     this.currentWindow.addEventListener('click', this.removeRef)
-     this.currentWindow.addEventListener('click', this.minimizeRef)
-     dragDrop.dragDrop()
-   }
-
-   /**
-    * Removes the current window.
-    *
-    * @param {object} event The event from the object that fired it.
-    */
-   removeWindow (event) {
-     if (event.target.id === 'close') {
-       document.body.removeChild(this.currentWindow)
-     }
-   }
-
-   /**
-    * Closes the current window.
-    *
-    * @param {object} event The event from the object that fired it.
-    */
-   minimizeWindow (event) {
-     if (event.target.id === 'minimize') {
-       let content = this.currentWindow.querySelector('#windowContent')
-       content.classList.toggle('windowMinimize')
-     }
    }
 
    addInformation () {

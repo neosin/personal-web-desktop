@@ -28,8 +28,10 @@
    })
 
    document.addEventListener('drag', event => {
-     event.target.style.left = `${event.clientX - offsetX}px`
-     event.target.style.top = `${event.clientY - offsetY}px`
+     if (event.target.nodeName === 'DIV') {
+       event.target.style.left = `${event.clientX - offsetX}px`
+       event.target.style.top = `${event.clientY - offsetY}px`
+     }
    })
 
    document.addEventListener('dragover', event => {

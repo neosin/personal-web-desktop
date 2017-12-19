@@ -12,6 +12,7 @@
  const Memory = require('./Memory')
  const Settings = require('./Settings')
  const Chat = require('./Chat')
+ const setup = require('./setup')
 
  template.innerHTML = `
  <style>
@@ -65,6 +66,8 @@
     * The code that runs when the element is added to the DOM.
     */
    connectedCallback () {
+     setup.setupWindows()
+
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
        new Memory().createMemoryWindow('Memory', '/image/icons/brain.png')
      })

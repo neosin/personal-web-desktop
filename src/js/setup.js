@@ -8,6 +8,27 @@
 
  'use strict'
 
+ const dragDrop = require('./dragDrop')
+
+ function setupWindows () {
+   dragDrop.dragDrop()
+
+   document.addEventListener('click', event => {
+     if (event.target.nodeName === 'BUTTON') {
+       let currentWindow = event.target.parentNode.parentNode.parentNode
+
+       if (event.target.id === 'minimize') {
+         let content = currentWindow.querySelector('#windowContent')
+         content.classList.toggle('windowMinimize')
+       }
+
+       if (event.target.id === 'close') {
+         document.body.removeChild(currentWindow)
+       }
+     }
+   })
+ }
+
 /**
  * Adds a given template to the DOM.
  *
@@ -51,3 +72,4 @@
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
  module.exports.windowFocus = windowFocus
+ module.exports.setupWindows = setupWindows
