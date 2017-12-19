@@ -35,8 +35,10 @@ class Weather extends DesktopWindow {
     let currentDay = new Date().getDate()
     let times = this.response.timeSeries
     let temps = []
+    let weatherImages = []
     let highestTemp
     let lowestTemp
+    let weatherImg
 
     console.log(this.response)
 
@@ -51,20 +53,27 @@ class Weather extends DesktopWindow {
 
       for (let j = 0; j < parameters.length; j++) {
         if (parameters[j].name === 't') {
-          temps.push(parameters[j].values[0])
+          temps.push({time: times[i].validTime, value: parameters[j].values[0]})
+        }
+
+        if (parameters[j].name === 'Wsymb2') {
+          weatherImages.push({time: times[i].validTime, value: parameters[j].values[0]})
         }
       }
     }
 
-    temps.sort((a, b) => { return b - a })
+    temps.sort((a, b) => { return b.value - a.value })
+    weatherImages.sort((a, b) => { return a.value - b.value })
 
-    highestTemp = Math.round(temps[0])
-    lowestTemp = Math.round(temps[temps.length - 1])
+    highestTemp = Math.round(temps[0].value)
+    lowestTemp = Math.round(temps[temps.length - 1].value)
 
-    this.displayWeather(highestTemp, lowestTemp)
+    console.log(temps, weatherImages)
+
+    this.displayWeather(highestTemp, lowestTemp, weatherImg)
   }
 
-  displayWeather (highestTemp, lowestTemp) {
+  displayWeather (highestTemp, lowestTemp, weatherImg) {
     this.calculateDay()
 
     let day = this.currentWindow.querySelector('#content h1')
