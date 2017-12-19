@@ -5,6 +5,9 @@ class Weather extends DesktopWindow {
   constructor () {
     super()
 
+    this.nameOfDay = undefined
+    this.date = undefined
+    this.day = undefined
     this.response = null
     this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
   }
@@ -24,13 +27,16 @@ class Weather extends DesktopWindow {
     })
     .then(response => {
       this.response = response
-      this.printData()
+      this.calculateWeather()
     })
   }
 
-  printData () {
+  calculateWeather () {
     let currentDay = new Date().getDate()
     let times = this.response.timeSeries
+    let temps = []
+    let highestTemp
+    let lowestTemp
 
     console.log(this.response)
 
@@ -40,7 +46,87 @@ class Weather extends DesktopWindow {
       return current === currentDay
     })
 
-    console.log(times)
+    for (let i = 0; i < times.length; i++) {
+      let parameters = times[i].parameters
+
+      for (let j = 0; j < parameters.length; j++) {
+        if (parameters[j].name === 't') {
+          temps.push(parameters[j].values[0])
+        }
+      }
+    }
+
+    temps.sort((a, b) => { return b - a })
+
+    highestTemp = Math.round(temps[0])
+    lowestTemp = Math.round(temps[temps.length - 1])
+
+    this.displayWeather(highestTemp, lowestTemp)
+  }
+
+  displayWeather (highestTemp, lowestTemp) {
+    this.calculateDay()
+
+    let day = this.currentWindow.querySelector('#content h1')
+    let date = this.currentWindow.querySelector('#content h2')
+    let temperature = this.currentWindow.querySelector('#content p')
+
+    day.textContent = this.day
+    date.textContent = this.date
+    temperature.textContent = `${highestTemp} / ${lowestTemp}`
+  }
+
+  calculateDay () {
+    let dateObj = new Date()
+    let date = dateObj.getDate()
+    let year = dateObj.getFullYear()
+    let day = dateObj.getDay()
+    let month = dateObj.getMonth() + 1
+
+    if (day === 1) {
+      day = 'Monday'
+    } else if (day === 2) {
+      day = 'Tuesday'
+    } else if (day === 3) {
+      day = 'Wednesday'
+    } else if (day === 4) {
+      day = 'Thursday'
+    } else if (day === 5) {
+      day = 'Friday'
+    } else if (day === 5) {
+      day = 'Saturday'
+    } else if (day === 5) {
+      day = 'Sunday'
+    }
+
+    if (month === 1) {
+        month = 'January'
+      } else if (month === 2) {
+        month = 'February'
+      } else if (month === 3) {
+        month = 'March'
+      } else if (month === 4) {
+        month = 'April'
+      } else if (month === 5) {
+        month = 'May'
+      } else if (month === 6) {
+        month = 'June'
+      } else if (month === 7) {
+        month = 'July'
+      } else if (month === 8) {
+        month = 'August'
+      } else if (month === 9) {
+        month = 'September'
+      } else if (month === 10) {
+        month = 'October'
+      } else if (month === 11) {
+        month = 'November'
+      } else if (month === 12) {
+        month = 'December'
+      }
+
+    this.date = `${date} ${month}, ${year}`
+    this.day = day
   }
 }
 
