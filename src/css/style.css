@@ -205,9 +205,26 @@ a {
 
 .weather {
     width: 300px;
-    overflow: scroll;
+}
+
+.weather #windowContent {
+    padding: 0px;
+    background-color: rgb(100, 198, 255);
 }
 
 .weather #content {
     white-space: pre-line;
+    padding: 0px;
+}
+
+.weather #content h1, .weather #content h2, .weather #content h3, .weather #content p {
+    margin: 0px;
+}
+
+.weather #content h3 {
+    font-size: 60px;
+}
+
+.weather #content p {
+    font-size: 20px;
 }
