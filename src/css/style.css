@@ -200,3 +200,10 @@ a {
 .chat #emojiSection {
     background-color: rgb(226, 226, 226);
 }
+
+/* Weather */
+
+.weather {
+    width: 600px;
+    height: 400px;
+}
