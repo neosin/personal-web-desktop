@@ -32,17 +32,12 @@
        display: inline-block;
        padding: 10px;
    }
-
-   :host img {
-       width: 60px;
-   }
  </style>
 
  <ul id="dock">
-   <li id="memory"><a><image src="/image/icons/brain.png"></a></li>
+   <li id="memory"><a><image src="/image/icons/game.png"></a></li>
    <li id="chat"><a><img src="/image/icons/chat.png"></a></li>
    <li id="settings"><a><img src="/image/icons/settings.png"></a></li>
-   <li id="music"><a><img src="/image/icons/music.png"></a></li>
  </ul>
 `
 
@@ -69,7 +64,7 @@
      setup.setupWindows()
 
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       new Memory().createMemoryWindow('Memory', '/image/icons/brain.png')
+       new Memory().createMemoryWindow('Memory', '/image/icons/game.png')
      })
 
      this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
@@ -78,10 +73,6 @@
 
      this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
        new Settings().createSettingsWindow('Settings', '/image/icons/settings.png')
-     })
-
-     this.shadowRoot.querySelector('#music').addEventListener('click', event => {
-       console.log('open music...')
      })
    }
  }

@@ -14,17 +14,13 @@
    dragDrop.dragDrop()
 
    document.addEventListener('click', event => {
-     if (event.target.nodeName === 'BUTTON') {
-       let currentWindow = event.target.parentNode.parentNode.parentNode
+     if (event.target.id === 'minimize') {
+       let content = event.target.parentNode.parentNode.parentNode.querySelector('#windowContent')
+       content.classList.toggle('windowMinimize')
+     }
 
-       if (event.target.id === 'minimize') {
-         let content = currentWindow.querySelector('#windowContent')
-         content.classList.toggle('windowMinimize')
-       }
-
-       if (event.target.id === 'close') {
-         document.body.removeChild(currentWindow)
-       }
+     if (event.target.id === 'close') {
+       document.body.removeChild(event.target.parentNode.parentNode.parentNode)
      }
    })
  }
