@@ -68,21 +68,30 @@ class Weather extends DesktopWindow {
     highestTemp = Math.round(temps[0].value)
     lowestTemp = Math.round(temps[temps.length - 1].value)
 
-    console.log(temps, weatherImages)
+    let value = temps.filter(current => {
+      let hours = new Date().getHours()
+      let dataHours = parseInt(current.time.slice(11, 13))
 
-    this.displayWeather(highestTemp, lowestTemp, weatherImg)
+      return dataHours === hours
+    })
+
+    console.log(value)
+
+    this.displayWeather(value[0].value, highestTemp, lowestTemp, weatherImg)
   }
 
-  displayWeather (highestTemp, lowestTemp, weatherImg) {
+  displayWeather (temp, highestTemp, lowestTemp, weatherImg) {
     this.calculateDay()
 
     let day = this.currentWindow.querySelector('#content h1')
     let date = this.currentWindow.querySelector('#content h2')
-    let temperature = this.currentWindow.querySelector('#content p')
+    let highLow = this.currentWindow.querySelector('#content p')
+    let temperature = this.currentWindow.querySelector('#content h3')
 
     day.textContent = this.day
     date.textContent = this.date
-    temperature.textContent = `${highestTemp} / ${lowestTemp}`
+    highLow.textContent = `${highestTemp}° / ${lowestTemp}°`
+    temperature.textContent = `${temp}°`
   }
 
   calculateDay () {
