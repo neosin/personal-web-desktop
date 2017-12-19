@@ -205,5 +205,10 @@ a {
 
 .weather {
     width: 600px;
-    height: 400px;
+    height: 600px;
+    overflow: scroll;
+}
+
+.weather #content {
+    white-space: pre-line;
 }

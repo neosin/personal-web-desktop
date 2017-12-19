@@ -12,6 +12,7 @@ class Weather extends DesktopWindow {
   createWeatherWindow (title, icon) {
     this.createWindow(title, icon)
     this.currentWindow.classList.add('weather')
+    setup.editAppContent('#weather', this.currentWindow)
 
     this.getData()
   }
@@ -28,7 +29,18 @@ class Weather extends DesktopWindow {
   }
 
   printData () {
-    console.log(this.response.timeSeries)
+    let currentDay = new Date().getDate()
+    let times = this.response.timeSeries
+
+    console.log(this.response)
+
+    times = times.filter(current => {
+      current = parseInt(current.validTime.slice(8, 10))
+
+      return current === currentDay
+    })
+
+    console.log(times)
   }
 }
 
