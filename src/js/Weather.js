@@ -10,16 +10,17 @@ class Weather extends DesktopWindow {
     this.day = undefined
     this.response = null
     this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
+    this.nrOfDays = 0
+    this.dateObj = new Date()
+    this.highestTemp = null
+    this.lowestTemp = null
+    this.hourCounter = 0
   }
 
   createWeatherWindow (title, icon) {
     this.createWindow(title, icon)
     this.currentWindow.classList.add('weather')
     setup.editAppContent('#weather', this.currentWindow)
-
-    this.currentWindow.querySelector('#content button').addEventListener('click', event => {
-      this.changeLocation()
-    })
 
     this.getData()
   }
@@ -32,6 +33,9 @@ class Weather extends DesktopWindow {
 
     this.url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${long}/lat/${lat}/data.json`
 
+    setup.editAppContent('#weather', this.currentWindow)
+    this.nrOfDays = 0
+    this.hourCounter = 0
     this.getData()
   }
 
@@ -42,22 +46,24 @@ class Weather extends DesktopWindow {
     })
     .then(response => {
       this.response = response
+
       this.calculateWeather()
+
+      this.currentWindow.querySelector('#controlls button').addEventListener('click', event => {
+        this.changeLocation()
+      })
     })
   }
 
   calculateWeather () {
-    let currentDay = new Date().getDate()
+    let currentDay = this.dateObj.getDate()
     let times = this.response.timeSeries
     let temps = []
-    let weatherImages = []
-    let highestTemp
-    let lowestTemp
 
     times = times.filter(current => {
       current = parseInt(current.validTime.slice(8, 10))
 
-      return current === currentDay
+      return current === currentDay + this.nrOfDays
     })
 
     for (let i = 0; i < times.length; i++) {
@@ -71,40 +77,44 @@ class Weather extends DesktopWindow {
     }
 
     temps.sort((a, b) => { return b.value - a.value })
-    weatherImages.sort((a, b) => { return a.value - b.value })
 
-    highestTemp = temps[0].value
-    lowestTemp = temps[temps.length - 1].value
+    this.highestTemp = temps[0].value
+    this.lowestTemp = temps[temps.length - 1].value
 
-    let value = temps.filter(current => {
-      let hours = new Date().getHours()
-      let dataHours = parseInt(current.time.slice(11, 13))
-
-      return dataHours === hours
-    })
-
-    this.displayWeather(value[0].value, highestTemp, lowestTemp)
+    this.checkCurrentWeatherTime(temps)
   }
 
   displayWeather (temp, highestTemp, lowestTemp) {
     this.calculateDay()
+    let template = document.querySelector('#weatherDay')
+    let dayTemplate
+    let content = this.currentWindow.querySelector('#content')
 
-    let day = this.currentWindow.querySelector('#content h1')
-    let date = this.currentWindow.querySelector('#content h2')
-    let highLow = this.currentWindow.querySelector('#content p')
-    let temperature = this.currentWindow.querySelector('#content h3')
+    dayTemplate = document.importNode(template.content, true)
+    content.appendChild(dayTemplate)
+
+    let day = this.currentWindow.querySelectorAll('#content h1')[this.nrOfDays]
+    let date = this.currentWindow.querySelectorAll('#content h2')[this.nrOfDays]
+    let highLow = this.currentWindow.querySelectorAll('#content p')[this.nrOfDays]
+    let temperature = this.currentWindow.querySelectorAll('#content h3')[this.nrOfDays]
 
     day.textContent = this.day
     date.textContent = this.date
     highLow.textContent = `${highestTemp}° / ${lowestTemp}°`
     temperature.textContent = `${temp}°`
+
+    this.nrOfDays++
+
+    if (this.nrOfDays < 3) {
+      this.calculateWeather()
+    }
   }
 
   calculateDay () {
-    let dateObj = new Date()
-    let date = dateObj.getDate()
+    let dateObj = this.dateObj
+    let date = dateObj.getDate() + this.nrOfDays
     let year = dateObj.getFullYear()
-    let day = dateObj.getDay()
+    let day = dateObj.getDay() + this.nrOfDays
     let month = dateObj.getMonth() + 1
 
     if (day === 1) {
@@ -151,6 +161,22 @@ class Weather extends DesktopWindow {
 
     this.date = `${date} ${month}, ${year}`
     this.day = day
+  }
+
+  checkCurrentWeatherTime (temps) {
+    let value = temps.filter(current => {
+      let hours = this.dateObj.getHours() + this.hourCounter
+      let dataHours = parseInt(current.time.slice(11, 13))
+
+      return dataHours === hours
+    })
+
+    if (value.length === 0) {
+      this.hourCounter++
+      this.checkCurrentWeatherTime(temps)
+    } else {
+      this.displayWeather(value[0].value, this.highestTemp, this.lowestTemp)
+    }
   }
 }
 
