@@ -1,109 +1,153 @@
-const DesktopWindow = require('./DesktopWindow')
-const setup = require('./setup')
+/**
+ * Module for the chat application.
+ *
+ * @module src/js/Chat
+ * @author Rasmus Falk
+ * @version 1.0.0
+ */
 
-class Chat extends DesktopWindow {
-  constructor () {
-    super()
+ 'use strict'
 
-    this.nickname = null
-    this.webSocket = null
-    this.response = null
-    this.chatMessageWindow = null
-  }
+ const DesktopWindow = require('./DesktopWindow')
+ const setup = require('./setup')
 
-  createChatWindow (title, icon) {
-    this.createWindow(title, icon)
-    this.currentWindow.classList.add('chat')
+ /**
+  * Class representing a chat application.
+  */
+ class Chat extends DesktopWindow {
+  /**
+   * Creates an instance of Chat
+   *
+   * @param {string} title String of the relative URL for the application window icon.
+   * @param {string} icon String of the title for the application window.
+   * @memberof Chat
+   */
+   constructor (title, icon) {
+     super()
 
-    this.chooseNickname()
-  }
+     this.title = title
+     this.icon = icon
+     this.nickname = null
+     this.webSocket = null
+     this.response = null
+   }
 
-  sendMessage () {
-    let message = this.currentWindow.querySelector('textarea')
+   /**
+    * Creates a new chat window.
+    *
+    */
+   createChatWindow () {
+     this.createWindow(this.title, this.icon)
+     this.currentWindow.classList.add('chat')
 
-    let data = {
-      type: 'message',
-      data: message.value,
-      username: this.nickname,
-      channel: 'chat',
-      key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
-    }
+     this.chooseNickname()
+   }
 
-    this.webSocket.send(JSON.stringify(data))
-    message.value = ''
-  }
+   /**
+    * Set a nickname for the current user.
+    */
+   chooseNickname () {
+     if (!window.localStorage.getItem('chatName')) {
+       setup.editAppContent('#chatName', this.currentWindow)
 
-  addMessageToWindow () {
-    if (this.response.type === 'message') {
-      let message = this.currentWindow.querySelector('#content p')
+       let input = this.currentWindow.querySelector('#content input')
 
-      message.textContent += `\n${this.response.username}: ${this.response.data}`
-    }
-  }
+       this.currentWindow.querySelector('#set').addEventListener('click', event => {
+         window.localStorage.setItem('chatName', input.value)
+         this.loadChat()
+       })
+     } else {
+       this.loadChat()
+     }
+   }
 
-  chooseNickname () {
-    if (!window.localStorage.getItem('chatName')) {
-      setup.editAppContent('#chatName', this.currentWindow)
+/**
+    * Loads the chat content.
+    */
+   loadChat () {
+     this.webSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'chat')
+     this.nickname = window.localStorage.getItem('chatName')
 
-      let input = this.currentWindow.querySelector('#content input')
+     setup.editAppContent('#chat', this.currentWindow)
 
-      this.currentWindow.querySelector('#set').addEventListener('click', event => {
-        window.localStorage.setItem('chatName', input.value)
-        this.loadChat()
-      })
-    } else {
-      this.loadChat()
-    }
-  }
+     let chatMessageWindow = this.currentWindow.querySelector('#content')
 
-  loadChat () {
-    this.webSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'chat')
-    this.nickname = window.localStorage.getItem('chatName')
-    setup.editAppContent('#chat', this.currentWindow)
+     this.webSocket.addEventListener('open', event => {
+       let p = document.createElement('p')
+       p.textContent = 'You are connected!'
+       chatMessageWindow.appendChild(p)
 
-    this.chatMessageWindow = this.currentWindow.querySelector('#content')
+       this.currentWindow.querySelector('#send').addEventListener('click', event => {
+         this.addEmojis()
+         this.sendMessage()
+       })
+     })
 
-    this.webSocket.addEventListener('open', event => {
-      let p = document.createElement('p')
-      p.textContent = 'You are connected!'
-      this.chatMessageWindow.appendChild(p)
+     this.webSocket.addEventListener('message', event => {
+       this.response = JSON.parse(event.data)
+       this.addMessageToWindow()
+     })
 
-      this.currentWindow.querySelector('#send').addEventListener('click', event => {
-        this.addEmojis()
-        this.sendMessage()
-      })
-    })
+     this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
+       this.currentWindow.querySelector('#emojis').classList.toggle('emojiToggle')
+     })
 
-    this.webSocket.addEventListener('message', event => {
-      this.response = JSON.parse(event.data)
-      this.addMessageToWindow()
-    })
+     this.currentWindow.querySelector('#emojis').addEventListener('click', event => {
+       if (event.target.nodeName === 'A') {
+         this.currentWindow.querySelector('textarea').value += event.target.getAttribute('data-custom-value')
+       }
+     })
+   }
 
-    this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
-      this.currentWindow.querySelector('#emojis').classList.toggle('emojiToggle')
-    })
+   /**
+    * Sends a a chat message.
+    */
+   sendMessage () {
+     let message = this.currentWindow.querySelector('textarea')
 
-    this.currentWindow.querySelector('#emojis').addEventListener('click', event => {
-      this.currentWindow.querySelector('textarea').value += event.target.getAttribute('data-custom-value')
-    })
-  }
+     let data = {
+       type: 'message',
+       data: message.value,
+       username: this.nickname,
+       channel: 'chat',
+       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
+     }
 
-  addEmojis () {
-    let message = this.currentWindow.querySelector('textarea')
+     this.webSocket.send(JSON.stringify(data))
 
-    if (message.value.search('/:happy:/')) {
-      message.value = message.value.replace(/:happy:/g, '\uD83D\uDE00')
-    }
+     message.value = ''
+   }
 
-    if (message.value.search('/:smile:/')) {
-      message.value = message.value.replace(/:smile:/g, '\uD83D\uDE42')
-    }
+   /**
+    * Writes out the recived messages to the chat window.
+    */
+   addMessageToWindow () {
+     if (this.response.type === 'message') {
+       let message = this.currentWindow.querySelector('#content p')
 
-    if (message.value.search('/:cool:/')) {
-      message.value = message.value.replace(/:cool:/g, '\uD83D\uDE0E')
-    }
-  }
-}
+       message.textContent += `\n${this.response.username}: ${this.response.data}`
+     }
+   }
 
-// Exports
-module.exports = Chat
+   /**
+    * Adds the emojis when sending the message.
+    */
+   addEmojis () {
+     let message = this.currentWindow.querySelector('textarea')
+
+     if (message.value.search('/:happy:/')) {
+       message.value = message.value.replace(/:happy:/g, '\uD83D\uDE00')
+     }
+
+     if (message.value.search('/:smile:/')) {
+       message.value = message.value.replace(/:smile:/g, '\uD83D\uDE42')
+     }
+
+     if (message.value.search('/:cool:/')) {
+       message.value = message.value.replace(/:cool:/g, '\uD83D\uDE0E')
+     }
+   }
+ }
+
+ // Exports
+ module.exports = Chat

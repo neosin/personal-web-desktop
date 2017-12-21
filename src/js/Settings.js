@@ -1,17 +1,40 @@
+/**
+ * Module for the settings application.
+ *
+ * @module src/js/Settings
+ * @author Rasmus Falk
+ * @version 1.0.0
+ */
+
 'use strict'
 
 const setup = require('./setup')
 const DesktopWindow = require('./DesktopWindow')
 
+/**
+ * Class representing a settings application.
+ */
 class Settings extends DesktopWindow {
-  constructor () {
+  /**
+   * Creates an instance of Settings.
+   *
+   * @param {string} title String of the relative URL for the application window icon.
+   * @param {string} icon String of the title for the application window.
+   */
+  constructor (title, icon) {
     super()
 
+    this.title = title
+    this.icon = icon
     this.selectedImg = `/image/wallpapers/bg1.jpg'`
   }
 
-  createSettingsWindow (title, icon) {
-    this.createWindow(title, icon)
+  /**
+   * Creates a new settings window.
+   */
+  createSettingsWindow () {
+    this.createWindow(this.title, this.icon)
+
     setup.editAppContent('#settings', this.currentWindow)
 
     this.currentWindow.classList.add('settings')

@@ -18,14 +18,18 @@
   /**
    * Creates an instance of MemoryGame.
    *
+   * @param {string} title String of the relative URL for the application window icon.
+   * @param {string} icon String of the title for the application window.
    * @memberof MemoryGame
    */
-   constructor (x = 4, y = 4) {
+   constructor (title, icon, x = 4, y = 4) {
      super()
 
-     this.appContent = null
+     this.title = title
+     this.icon = icon
      this.x = x
      this.y = y
+     this.appContent = null
      this.bricks = []
      this.brickCounter = 0
      this.clickedBricks = []
@@ -37,8 +41,8 @@
    /**
     * Creates a new memory game window.
     */
-   createMemoryWindow (title, icon) {
-     this.createWindow(title, icon)
+   createMemoryWindow () {
+     this.createWindow(this.title, this.icon)
      this.currentWindow.classList.add('memory')
 
      this.startGame()
@@ -52,11 +56,11 @@
      this.appContent = this.currentWindow.querySelector('#content')
 
      this.currentWindow.querySelector('#change').addEventListener('click', event => {
-       let select = this.currentWindow.querySelector('select')
-       let option = select.value
+       let option = this.currentWindow.querySelector('select').value
 
        this.x = option.slice(0, 1)
        this.y = option.slice(1)
+
        this.resetGame()
      })
 
@@ -140,9 +144,10 @@
 
      if (this.clickedBricks.length === 2) {
        if (this.clickedBricks[0].src === this.clickedBricks[1].src) {
-         let remove = this.appContent.querySelectorAll(`#${event.id}`)
+         this.appContent.querySelectorAll(`#${event.id}`).forEach(current => {
+           current.parentElement.style.visibility = 'hidden'
+         })
 
-         remove.forEach(current => { current.parentElement.style.visibility = 'hidden' })
          this.brickCounter += 2
        } else {
          setTimeout(() => {

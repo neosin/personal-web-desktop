@@ -25,6 +25,10 @@ a {
     z-index: 200;
 }
 
+.window:focus {
+    outline: none;
+}
+
 .windowMinimize {
     display: none;
 }
@@ -223,7 +227,9 @@ a {
     padding: 15px;
 }
 
-.weather #content h1, .weather #content h2, .weather #content p {
+.weather #content h1,
+.weather #content h2,
+.weather #content p {
     margin: 0px;
 }
 

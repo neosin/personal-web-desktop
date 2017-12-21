@@ -10,17 +10,21 @@
 
  const dragDrop = require('./dragDrop')
 
+ /**
+  * Adds the drag and drop,close and minimize event listeners to the document object.
+  */
  function setupWindows () {
    dragDrop.dragDrop()
 
    document.addEventListener('click', event => {
+     let currentWindow = event.target.closest('.window')
+
      if (event.target.id === 'minimize') {
-       let content = event.target.parentNode.parentNode.parentNode.querySelector('#windowContent')
-       content.classList.toggle('windowMinimize')
+       currentWindow.querySelector('#windowContent').classList.toggle('windowMinimize')
      }
 
      if (event.target.id === 'close') {
-       document.body.removeChild(event.target.parentNode.parentNode.parentNode)
+       document.body.removeChild(currentWindow)
      }
    })
  }
@@ -54,6 +58,11 @@
    windowContent.appendChild(document.importNode(template.content, true))
  }
 
+ /**
+  * Controlls which window that's focused.
+  *
+  * @param {object} currentWindow The window that is being clicked.
+  */
  function windowFocus (currentWindow) {
    let allWindows = document.querySelectorAll('.window')
 

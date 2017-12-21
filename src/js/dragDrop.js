@@ -9,7 +9,7 @@
  'use strict'
 
  /**
-  * Is used to be able to move a window.
+  * Is used to be able to drag a window.
   */
  function dragDrop () {
    let offsetX, offsetY
@@ -21,10 +21,6 @@
      offsetY = event.clientY - event.target.offsetTop
 
      event.target.classList.add('windowDrag')
-   })
-
-   document.addEventListener('dragenter', event => {
-     event.dataTransfer.dropEffect = 'move'
    })
 
    document.addEventListener('drag', event => {

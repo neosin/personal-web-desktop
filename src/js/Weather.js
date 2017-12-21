@@ -1,31 +1,59 @@
+/**
+ * Module for the weather application.
+ *
+ * @module src/js/Weather
+ * @author Rasmus Falk
+ * @version 1.0.0
+ */
+
+'use strict'
+
 const DesktopWindow = require('./DesktopWindow')
 const setup = require('./setup')
 
+/**
+ * Class representing a weather application.
+ */
 class Weather extends DesktopWindow {
-  constructor () {
+  /**
+   * Creates an instance of Weather.
+   *
+   * @param {string} title String of the relative URL for the application window icon.
+   * @param {string} icon String of the title for the application window.
+   * @memberof Weather
+   */
+  constructor (title, icon) {
     super()
 
-    this.day = undefined
     this.response = null
     this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
-    this.nrOfDays = 0
+    this.title = title
+    this.icon = icon
+    this.day = undefined
+    this.dayToDisplay = 0
     this.dateObj = new Date()
     this.highestTemp = null
     this.lowestTemp = null
     this.hourCounter = 0
-    this.currentDay = this.dateObj.getDay()
     this.counter = 0
     this.filteredTimes = undefined
   }
 
-  createWeatherWindow (title, icon) {
-    this.createWindow(title, icon)
+  /**
+   * Creates a new weather window.
+   */
+  createWeatherWindow () {
+    this.createWindow(this.title, this.icon)
     this.currentWindow.classList.add('weather')
+
     setup.editAppContent('#weather', this.currentWindow)
 
     this.getData()
   }
 
+  /**
+   * Updates the choosen location.
+   */
   changeLocation () {
     let selected = this.currentWindow.querySelector('select').value
 
@@ -36,11 +64,14 @@ class Weather extends DesktopWindow {
 
     setup.editAppContent('#weather', this.currentWindow)
     this.counter = 0
-    this.nrOfDays = 0
+    this.dayToDisplay = 0
     this.hourCounter = 0
     this.getData()
   }
 
+  /**
+   * Gets the data from the SMHI API.
+   */
   getData () {
     window.fetch(this.url)
     .then(response => {
@@ -57,6 +88,9 @@ class Weather extends DesktopWindow {
     })
   }
 
+  /**
+   * Calculates the different temperatures etc.
+   */
   calculateWeather () {
     let temps = []
 
@@ -80,8 +114,15 @@ class Weather extends DesktopWindow {
     this.checkCurrentWeatherTime(temps)
   }
 
+  /**
+   * Prints out the data to the screen.
+   *
+   * @param {number} temp The temperature closest to the current hour.
+   * @param {number} highestTemp The highest temperature of the day.
+   * @param {number} lowestTemp The lowest temperature of the day.
+   */
   displayWeather (temp, highestTemp, lowestTemp) {
-    this.calculateDay()
+    this.getDayName()
     let template = document.querySelector('#weatherDay')
     let dayTemplate
     let content = this.currentWindow.querySelector('#content')
@@ -89,15 +130,15 @@ class Weather extends DesktopWindow {
     dayTemplate = document.importNode(template.content, true)
     content.appendChild(dayTemplate)
 
-    let day = this.currentWindow.querySelectorAll('#content h2')[this.nrOfDays]
-    let highLow = this.currentWindow.querySelectorAll('#content p')[this.nrOfDays]
-    let temperature = this.currentWindow.querySelectorAll('#content h1')[this.nrOfDays]
+    let day = this.currentWindow.querySelectorAll('#content h2')[this.counter]
+    let highLow = this.currentWindow.querySelectorAll('#content p')[this.counter]
+    let temperature = this.currentWindow.querySelectorAll('#content h1')[this.counter]
 
     day.textContent = this.day
     highLow.textContent = `${highestTemp}° / ${lowestTemp}°`
     temperature.textContent = `${temp}°`
 
-    this.nrOfDays++
+    this.dayToDisplay++
     this.counter++
 
     if (this.counter < 5) {
@@ -105,35 +146,24 @@ class Weather extends DesktopWindow {
     }
   }
 
-  calculateDay () {
+  /**
+   * Gets the correct text for the specific day.
+   */
+  getDayName () {
     let dateObj = this.dateObj
-    let day = dateObj.getDay() + this.nrOfDays
+    let day = dateObj.getDay() + this.dayToDisplay
+    let nameOfDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-    if (day > 7) {
-      day = day - 7
-    }
+    if (day > 7) { day -= 7 }
 
-    if (day === this.currentDay) {
-      day = 'Today'
-    } else if (day === 1) {
-      day = 'Monday'
-    } else if (day === 2) {
-      day = 'Tuesday'
-    } else if (day === 3) {
-      day = 'Wednesday'
-    } else if (day === 4) {
-      day = 'Thursday'
-    } else if (day === 5) {
-      day = 'Friday'
-    } else if (day === 6) {
-      day = 'Saturday'
-    } else if (day === 7) {
-      day = 'Sunday'
-    }
-
-    this.day = day
+    day === this.dateObj.getDay() ? this.day = 'Today' : this.day = nameOfDays[day - 1]
   }
 
+  /**
+   * Checks if the data has weather info that matches the closest hour.
+   *
+   * @param {object[]} temps Array of objects with temperatures and their closest time.
+   */
   checkCurrentWeatherTime (temps) {
     let value = temps.filter(current => {
       let hours = this.dateObj.getHours() + this.hourCounter
@@ -150,25 +180,26 @@ class Weather extends DesktopWindow {
     }
   }
 
+  /**
+   * Checks if it becomes anew month.
+   *
+   * @param {number} start The new starting point if there is a new month.
+   */
   checkCurrentWeatherDay (start) {
     this.filteredTimes = this.response.timeSeries.filter(current => {
       current = parseInt(current.validTime.slice(8, 10))
 
       let compare
-
-      if (start) {
-        compare = start
-      } else {
-        compare = this.dateObj.getDate() + this.nrOfDays
-      }
+      start ? compare = start : compare = this.dateObj.getDate() + this.dayToDisplay
 
       return current === compare
     })
 
     if (this.filteredTimes.length === 0) {
-      this.nrOfDays = 1
-      this.checkCurrentWeatherDay(this.nrOfDays)
-      this.nrOfDays++
+      this.dayToDisplay = 1
+
+      this.checkCurrentWeatherDay(this.dayToDisplay)
+      this.dayToDisplay++
     }
   }
 }

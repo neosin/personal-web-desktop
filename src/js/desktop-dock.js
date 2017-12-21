@@ -36,10 +36,10 @@
  </style>
 
  <ul id="dock">
-   <li id="memory"><a><image src="/image/icons/game.png"></a></li>
-   <li id="chat"><a><img src="/image/icons/chat.png"></a></li>
-   <li id="settings"><a><img src="/image/icons/settings.png"></a></li>
-   <li id="weather"><a><img src="/image/icons/weather.png"></a></li>
+   <li id="memory"><a href="#"><image src="/image/icons/game.png"></a></li>
+   <li id="chat"><a href="#"><img src="/image/icons/chat.png"></a></li>
+   <li id="settings"><a href="#"><img src="/image/icons/settings.png"></a></li>
+   <li id="weather"><a href="#"><img src="/image/icons/weather.png"></a></li>
  </ul>
 `
 
@@ -66,19 +66,19 @@
      setup.setupWindows()
 
      this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       new Memory().createMemoryWindow('Memory', '/image/icons/game.png')
+       new Memory('Memory', '/image/icons/game.png').createMemoryWindow()
      })
 
      this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
-       new Chat().createChatWindow('Chat', '/image/icons/chat.png')
+       new Chat('Chat', '/image/icons/chat.png').createChatWindow()
      })
 
      this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
-       new Settings().createSettingsWindow('Settings', '/image/icons/settings.png')
+       new Settings('Settings', '/image/icons/settings.png').createSettingsWindow()
      })
 
      this.shadowRoot.querySelector('#weather').addEventListener('click', event => {
-       new Weather().createWeatherWindow('Weather', '/image/icons/weather.png')
+       new Weather('Weather', '/image/icons/weather.png').createWeatherWindow()
      })
    }
  }
