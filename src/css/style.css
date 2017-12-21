@@ -4,7 +4,6 @@ body {
     background-image: url('/image/wallpapers/bg1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    position: center;
     background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -44,26 +43,19 @@ a {
     border-top-left-radius: 5px;
     border-bottom: 1px solid rgb(136, 136, 136);
     background: linear-gradient(#e0e0e0, #bababa);
+    display: table;
 }
 
 #windowHeader img {
     width: 25px;
-    width: 25px;
-    padding: 3px;
-    margin-right: 8px;
+    height: 25px;
 }
 
-#windowHeader p {
-    display: inline-block;
+#windowHeader p, #windowHeader #close, #windowHeader #minimize, #windowHeader img {
+    display: table-cell;
+    vertical-align: middle;
     margin: 0px;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-}
-
-#windowHeader #details {
-    position: relative;
-    height: 100%;
+    padding: 0px;
 }
 
 #close,
@@ -72,10 +64,6 @@ a {
     height: 15px;
     border-radius: 100%;
     text-indent: -9999px;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    left: 15px;
 }
 
 #close {
@@ -84,7 +72,6 @@ a {
 
 #minimize {
     background-color: rgb(255, 208, 0);
-    margin-left: 25px;
 }
 
 #close:hover,
@@ -95,7 +82,6 @@ a {
 #windowContent {
     padding: 10px;
 }
-
 
 /* Memory */
 
@@ -123,6 +109,9 @@ a {
     height: 200px;
 }
 
+.settings #content a:hover {
+    opacity: 0.7;
+}
 
 /* Chat */
 

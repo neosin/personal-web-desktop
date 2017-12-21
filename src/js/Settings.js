@@ -45,8 +45,10 @@ class Settings extends DesktopWindow {
       }
     })
 
-    this.currentWindow.querySelector('#changeWallpaper').addEventListener('click', event => {
-      document.body.style.backgroundImage = `url(${this.selectedImg})`
+    this.currentWindow.addEventListener('click', event => {
+      if (event.target.id === 'changeWallpaper') {
+        document.body.style.backgroundImage = `url(${this.selectedImg})`
+      }
     })
   }
 }

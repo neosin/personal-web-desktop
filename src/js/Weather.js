@@ -118,10 +118,8 @@ class Weather extends DesktopWindow {
    * Prints out the data to the screen.
    *
    * @param {number} temp The temperature closest to the current hour.
-   * @param {number} highestTemp The highest temperature of the day.
-   * @param {number} lowestTemp The lowest temperature of the day.
    */
-  displayWeather (temp, highestTemp, lowestTemp) {
+  displayWeather (temp) {
     this.getDayName()
     let template = document.querySelector('#weatherDay')
     let dayTemplate
@@ -135,7 +133,7 @@ class Weather extends DesktopWindow {
     let temperature = this.currentWindow.querySelectorAll('#content h1')[this.counter]
 
     day.textContent = this.day
-    highLow.textContent = `${highestTemp}° / ${lowestTemp}°`
+    highLow.textContent = `${this.highestTemp}° / ${this.lowestTemp}°`
     temperature.textContent = `${temp}°`
 
     this.dayToDisplay++
@@ -172,11 +170,15 @@ class Weather extends DesktopWindow {
       return dataHours === hours
     })
 
-    if (value.length === 0) {
+    if (value.length === 0 && this.hourCounter !== 10) {
       this.hourCounter++
       this.checkCurrentWeatherTime(temps)
+    } else if (this.hourCounter === 10) {
+      this.hourCounter = 0
+      this.displayWeather(temps[temps.length - 1].value)
     } else {
-      this.displayWeather(value[0].value, this.highestTemp, this.lowestTemp)
+      this.hourCounter = 0
+      this.displayWeather(value[0].value)
     }
   }
 
