@@ -5,8 +5,6 @@ class Weather extends DesktopWindow {
   constructor () {
     super()
 
-    this.nameOfDay = undefined
-    this.date = undefined
     this.day = undefined
     this.response = null
     this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
@@ -15,6 +13,9 @@ class Weather extends DesktopWindow {
     this.highestTemp = null
     this.lowestTemp = null
     this.hourCounter = 0
+    this.currentDay = this.dateObj.getDay()
+    this.counter = 0
+    this.filteredTimes = undefined
   }
 
   createWeatherWindow (title, icon) {
@@ -34,6 +35,7 @@ class Weather extends DesktopWindow {
     this.url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${long}/lat/${lat}/data.json`
 
     setup.editAppContent('#weather', this.currentWindow)
+    this.counter = 0
     this.nrOfDays = 0
     this.hourCounter = 0
     this.getData()
@@ -56,22 +58,16 @@ class Weather extends DesktopWindow {
   }
 
   calculateWeather () {
-    let currentDay = this.dateObj.getDate()
-    let times = this.response.timeSeries
     let temps = []
 
-    times = times.filter(current => {
-      current = parseInt(current.validTime.slice(8, 10))
+    this.checkCurrentWeatherDay()
 
-      return current === currentDay + this.nrOfDays
-    })
-
-    for (let i = 0; i < times.length; i++) {
-      let parameters = times[i].parameters
+    for (let i = 0; i < this.filteredTimes.length; i++) {
+      let parameters = this.filteredTimes[i].parameters
 
       for (let j = 0; j < parameters.length; j++) {
         if (parameters[j].name === 't') {
-          temps.push({time: times[i].validTime, value: parameters[j].values[0]})
+          temps.push({time: this.filteredTimes[i].validTime, value: parameters[j].values[0]})
         }
       }
     }
@@ -93,31 +89,33 @@ class Weather extends DesktopWindow {
     dayTemplate = document.importNode(template.content, true)
     content.appendChild(dayTemplate)
 
-    let day = this.currentWindow.querySelectorAll('#content h1')[this.nrOfDays]
-    let date = this.currentWindow.querySelectorAll('#content h2')[this.nrOfDays]
+    let day = this.currentWindow.querySelectorAll('#content h2')[this.nrOfDays]
     let highLow = this.currentWindow.querySelectorAll('#content p')[this.nrOfDays]
-    let temperature = this.currentWindow.querySelectorAll('#content h3')[this.nrOfDays]
+    let temperature = this.currentWindow.querySelectorAll('#content h1')[this.nrOfDays]
 
     day.textContent = this.day
-    date.textContent = this.date
     highLow.textContent = `${highestTemp}° / ${lowestTemp}°`
     temperature.textContent = `${temp}°`
 
     this.nrOfDays++
+    this.counter++
 
-    if (this.nrOfDays < 3) {
+    if (this.counter < 5) {
       this.calculateWeather()
     }
   }
 
   calculateDay () {
     let dateObj = this.dateObj
-    let date = dateObj.getDate() + this.nrOfDays
-    let year = dateObj.getFullYear()
     let day = dateObj.getDay() + this.nrOfDays
-    let month = dateObj.getMonth() + 1
 
-    if (day === 1) {
+    if (day > 7) {
+      day = day - 7
+    }
+
+    if (day === this.currentDay) {
+      day = 'Today'
+    } else if (day === 1) {
       day = 'Monday'
     } else if (day === 2) {
       day = 'Tuesday'
@@ -127,39 +125,12 @@ class Weather extends DesktopWindow {
       day = 'Thursday'
     } else if (day === 5) {
       day = 'Friday'
-    } else if (day === 5) {
+    } else if (day === 6) {
       day = 'Saturday'
-    } else if (day === 5) {
+    } else if (day === 7) {
       day = 'Sunday'
     }
 
-    if (month === 1) {
-      month = 'January'
-    } else if (month === 2) {
-      month = 'February'
-    } else if (month === 3) {
-      month = 'March'
-    } else if (month === 4) {
-      month = 'April'
-    } else if (month === 5) {
-      month = 'May'
-    } else if (month === 6) {
-      month = 'June'
-    } else if (month === 7) {
-      month = 'July'
-    } else if (month === 8) {
-      month = 'August'
-    } else if (month === 9) {
-      month = 'September'
-    } else if (month === 10) {
-      month = 'October'
-    } else if (month === 11) {
-      month = 'November'
-    } else if (month === 12) {
-      month = 'December'
-    }
-
-    this.date = `${date} ${month}, ${year}`
     this.day = day
   }
 
@@ -176,6 +147,28 @@ class Weather extends DesktopWindow {
       this.checkCurrentWeatherTime(temps)
     } else {
       this.displayWeather(value[0].value, this.highestTemp, this.lowestTemp)
+    }
+  }
+
+  checkCurrentWeatherDay (start) {
+    this.filteredTimes = this.response.timeSeries.filter(current => {
+      current = parseInt(current.validTime.slice(8, 10))
+
+      let compare
+
+      if (start) {
+        compare = start
+      } else {
+        compare = this.dateObj.getDate() + this.nrOfDays
+      }
+
+      return current === compare
+    })
+
+    if (this.filteredTimes.length === 0) {
+      this.nrOfDays = 1
+      this.checkCurrentWeatherDay(this.nrOfDays)
+      this.nrOfDays++
     }
   }
 }

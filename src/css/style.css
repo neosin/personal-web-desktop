@@ -204,7 +204,7 @@ a {
 /* Weather */
 
 .weather {
-    width: 300px;
+    width: 800px;
 }
 
 .weather #windowContent {
@@ -213,16 +213,26 @@ a {
 }
 
 .weather #content {
-    white-space: pre-line;
     padding: 0px;
+    display: table;
+    margin:  0 auto;
 }
 
-.weather #content h1, .weather #content h2, .weather #content h3, .weather #content p {
+.weather #day {
+    display: table-cell;
+    padding: 15px;
+}
+
+.weather #content h1, .weather #content h2, .weather #content p {
     margin: 0px;
 }
 
-.weather #content h3 {
+.weather #content h1 {
     font-size: 60px;
+}
+
+.weather #content h2 {
+    font-size: 30px;
 }
 
 .weather #content p {
