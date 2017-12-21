@@ -10,10 +10,14 @@
     <template id="window">
         <div class="window" draggable="true" tabindex="0">
             <div id="windowHeader">
-                    <button id="close">X</button>
-                    <button id="minimize">-</button>
-                    <img>
-                    <p></p>
+                <div id="buttons">
+                        <button id="close">X</button>
+                        <button id="minimize">-</button>
+                </div>
+                    <div id="center">
+                            <img>
+                            <p></p>
+                    </div>
             </div>
             <div id="windowContent"></div>
         </div>
@@ -50,7 +54,7 @@
 
     <template id="settings">
         <div id="content">
-            <p>Wallpaper:</p>
+            <p>Wallpaper</p>
             <a><img src="/image/wallpapers/bg1.jpg"></a>
             <a><img src="/image/wallpapers/bg2.jpg"></a>
             <button id="changeWallpaper">Set as wallpaper</button>

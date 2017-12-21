@@ -43,19 +43,17 @@ a {
     border-top-left-radius: 5px;
     border-bottom: 1px solid rgb(136, 136, 136);
     background: linear-gradient(#e0e0e0, #bababa);
-    display: table;
+    position: relative;
 }
 
 #windowHeader img {
+    padding-top: 2.5px;
     width: 25px;
     height: 25px;
 }
 
-#windowHeader p, #windowHeader #close, #windowHeader #minimize, #windowHeader img {
-    display: table-cell;
-    vertical-align: middle;
-    margin: 0px;
-    padding: 0px;
+#windowHeader p, #close, #minimize, #windowHeader img {
+    display: inline-block;
 }
 
 #close,
@@ -64,10 +62,30 @@ a {
     height: 15px;
     border-radius: 100%;
     text-indent: -9999px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+#windowHeader #buttons {
+    vertical-align: top;
+    position: absolute;
+    height: 100%;
+    padding-top: 6.5px;
+}
+
+#windowHeader #center {
+    height: 100%;
+}
+
+#windowHeader p {
+    margin: 0px;
+    vertical-align: top;
+    padding-top: 8px;
 }
 
 #close {
     background-color: rgb(255, 47, 0);
+    margin-left: 15px;
 }
 
 #minimize {
