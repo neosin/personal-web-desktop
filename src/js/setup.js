@@ -73,8 +73,18 @@
    currentWindow.style.zIndex = 100
  }
 
+ /**
+  * Keeps the scrollbar at the bottom of the content window.
+  *
+  * @param {object} scrollContent The content containing the scrollbar.
+  */
+ function dynamicScroll (scrollContent) {
+   scrollContent.scrollTop = scrollContent.scrollHeight
+ }
+
  // Exports
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
  module.exports.windowFocus = windowFocus
  module.exports.setupWindows = setupWindows
+ module.exports.dynamicScroll = dynamicScroll

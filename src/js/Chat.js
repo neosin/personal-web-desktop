@@ -86,6 +86,7 @@
      this.webSocket.addEventListener('message', event => {
        this.response = JSON.parse(event.data)
        this.addMessageToWindow()
+       setup.dynamicScroll(chatMessageWindow)
      })
 
      this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
