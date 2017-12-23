@@ -30,6 +30,7 @@ class Weather extends DesktopWindow {
     this.title = title
     this.icon = icon
     this.day = undefined
+    this.weatherStatus = undefined
     this.dayToDisplay = 0
     this.dateObj = new Date()
     this.highestTemp = null
@@ -79,6 +80,7 @@ class Weather extends DesktopWindow {
     })
     .then(response => {
       this.response = response
+      console.log(response)
 
       this.calculateWeather()
 
@@ -103,6 +105,10 @@ class Weather extends DesktopWindow {
         if (parameters[j].name === 't') {
           temps.push({time: this.filteredTimes[i].validTime, value: parameters[j].values[0]})
         }
+
+        if (parameters[j].name === 'Wsymb2') {
+          temps[i].status = parameters[j].values[0]
+        }
       }
     }
 
@@ -119,8 +125,10 @@ class Weather extends DesktopWindow {
    *
    * @param {number} temp The temperature closest to the current hour.
    */
-  displayWeather (temp) {
+  displayWeather (temp, weatherStatus) {
     this.getDayName()
+    this.getStatus(weatherStatus)
+
     let template = document.querySelector('#weatherDay')
     let dayTemplate
     let content = this.currentWindow.querySelector('#content')
@@ -131,10 +139,12 @@ class Weather extends DesktopWindow {
     let day = this.currentWindow.querySelectorAll('#content h2')[this.counter]
     let highLow = this.currentWindow.querySelectorAll('#content p')[this.counter]
     let temperature = this.currentWindow.querySelectorAll('#content h1')[this.counter]
+    let statusText = this.currentWindow.querySelectorAll('#content h3')[this.counter]
 
     day.textContent = this.day
     highLow.textContent = `${this.highestTemp}° / ${this.lowestTemp}°`
     temperature.textContent = `${temp}°`
+    statusText.textContent = this.weatherStatus
 
     this.dayToDisplay++
     this.counter++
@@ -158,6 +168,22 @@ class Weather extends DesktopWindow {
   }
 
   /**
+   * Calculates the weather status text.
+   *
+   * @param {number} statusCode The number recived from the request.
+   */
+  getStatus (statusCode) {
+    let weatherStatusList = ['Clear sky', 'Nearly clear sky', 'Variable cloudiness', 'Halfclear sky',
+      'Cloudy sky', 'Overcast', 'Fog', 'Light rain showers', 'Moderate rain showers',
+      'Heavy rain showers', 'Thunderstorm', 'Light sleet showers', 'Moderate sleet showers',
+      'Heavy sleet showers', 'Light snow showers', 'Moderate snow showers', 'Heavy snow showers',
+      'Light rain', 'Moderate rain', 'Heavy rain', 'Thunder', 'Light sleet', 'Moderate sleet',
+      'Heavy sleet', 'Light snowfall', 'Moderate snowfall', 'Heavy snowfall']
+
+    this.weatherStatus = weatherStatusList[statusCode - 1]
+  }
+
+  /**
    * Checks if the data has weather info that matches the closest hour.
    *
    * @param {object[]} temps Array of objects with temperatures and their closest time.
@@ -175,10 +201,11 @@ class Weather extends DesktopWindow {
       this.checkCurrentWeatherTime(temps)
     } else if (this.hourCounter === 10) {
       this.hourCounter = 0
-      this.displayWeather(temps[temps.length - 1].value)
+      let tempInfo = temps[temps.length - 1]
+      this.displayWeather(tempInfo.value, tempInfo.status)
     } else {
       this.hourCounter = 0
-      this.displayWeather(value[0].value)
+      this.displayWeather(value[0].value, value[0].status)
     }
   }
 
