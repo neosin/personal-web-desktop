@@ -138,7 +138,7 @@ a {
 }
 
 .chat #content {
-    height: 10px; /* 200 */
+    height: 200px;
     background-color: rgb(226, 226, 226);
     overflow: scroll;
     text-align: left;
@@ -161,7 +161,7 @@ a {
     width: 100%;
 }
 
-.chat #send {
+.chat #send, .chat #emojiBtn {
     margin-top: 5px;
     margin-bottom: 5px;
     height: 42px;
@@ -202,14 +202,11 @@ a {
 
 .chat #emojis li {
     display: inline;
+    margin: 5px;
 }
 
 .emojiToggle {
     display: none;
-}
-
-.chat #emojiSection {
-    background-color: rgb(226, 226, 226);
 }
 
 /* Weather */
@@ -250,4 +247,8 @@ a {
 
 .weather #content p {
     font-size: 20px;
+}
+
+.weather #controlls {
+    padding-top: 10px;
 }

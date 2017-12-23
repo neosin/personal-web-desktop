@@ -147,6 +147,22 @@
      if (message.value.search('/:cool:/')) {
        message.value = message.value.replace(/:cool:/g, '\uD83D\uDE0E')
      }
+
+     if (message.value.search('/:surprised:/')) {
+       message.value = message.value.replace(/:surprised:/g, '\uD83D\uDE2E')
+     }
+
+     if (message.value.search('/:cheeky:/')) {
+       message.value = message.value.replace(/:cheeky:/g, '\uD83D\uDE1B')
+     }
+
+     if (message.value.search('/:horns:/')) {
+       message.value = message.value.replace(/:horns:/g, '\uD83E\uDD18')
+     }
+
+     if (message.value.search('/:thinking:/')) {
+       message.value = message.value.replace(/:thinking:/g, '\uD83E\uDD14')
+     }
    }
  }
 
