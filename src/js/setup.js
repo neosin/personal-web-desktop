@@ -82,6 +82,11 @@
    scrollContent.scrollTop = scrollContent.scrollHeight
  }
 
+ /**
+  * Starts a loading animation.
+  *
+  * @param {object} currentWindow The window that will get the loading animation.
+  */
  function startLoading (currentWindow) {
    let loader = document.createElement('div')
    loader.classList.add('loading')
@@ -89,8 +94,15 @@
    currentWindow.querySelector('#windowContent').appendChild(loader)
  }
 
+ /**
+  * Stops the loading animation.
+  *
+  * @param {object} currentWindow The window that has a loading animation.
+  */
  function stopLoading (currentWindow) {
-   currentWindow.querySelector('#windowContent').removeChild(currentWindow.querySelector('.loading'))
+   if (currentWindow.querySelector('.loading')) {
+     currentWindow.querySelector('#windowContent').removeChild(currentWindow.querySelector('.loading'))
+   }
  }
 
  // Exports

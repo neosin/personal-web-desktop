@@ -45,7 +45,6 @@ class Weather extends DesktopWindow {
    */
   createWeatherWindow () {
     this.createWindow(this.title, this.icon)
-    setup.startLoading(this.currentWindow)
     this.currentWindow.classList.add('weather')
 
     setup.editAppContent('#weather', this.currentWindow)
@@ -75,6 +74,8 @@ class Weather extends DesktopWindow {
    * Gets the data from the SMHI API.
    */
   getData () {
+    setup.startLoading(this.currentWindow)
+
     window.fetch(this.url)
     .then(response => {
       return response.json()
