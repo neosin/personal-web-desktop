@@ -61,7 +61,7 @@
      }
    }
 
-/**
+   /**
     * Loads the chat content.
     */
    loadChat () {
@@ -73,20 +73,18 @@
      let chatMessageWindow = this.currentWindow.querySelector('#content')
 
      this.webSocket.addEventListener('open', event => {
-       let p = document.createElement('p')
-       p.textContent = 'You are connected!'
-       chatMessageWindow.appendChild(p)
+       this.webSocket.addEventListener('message', event => {
+         this.response = JSON.parse(event.data)
 
-       this.currentWindow.querySelector('#send').addEventListener('click', event => {
-         this.addEmojis()
-         this.sendMessage()
+         this.addMessageToWindow()
+
+         setup.dynamicScroll(chatMessageWindow)
        })
      })
 
-     this.webSocket.addEventListener('message', event => {
-       this.response = JSON.parse(event.data)
-       this.addMessageToWindow()
-       setup.dynamicScroll(chatMessageWindow)
+     this.currentWindow.querySelector('#send').addEventListener('click', event => {
+       this.addEmojis()
+       this.sendMessage()
      })
 
      this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
@@ -123,9 +121,11 @@
     * Writes out the recived messages to the chat window.
     */
    addMessageToWindow () {
-     if (this.response.type === 'message') {
-       let message = this.currentWindow.querySelector('#content p')
+     let message = this.currentWindow.querySelector('#content p')
 
+     if (this.response.type === 'notification') {
+       message.textContent += `${this.response.data}`
+     } else if (this.response.type === 'message') {
        message.textContent += `\n${this.response.username}: ${this.response.data}`
      }
    }
