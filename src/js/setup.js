@@ -82,9 +82,22 @@
    scrollContent.scrollTop = scrollContent.scrollHeight
  }
 
+ function startLoading (currentWindow) {
+   let loader = document.createElement('div')
+   loader.classList.add('loading')
+
+   currentWindow.querySelector('#windowContent').appendChild(loader)
+ }
+
+ function stopLoading (currentWindow) {
+   currentWindow.querySelector('#windowContent').removeChild(currentWindow.querySelector('.loading'))
+ }
+
  // Exports
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
  module.exports.windowFocus = windowFocus
  module.exports.setupWindows = setupWindows
  module.exports.dynamicScroll = dynamicScroll
+ module.exports.startLoading = startLoading
+ module.exports.stopLoading = stopLoading

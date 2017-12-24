@@ -38,6 +38,7 @@
     */
    createChatWindow () {
      this.createWindow(this.title, this.icon)
+     setup.startLoading(this.currentWindow)
      this.currentWindow.classList.add('chat')
 
      this.chooseNickname()
@@ -48,6 +49,7 @@
     */
    chooseNickname () {
      if (!window.localStorage.getItem('chatName')) {
+       setup.stopLoading(this.currentWindow)
        setup.editAppContent('#chatName', this.currentWindow)
 
        let input = this.currentWindow.querySelector('#content input')
@@ -68,11 +70,28 @@
      this.webSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'chat')
      this.nickname = window.localStorage.getItem('chatName')
 
-     setup.editAppContent('#chat', this.currentWindow)
-
-     let chatMessageWindow = this.currentWindow.querySelector('#content')
-
      this.webSocket.addEventListener('open', event => {
+       setup.stopLoading(this.currentWindow)
+
+       setup.editAppContent('#chat', this.currentWindow)
+
+       let chatMessageWindow = this.currentWindow.querySelector('#content')
+
+       this.currentWindow.querySelector('#send').addEventListener('click', event => {
+         this.addEmojis()
+         this.sendMessage()
+       })
+
+       this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
+         this.currentWindow.querySelector('#emojis').classList.toggle('emojiToggle')
+       })
+
+       this.currentWindow.querySelector('#emojis').addEventListener('click', event => {
+         if (event.target.nodeName === 'A') {
+           this.currentWindow.querySelector('textarea').value += event.target.getAttribute('data-custom-value')
+         }
+       })
+
        this.webSocket.addEventListener('message', event => {
          this.response = JSON.parse(event.data)
 
@@ -80,21 +99,6 @@
 
          setup.dynamicScroll(chatMessageWindow)
        })
-     })
-
-     this.currentWindow.querySelector('#send').addEventListener('click', event => {
-       this.addEmojis()
-       this.sendMessage()
-     })
-
-     this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
-       this.currentWindow.querySelector('#emojis').classList.toggle('emojiToggle')
-     })
-
-     this.currentWindow.querySelector('#emojis').addEventListener('click', event => {
-       if (event.target.nodeName === 'A') {
-         this.currentWindow.querySelector('textarea').value += event.target.getAttribute('data-custom-value')
-       }
      })
    }
 

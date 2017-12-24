@@ -12,6 +12,21 @@ a {
     text-decoration: none;
 }
 
+.loading {
+    border: 16px solid rgb(226, 226, 226);
+    border-top: 16px solid rgb(0, 153, 224);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 0.5s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Window */
 
 .window {

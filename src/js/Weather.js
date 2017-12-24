@@ -45,6 +45,7 @@ class Weather extends DesktopWindow {
    */
   createWeatherWindow () {
     this.createWindow(this.title, this.icon)
+    setup.startLoading(this.currentWindow)
     this.currentWindow.classList.add('weather')
 
     setup.editAppContent('#weather', this.currentWindow)
@@ -80,7 +81,7 @@ class Weather extends DesktopWindow {
     })
     .then(response => {
       this.response = response
-      console.log(response)
+      setup.stopLoading(this.currentWindow)
 
       this.calculateWeather()
 
