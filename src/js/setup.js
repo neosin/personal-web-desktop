@@ -101,6 +101,14 @@
    }
  }
 
+ function clearDesktop () {
+   let windows = document.querySelectorAll('.window')
+
+   for (let i = 0; i < windows.length; i++) {
+     document.body.removeChild(windows[i])
+   }
+ }
+
  // Exports
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
@@ -109,3 +117,4 @@
  module.exports.dynamicScroll = dynamicScroll
  module.exports.startLoading = startLoading
  module.exports.stopLoading = stopLoading
+ module.exports.clearDesktop = clearDesktop

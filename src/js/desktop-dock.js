@@ -38,8 +38,9 @@
  <ul id="dock">
    <li id="memory"><a href="#"><image src="/image/icons/game.png"></a></li>
    <li id="chat"><a href="#"><img src="/image/icons/chat.png"></a></li>
-   <li id="settings"><a href="#"><img src="/image/icons/settings.png"></a></li>
    <li id="weather"><a href="#"><img src="/image/icons/weather.png"></a></li>
+   <li id="settings"><a href="#"><img src="/image/icons/settings.png"></a></li>
+   <li id="trash"><a href="#"><img src="/image/icons/trash.png"></a></li>
  </ul>
 `
 
@@ -65,20 +66,18 @@
    connectedCallback () {
      setup.setupWindows()
 
-     this.shadowRoot.querySelector('#memory').addEventListener('click', event => {
-       new Memory('Memory', '/image/icons/game.png').createMemoryWindow()
-     })
-
-     this.shadowRoot.querySelector('#chat').addEventListener('click', event => {
-       new Chat('Chat', '/image/icons/chat.png').createChatWindow()
-     })
-
-     this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
-       new Settings('Settings', '/image/icons/settings.png').createSettingsWindow()
-     })
-
-     this.shadowRoot.querySelector('#weather').addEventListener('click', event => {
-       new Weather('Weather', '/image/icons/weather.png').createWeatherWindow()
+     this.shadowRoot.addEventListener('click', event => {
+       if (event.target.closest('li').id === 'memory') {
+         new Memory('Memory', '/image/icons/game.png').createMemoryWindow()
+       } else if (event.target.closest('li').id === 'chat') {
+         new Chat('Chat', '/image/icons/chat.png').createChatWindow()
+       } else if (event.target.closest('li').id === 'settings') {
+         new Settings('Settings', '/image/icons/settings.png').createSettingsWindow()
+       } else if (event.target.closest('li').id === 'weather') {
+         new Weather('Weather', '/image/icons/weather.png').createWeatherWindow()
+       } else if (event.target.closest('li').id === 'trash') {
+         setup.clearDesktop()
+       }
      })
    }
  }
