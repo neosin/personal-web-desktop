@@ -29,15 +29,14 @@ class Weather extends DesktopWindow {
     this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
     this.title = title
     this.icon = icon
+    this.currentDay = undefined
     this.day = undefined
     this.weatherStatus = undefined
-    this.dayToDisplay = 0
     this.dateObj = new Date()
     this.highestTemp = null
     this.lowestTemp = null
     this.hourCounter = 0
     this.counter = 0
-    this.filteredTimes = undefined
   }
 
   /**
@@ -48,6 +47,10 @@ class Weather extends DesktopWindow {
     this.currentWindow.classList.add('weather')
 
     setup.editAppContent('#weather', this.currentWindow)
+
+    this.currentWindow.querySelector('#controlls button').addEventListener('click', event => {
+      this.changeLocation()
+    })
 
     this.getData()
   }
@@ -65,9 +68,9 @@ class Weather extends DesktopWindow {
 
     setup.editAppContent('#weatherReset', this.currentWindow)
     this.counter = 0
-    this.dayToDisplay = 0
     this.hourCounter = 0
     this.getData()
+    this.dateObj = new Date()
   }
 
   /**
@@ -85,10 +88,6 @@ class Weather extends DesktopWindow {
       setup.stopLoading(this.currentWindow)
 
       this.calculateWeather()
-
-      this.currentWindow.querySelector('#controlls button').addEventListener('click', event => {
-        this.changeLocation()
-      })
     })
   }
 
@@ -96,16 +95,22 @@ class Weather extends DesktopWindow {
    * Calculates the different temperatures etc.
    */
   calculateWeather () {
+    this.dateObj.setDate(this.dateObj.getDate() + 1)
+    this.currentDay = this.dateObj.getDay()
+
     let temps = []
+    let responseTimes = []
 
-    this.checkCurrentWeatherDay()
+    responseTimes = this.response.timeSeries.filter(current => {
+      return parseInt(current.validTime.slice(8, 10)) === this.dateObj.getDate()
+    })
 
-    for (let i = 0; i < this.filteredTimes.length; i++) {
-      let parameters = this.filteredTimes[i].parameters
+    for (let i = 0; i < responseTimes.length; i++) {
+      let parameters = responseTimes[i].parameters
 
       for (let j = 0; j < parameters.length; j++) {
         if (parameters[j].name === 't') {
-          temps.push({time: this.filteredTimes[i].validTime, value: parameters[j].values[0]})
+          temps.push({time: responseTimes[i].validTime, value: parameters[j].values[0]})
         }
 
         if (parameters[j].name === 'Wsymb2') {
@@ -148,7 +153,6 @@ class Weather extends DesktopWindow {
     temperature.textContent = `${temp}°`
     statusText.textContent = this.weatherStatus
 
-    this.dayToDisplay++
     this.counter++
 
     if (this.counter < 5) {
@@ -160,13 +164,8 @@ class Weather extends DesktopWindow {
    * Gets the correct text for the specific day.
    */
   getDayName () {
-    let dateObj = this.dateObj
-    let day = dateObj.getDay() + this.dayToDisplay
     let nameOfDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
-    if (day > 7) { day -= 7 }
-
-    day === this.dateObj.getDay() ? this.day = 'Today' : this.day = nameOfDays[day - 1]
+    this.day = nameOfDays[this.currentDay - 1]
   }
 
   /**
@@ -208,29 +207,6 @@ class Weather extends DesktopWindow {
     } else {
       this.hourCounter = 0
       this.displayWeather(value[0].value, value[0].status)
-    }
-  }
-
-  /**
-   * Checks if it becomes anew month.
-   *
-   * @param {number} start The new starting point if there is a new month.
-   */
-  checkCurrentWeatherDay (start) {
-    this.filteredTimes = this.response.timeSeries.filter(current => {
-      current = parseInt(current.validTime.slice(8, 10))
-
-      let compare
-      start ? compare = start : compare = this.dateObj.getDate() + this.dayToDisplay
-
-      return current === compare
-    })
-
-    if (this.filteredTimes.length === 0) {
-      this.dayToDisplay = 1
-
-      this.checkCurrentWeatherDay(this.dayToDisplay)
-      this.dayToDisplay++
     }
   }
 }
