@@ -223,7 +223,9 @@ a {
 /* Weather */
 
 .weather {
-    width: 800px;
+    width: 850px;
+    color: rgb(255, 255, 255);
+    background: linear-gradient(rgb(49, 117, 161), rgb(6, 83, 146))
 }
 
 .weather #content {

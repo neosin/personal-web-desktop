@@ -63,7 +63,7 @@ class Weather extends DesktopWindow {
 
     this.url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${long}/lat/${lat}/data.json`
 
-    setup.editAppContent('#weather', this.currentWindow)
+    setup.editAppContent('#weatherReset', this.currentWindow)
     this.counter = 0
     this.dayToDisplay = 0
     this.hourCounter = 0

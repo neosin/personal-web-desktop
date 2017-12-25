@@ -11,13 +11,13 @@
         <div class="window" draggable="true" tabindex="0">
             <div id="windowHeader">
                 <div id="buttons">
-                        <button id="close">X</button>
-                        <button id="minimize">-</button>
+                    <button id="close">X</button>
+                    <button id="minimize">-</button>
                 </div>
-                    <div id="center">
-                            <img>
-                            <p></p>
-                    </div>
+                <div id="center">
+                    <img>
+                    <p></p>
+                </div>
             </div>
             <div id="windowContent"></div>
         </div>
@@ -36,6 +36,10 @@
         <div id="content"></div>
     </template>
 
+    <template id="memoryReset">
+        <div id="content"></div>
+    </template>
+
     <template id="memoryCompleted">
         <div id="content">
             <h2>Congratulations!</h2>
@@ -44,19 +48,21 @@
         </div>
     </template>
 
-    <template id="memorySettings">
-        <div id="content"></div>
-    </template>
-
     <template id="memoryBricks">
-        <a href="#"><img src="/image/memory/0.png"></a>
+        <a href="#">
+            <img src="/image/memory/0.png">
+        </a>
     </template>
 
     <template id="settings">
         <div id="content">
             <p>Wallpaper</p>
-            <a><img src="/image/wallpapers/bg1.jpg"></a>
-            <a><img src="/image/wallpapers/bg2.jpg"></a>
+            <a>
+                <img src="/image/wallpapers/bg1.jpg">
+            </a>
+            <a>
+                <img src="/image/wallpapers/bg2.jpg">
+            </a>
             <button id="changeWallpaper">Set as wallpaper</button>
         </div>
     </template>
@@ -71,13 +77,27 @@
             <button id="emojiBtn">Emoji</button>
             <div id="emojiSection">
                 <ul id="emojis" class="emojiToggle">
-                    <li><a data-custom-value=":smile:">&#x1F642</a></li>
-                    <li><a data-custom-value=":happy:">&#x1F600</a></li>
-                    <li><a data-custom-value=":cool:">&#x1F60E</a></li>
-                    <li><a data-custom-value=":surprised:">&#x1F62E</a></li>
-                    <li><a data-custom-value=":cheeky:">&#x1F61B</a></li>
-                    <li><a data-custom-value=":horns:">&#x1F918</a></li>
-                    <li><a data-custom-value=":thinking:">&#x1F914</a></li>
+                    <li>
+                        <a data-custom-value=":smile:">&#x1F642</a>
+                    </li>
+                    <li>
+                        <a data-custom-value=":happy:">&#x1F600</a>
+                    </li>
+                    <li>
+                        <a data-custom-value=":cool:">&#x1F60E</a>
+                    </li>
+                    <li>
+                        <a data-custom-value=":surprised:">&#x1F62E</a>
+                    </li>
+                    <li>
+                        <a data-custom-value=":cheeky:">&#x1F61B</a>
+                    </li>
+                    <li>
+                        <a data-custom-value=":horns:">&#x1F918</a>
+                    </li>
+                    <li>
+                        <a data-custom-value=":thinking:">&#x1F914</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -111,9 +131,14 @@
             <p></p>
         </div>
     </template>
+
+    <template id="weatherReset">
+        <div id="content"></div>
+    </template>
 </head>
 
 <body>
     <desktop-dock></desktop-dock>
 </body>
+
 </html>

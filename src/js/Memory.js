@@ -45,6 +45,8 @@
      this.createWindow(this.title, this.icon)
      this.currentWindow.classList.add('memory')
 
+     setup.editAppContent('#memoryDefault', this.currentWindow)
+
      this.startGame()
    }
 
@@ -52,7 +54,6 @@
     * Starts the memory game.
     */
    startGame () {
-     setup.editAppContent('#memoryDefault', this.currentWindow)
      this.appContent = this.currentWindow.querySelector('#content')
 
      this.currentWindow.querySelector('#change').addEventListener('click', event => {
@@ -77,6 +78,7 @@
      this.brickCounter = 0
      this.bricks.length = 0
 
+     setup.editAppContent('#memoryReset', this.currentWindow)
      this.startGame()
    }
 
