@@ -37,7 +37,7 @@
     *
     */
    createChatWindow () {
-     this.createWindow(this.title, this.icon)
+     this.createWindow()
      setup.startLoading(this.currentWindow)
      this.currentWindow.classList.add('chat')
 

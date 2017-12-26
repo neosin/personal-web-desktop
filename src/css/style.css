@@ -23,9 +23,14 @@ a {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
+
 
 /* Window */
 
@@ -67,7 +72,10 @@ a {
     height: 25px;
 }
 
-.windowHeader p, .close, .minimize, .windowHeader img {
+.windowHeader p,
+.close,
+.minimize,
+.windowHeader img {
     display: inline-block;
 }
 
@@ -116,6 +124,7 @@ a {
     padding: 10px;
 }
 
+
 /* Memory */
 
 .memory {
@@ -145,6 +154,7 @@ a {
 .settings .content a:hover {
     opacity: 0.7;
 }
+
 
 /* Chat */
 
@@ -179,7 +189,9 @@ a {
     width: 100%;
 }
 
-.chat .send, .chat .emojiBtn, .chat .set {
+.chat .send,
+.chat .emojiBtn,
+.chat .set {
     margin-top: 5px;
     margin-bottom: 5px;
     height: 42px;
@@ -224,6 +236,7 @@ a {
     display: none;
 }
 
+
 /* Weather */
 
 .weather {
@@ -235,7 +248,7 @@ a {
     color: rgb(255, 255, 255);
     padding: 0px;
     display: table;
-    margin:  0 auto;
+    margin: 0 auto;
 }
 
 .weather .day {

@@ -42,7 +42,7 @@
     * Creates a new memory game window.
     */
    createMemoryWindow () {
-     this.createWindow(this.title, this.icon)
+     this.createWindow()
      this.currentWindow.classList.add('memory')
 
      setup.editAppContent('#memoryDefault', this.currentWindow)

@@ -33,7 +33,7 @@ class Settings extends DesktopWindow {
    * Creates a new settings window.
    */
   createSettingsWindow () {
-    this.createWindow(this.title, this.icon)
+    this.createWindow()
     this.currentWindow.classList.add('settings')
 
     setup.editAppContent('#settings', this.currentWindow)

@@ -15,21 +15,13 @@
   */
  class DesktopWindow {
    constructor () {
-     this.title = null
-     this.icon = null
      this.currentWindow = null
    }
 
    /**
     * Creates a new window and adds it to the DOM.
-    *
-    * @param {string} title Name of the application.
-    * @param {string} icon The relative URL for the icon of the opened application.
     */
-   createWindow (title, icon) {
-     this.title = title
-     this.icon = icon
-
+   createWindow () {
      setup.addTemplateBody('#window')
 
      let allWindows = document.querySelectorAll('.window')
