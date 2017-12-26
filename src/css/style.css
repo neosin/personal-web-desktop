@@ -153,12 +153,15 @@ a {
 }
 
 .chat #content {
-    height: 200px;
-    background-color: rgb(226, 226, 226);
     overflow: scroll;
     text-align: left;
     padding: 10px;
     font-size: 14px;
+}
+
+.chatMessages {
+    background-color: rgb(226, 226, 226);
+    height: 200px;
 }
 
 .chat #content p {

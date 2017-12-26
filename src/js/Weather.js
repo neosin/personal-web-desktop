@@ -170,7 +170,6 @@ class Weather extends DesktopWindow {
    */
   getDayName () {
     let nameOfDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
     let day = this.dateObj.getDay()
 
     this.currentDay === day ? this.dayText = 'Today' : this.dayText = nameOfDays[day - 1]

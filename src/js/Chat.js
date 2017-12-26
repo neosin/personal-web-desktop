@@ -53,9 +53,13 @@
        setup.editAppContent('#chatName', this.currentWindow)
 
        let input = this.currentWindow.querySelector('#content input')
+       let button = this.currentWindow.querySelector('#set')
 
-       this.currentWindow.querySelector('#set').addEventListener('click', event => {
+       setup.enableButton(input, button)
+
+       button.addEventListener('click', event => {
          window.localStorage.setItem('chatName', input.value)
+         setup.startLoading(this.currentWindow)
          this.loadChat()
        })
      } else {
@@ -72,8 +76,8 @@
 
      this.webSocket.addEventListener('open', event => {
        setup.stopLoading(this.currentWindow)
-
        setup.editAppContent('#chat', this.currentWindow)
+       setup.enableButton(this.currentWindow.querySelector('textarea'), this.currentWindow.querySelector('#send'))
 
        let chatMessageWindow = this.currentWindow.querySelector('#content')
 

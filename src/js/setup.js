@@ -1,5 +1,5 @@
 /**
- * Module containing functions that import templates etc.
+ * Module containing setup functions for windows etc.
  *
  * @module src/js/setup
  * @author Rasmus Falk
@@ -11,7 +11,7 @@
  const dragDrop = require('./dragDrop')
 
  /**
-  * Adds the drag and drop,close and minimize event listeners to the document object.
+  * Adds the drag and drop, close and minimize event listeners to the document object.
   */
  function setupWindows () {
    dragDrop.dragDrop()
@@ -101,12 +101,27 @@
    }
  }
 
+ /**
+  * Closes every window on the desktop.
+  */
  function clearDesktop () {
    let windows = document.querySelectorAll('.window')
 
    for (let i = 0; i < windows.length; i++) {
      document.body.removeChild(windows[i])
    }
+ }
+
+ function enableButton (input, button) {
+   setTimeout(() => {
+     if (input.value.trim() !== '') {
+       button.disabled = false
+     } else {
+       button.disabled = true
+     }
+
+     enableButton(input, button)
+   }, 100)
  }
 
  // Exports
@@ -118,3 +133,4 @@
  module.exports.startLoading = startLoading
  module.exports.stopLoading = stopLoading
  module.exports.clearDesktop = clearDesktop
+ module.exports.enableButton = enableButton
