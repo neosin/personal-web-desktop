@@ -34,19 +34,20 @@ class Settings extends DesktopWindow {
    */
   createSettingsWindow () {
     this.createWindow(this.title, this.icon)
+    this.currentWindow.classList.add('settings')
 
     setup.editAppContent('#settings', this.currentWindow)
 
-    this.currentWindow.classList.add('settings')
+    let settingsContent = this.currentWindow.querySelector('.content')
 
-    this.currentWindow.querySelector('#content').addEventListener('click', event => {
+    settingsContent.addEventListener('click', event => {
       if (event.target.nodeName === 'IMG') {
         this.selectedImg = event.target.src
       }
     })
 
     this.currentWindow.addEventListener('click', event => {
-      if (event.target.id === 'changeWallpaper') {
+      if (event.target.className === 'changeWallpaper') {
         document.body.style.backgroundImage = `url(${this.selectedImg})`
       }
     })

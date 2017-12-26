@@ -19,11 +19,11 @@
    document.addEventListener('click', event => {
      let currentWindow = event.target.closest('.window')
 
-     if (event.target.id === 'minimize') {
-       currentWindow.querySelector('#windowContent').classList.toggle('windowMinimize')
+     if (event.target.className === 'minimize') {
+       currentWindow.querySelector('.windowContent').classList.toggle('windowMinimize')
      }
 
-     if (event.target.id === 'close') {
+     if (event.target.className === 'close') {
        document.body.removeChild(currentWindow)
      }
    })
@@ -42,14 +42,14 @@
  }
 
  function editAppContent (id, window) {
-   if (window.querySelector('#content')) {
-     let remove = window.querySelector('#content')
-     let removeParent = window.querySelector('#windowContent')
+   if (window.querySelector('.content')) {
+     let remove = window.querySelector('.content')
+     let removeParent = window.querySelector('.windowContent')
 
      removeParent.removeChild(remove)
    }
 
-   let windowContent = window.querySelector('#windowContent')
+   let windowContent = window.querySelector('.windowContent')
    let template = document.querySelector(id)
    windowContent.appendChild(document.importNode(template.content, true))
  }
@@ -87,7 +87,7 @@
    let loader = document.createElement('div')
    loader.classList.add('loading')
 
-   currentWindow.querySelector('#windowContent').appendChild(loader)
+   currentWindow.querySelector('.windowContent').appendChild(loader)
  }
 
  /**
@@ -97,7 +97,7 @@
   */
  function stopLoading (currentWindow) {
    if (currentWindow.querySelector('.loading')) {
-     currentWindow.querySelector('#windowContent').removeChild(currentWindow.querySelector('.loading'))
+     currentWindow.querySelector('.windowContent').removeChild(currentWindow.querySelector('.loading'))
    }
  }
 

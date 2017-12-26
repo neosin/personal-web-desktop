@@ -50,10 +50,10 @@
    chooseNickname () {
      if (!window.localStorage.getItem('chatName')) {
        setup.stopLoading(this.currentWindow)
-       setup.editAppContent('#chatName', this.currentWindow)
+       setup.editAppContent('.chatName', this.currentWindow)
 
-       let input = this.currentWindow.querySelector('#content input')
-       let button = this.currentWindow.querySelector('#set')
+       let input = this.currentWindow.querySelector('.content input')
+       let button = this.currentWindow.querySelector('.set')
 
        setup.enableButton(input, button)
 
@@ -77,22 +77,29 @@
      this.webSocket.addEventListener('open', event => {
        setup.stopLoading(this.currentWindow)
        setup.editAppContent('#chat', this.currentWindow)
-       setup.enableButton(this.currentWindow.querySelector('textarea'), this.currentWindow.querySelector('#send'))
 
-       let chatMessageWindow = this.currentWindow.querySelector('#content')
+       let input = this.currentWindow.querySelector('textarea')
+       let button = this.currentWindow.querySelector('.send')
+       let emojiBtn = this.currentWindow.querySelector('.emojiBtn')
+       let emojis = this.currentWindow.querySelector('ul')
+       let emojiSection = this.currentWindow.querySelector('.emojiSection')
 
-       this.currentWindow.querySelector('#send').addEventListener('click', event => {
+       setup.enableButton(input, button)
+
+       let chatMessageWindow = this.currentWindow.querySelector('.content')
+
+       button.addEventListener('click', event => {
          this.addEmojis()
          this.sendMessage()
        })
 
-       this.currentWindow.querySelector('#emojiBtn').addEventListener('click', event => {
-         this.currentWindow.querySelector('#emojis').classList.toggle('emojiToggle')
+       emojiBtn.addEventListener('click', event => {
+         emojiSection.classList.toggle('emojiToggle')
        })
 
-       this.currentWindow.querySelector('#emojis').addEventListener('click', event => {
+       emojis.addEventListener('click', event => {
          if (event.target.nodeName === 'A') {
-           this.currentWindow.querySelector('textarea').value += event.target.getAttribute('data-custom-value')
+           input.value += event.target.getAttribute('data-custom-value')
          }
        })
 
@@ -100,7 +107,6 @@
          this.response = JSON.parse(event.data)
 
          this.addMessageToWindow()
-
          setup.dynamicScroll(chatMessageWindow)
        })
      })
@@ -121,7 +127,6 @@
      }
 
      this.webSocket.send(JSON.stringify(data))
-
      message.value = ''
    }
 
@@ -129,7 +134,7 @@
     * Writes out the recived messages to the chat window.
     */
    addMessageToWindow () {
-     let message = this.currentWindow.querySelector('#content p')
+     let message = this.currentWindow.querySelector('.content p')
 
      if (this.response.type === 'notification') {
        message.textContent += `${this.response.data}`

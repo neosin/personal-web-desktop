@@ -54,9 +54,9 @@
     * Starts the memory game.
     */
    startGame () {
-     this.appContent = this.currentWindow.querySelector('#content')
+     this.appContent = this.currentWindow.querySelector('.content')
 
-     this.currentWindow.querySelector('#change').addEventListener('click', event => {
+     this.currentWindow.querySelector('.change').addEventListener('click', event => {
        let option = this.currentWindow.querySelector('select').value
 
        this.x = option.slice(0, 1)
@@ -78,7 +78,7 @@
      this.brickCounter = 0
      this.bricks.length = 0
 
-     setup.editAppContent('#memoryReset', this.currentWindow)
+     setup.editAppContent('.memoryReset', this.currentWindow)
      this.startGame()
    }
 
@@ -164,10 +164,10 @@
        if (this.brickCounter === this.bricks.length) {
          setup.editAppContent('#memoryCompleted', this.currentWindow)
 
-         let attempts = this.currentWindow.querySelector('#attempts')
+         let attempts = this.currentWindow.querySelector('.attempts')
          attempts.textContent += this.attempts
 
-         this.currentWindow.querySelector('#reset').addEventListener('click', event => {
+         this.currentWindow.querySelector('.reset').addEventListener('click', event => {
            this.resetGame()
          })
        }

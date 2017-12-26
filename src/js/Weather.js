@@ -48,7 +48,7 @@ class Weather extends DesktopWindow {
 
     setup.editAppContent('#weather', this.currentWindow)
 
-    this.currentWindow.querySelector('#controlls button').addEventListener('click', event => {
+    this.currentWindow.querySelector('.controlls button').addEventListener('click', event => {
       this.changeLocation()
     })
 
@@ -141,16 +141,16 @@ class Weather extends DesktopWindow {
     this.getStatus(weatherStatus)
 
     let template = document.querySelector('#weatherDay')
-    let content = this.currentWindow.querySelector('#content')
+    let content = this.currentWindow.querySelector('.content')
     let dayTemplate
 
     dayTemplate = document.importNode(template.content, true)
     content.appendChild(dayTemplate)
 
-    let day = this.currentWindow.querySelectorAll('#content h2')[this.counter]
-    let highLow = this.currentWindow.querySelectorAll('#content p')[this.counter]
-    let temperature = this.currentWindow.querySelectorAll('#content h1')[this.counter]
-    let statusText = this.currentWindow.querySelectorAll('#content h3')[this.counter]
+    let day = this.currentWindow.querySelectorAll('.content h2')[this.counter]
+    let highLow = this.currentWindow.querySelectorAll('.content p')[this.counter]
+    let temperature = this.currentWindow.querySelectorAll('.content h1')[this.counter]
+    let statusText = this.currentWindow.querySelectorAll('.content h3')[this.counter]
 
     day.textContent = this.dayText
     highLow.textContent = `${highest}° / ${lowest}°`

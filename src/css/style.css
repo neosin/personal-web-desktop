@@ -51,7 +51,7 @@ a {
     opacity: 0.3;
 }
 
-#windowHeader {
+.windowHeader {
     width: 100%;
     height: 30px;
     border-top-right-radius: 5px;
@@ -61,18 +61,18 @@ a {
     position: relative;
 }
 
-#windowHeader img {
+.windowHeader img {
     padding-top: 2.5px;
     width: 25px;
     height: 25px;
 }
 
-#windowHeader p, #close, #minimize, #windowHeader img {
+.windowHeader p, .close, .minimize, .windowHeader img {
     display: inline-block;
 }
 
-#close,
-#minimize {
+.close,
+.minimize {
     width: 15px;
     height: 15px;
     border-radius: 100%;
@@ -81,38 +81,38 @@ a {
     margin-left: 5px;
 }
 
-#windowHeader #buttons {
+.windowHeader .buttons {
     vertical-align: top;
     position: absolute;
     height: 100%;
     padding-top: 6.5px;
 }
 
-#windowHeader #center {
+.windowHeader .center {
     height: 100%;
 }
 
-#windowHeader p {
+.windowHeader p {
     margin: 0px;
     vertical-align: top;
     padding-top: 8px;
 }
 
-#close {
+.close {
     background-color: rgb(255, 47, 0);
     margin-left: 15px;
 }
 
-#minimize {
+.minimize {
     background-color: rgb(255, 208, 0);
 }
 
-#close:hover,
-#minimize:hover {
+.close:hover,
+.minimize:hover {
     opacity: 0.7;
 }
 
-#windowContent {
+.windowContent {
     padding: 10px;
 }
 
@@ -122,11 +122,11 @@ a {
     width: 314px;
 }
 
-.memory #content img {
+.memory .content img {
     width: 70px;
 }
 
-.memory #controlls {
+.memory .controlls {
     margin-bottom: 10px;
 }
 
@@ -137,12 +137,12 @@ a {
     width: 450px;
 }
 
-.settings #content img {
+.settings .content img {
     width: 350px;
     height: 200px;
 }
 
-.settings #content a:hover {
+.settings .content a:hover {
     opacity: 0.7;
 }
 
@@ -152,7 +152,7 @@ a {
     width: 450px;
 }
 
-.chat #content {
+.chat .content {
     overflow: scroll;
     text-align: left;
     padding: 10px;
@@ -164,7 +164,7 @@ a {
     height: 200px;
 }
 
-.chat #content p {
+.chat .content p {
     margin: 0px;
     white-space: pre-line;
     line-height: 1.5;
@@ -179,7 +179,7 @@ a {
     width: 100%;
 }
 
-.chat #send, .chat #emojiBtn, .chat #set {
+.chat .send, .chat .emojiBtn, .chat .set {
     margin-top: 5px;
     margin-bottom: 5px;
     height: 42px;
@@ -195,12 +195,12 @@ a {
     text-align: center;
 }
 
-.chat #content #info {
+.chat .content .info {
     text-align: center;
     margin-bottom: 5px;
 }
 
-.chat #set,
+.chat .set,
 .chat input {
     display: block;
     margin: 0 auto;
@@ -209,12 +209,13 @@ a {
     padding: 0px;
 }
 
-.chat #emojis {
+.chat ul {
     list-style: none;
     padding: 0px;
+    margin: 0px;
 }
 
-.chat #emojis li {
+.chat li {
     display: inline;
     margin: 5px;
 }
@@ -230,37 +231,37 @@ a {
     background: linear-gradient(rgb(49, 117, 161), rgb(6, 83, 146))
 }
 
-.weather #content {
+.weather .content {
     color: rgb(255, 255, 255);
     padding: 0px;
     display: table;
     margin:  0 auto;
 }
 
-.weather #day {
+.weather .day {
     display: table-cell;
     padding: 15px;
 }
 
-.weather #content h1,
-.weather #content h2,
-.weather #content p {
+.weather .content h1,
+.weather .content h2,
+.weather .content p {
     margin: 0px;
 }
 
-.weather #content h1 {
+.weather .content h1 {
     font-size: 60px;
 }
 
-.weather #content h2 {
+.weather .content h2 {
     font-size: 30px;
 }
 
-.weather #content p {
+.weather .content p {
     font-size: 20px;
 }
 
-.weather #controlls {
+.weather .controlls {
     padding-top: 10px;
     padding-bottom: 10px;
 }

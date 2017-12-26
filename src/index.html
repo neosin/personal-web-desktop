@@ -9,42 +9,42 @@
 
     <template id="window">
         <div class="window" draggable="true" tabindex="0">
-            <div id="windowHeader">
-                <div id="buttons">
-                    <button id="close">X</button>
-                    <button id="minimize">-</button>
+            <div class="windowHeader">
+                <div class="buttons">
+                    <button class="close">X</button>
+                    <button class="minimize">-</button>
                 </div>
-                <div id="center">
+                <div class="center">
                     <img>
                     <p></p>
                 </div>
             </div>
-            <div id="windowContent"></div>
+            <div class="windowContent"></div>
         </div>
     </template>
 
     <template id="memoryDefault">
-        <div id="controlls">
+        <div class="controlls">
             <select>
                 <option value="44">4 x 4</option>
                 <option value="43">4 x 3</option>
                 <option value="42">4 x 2</option>
                 <option value="41">4 x 1</option>
             </select>
-            <button id="change">Restart game</button>
+            <button class="change">Restart game</button>
         </div>
-        <div id="content"></div>
+        <div class="content"></div>
     </template>
 
-    <template id="memoryReset">
-        <div id="content"></div>
+    <template class="memoryReset">
+        <div class="content"></div>
     </template>
 
     <template id="memoryCompleted">
-        <div id="content">
+        <div class="content">
             <h2>Congratulations!</h2>
-            <p id="attempts">Attempts: </p>
-            <button id="reset">Play again?</button>
+            <p class="attempts">Attempts: </p>
+            <button class="reset">Play again?</button>
         </div>
     </template>
 
@@ -55,7 +55,7 @@
     </template>
 
     <template id="settings">
-        <div id="content">
+        <div class="content">
             <p>Wallpaper</p>
             <a>
                 <img src="/image/wallpapers/bg1.jpg">
@@ -63,20 +63,20 @@
             <a>
                 <img src="/image/wallpapers/bg2.jpg">
             </a>
-            <button id="changeWallpaper">Set as wallpaper</button>
+            <button class="changeWallpaper">Set as wallpaper</button>
         </div>
     </template>
 
     <template id="chat">
-        <div id="content" class="chatMessages">
+        <div class="content chatMessages">
             <p></p>
         </div>
-        <div id="controlls">
+        <div class="controlls">
             <textarea></textarea>
-            <button id="send">Send</button>
-            <button id="emojiBtn">Emoji</button>
-            <div id="emojiSection">
-                <ul id="emojis" class="emojiToggle">
+            <button class="send">Send</button>
+            <button class="emojiBtn">Emoji</button>
+            <div class="emojiSection emojiToggle">
+                <ul>
                     <li>
                         <a data-custom-value=":smile:">&#x1F642</a>
                     </li>
@@ -104,15 +104,15 @@
     </template>
 
     <template id="chatName">
-        <div id="content">
-            <p id="info">Please choose a nickname that will be used in the chat...</p>
+        <div class="content">
+            <p class="info">Please choose a nickname that will be used in the chat...</p>
             <input type="text" placeholder="nickname...">
-            <button id="set">Set</button>
+            <button class="set">Set</button>
         </div>
     </template>
 
     <template id="weather">
-        <div id="controlls">
+        <div class="controlls">
             <select>
                 <option value="18.068581,59.329324">Stockholm</option>
                 <option value="16.356779,56.663445">Kalmar</option>
@@ -120,11 +120,11 @@
             </select>
             <button>Update</button>
         </div>
-        <div id="content"></div>
+        <div class="content"></div>
     </template>
 
     <template id="weatherDay">
-        <div id="day">
+        <div class="day">
             <h1></h1>
             <h2></h2>
             <h3></h3>
@@ -133,7 +133,7 @@
     </template>
 
     <template id="weatherReset">
-        <div id="content"></div>
+        <div class="content"></div>
     </template>
 </head>
 
