@@ -26,7 +26,6 @@ class Settings extends DesktopWindow {
 
     this.title = title
     this.icon = icon
-    this.selectedImg = `/image/wallpapers/bg1.jpg'`
   }
 
   /**
@@ -42,13 +41,7 @@ class Settings extends DesktopWindow {
 
     settingsContent.addEventListener('click', event => {
       if (event.target.nodeName === 'IMG') {
-        this.selectedImg = event.target.src
-      }
-    })
-
-    this.currentWindow.addEventListener('click', event => {
-      if (event.target.className === 'changeWallpaper') {
-        document.body.style.backgroundImage = `url(${this.selectedImg})`
+        document.body.style.backgroundImage = `url(${event.target.src})`
       }
     })
   }

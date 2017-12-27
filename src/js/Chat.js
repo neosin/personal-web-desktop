@@ -49,7 +49,7 @@
    chooseNickname () {
      if (!window.localStorage.getItem('chatName')) {
        setup.stopLoading(this.currentWindow)
-       setup.editAppContent('.chatName', this.currentWindow)
+       setup.editAppContent('#chatName', this.currentWindow)
 
        let input = this.currentWindow.querySelector('.content input')
        let button = this.currentWindow.querySelector('.set')

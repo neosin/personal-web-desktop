@@ -31,6 +31,10 @@ a {
     }
 }
 
+select {
+    background-color: rgb(255, 255, 255);
+}
+
 
 /* Window */
 
@@ -131,23 +135,22 @@ a {
     width: 314px;
 }
 
-.memory .content img {
-    width: 70px;
-}
-
 .memory .controlls {
     margin-bottom: 10px;
 }
 
+.memory h2 {
+    margin: 0px;
+}
 
 /* Settings */
 
 .settings {
-    width: 450px;
+    width: 365px;
 }
 
 .settings .content img {
-    width: 350px;
+    width: 345px;
     height: 200px;
 }
 
@@ -162,6 +165,10 @@ a {
     width: 450px;
 }
 
+.chat .windowContent {
+    background-color: rgb(27, 27, 27);
+}
+
 .chat .content {
     overflow: scroll;
     text-align: left;
@@ -170,11 +177,12 @@ a {
 }
 
 .chatMessages {
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(43, 43, 43);
     height: 200px;
 }
 
 .chat .content p {
+    color: rgb(226, 226, 226);
     margin: 0px;
     white-space: pre-line;
     line-height: 1.5;
@@ -186,7 +194,9 @@ a {
     margin-top: 10px;
     margin-bottom: 5px;
     overflow: scroll;
-    width: 100%;
+    width: 97%;
+    font-size: 14px;
+    padding: 5px;
 }
 
 .chat .send,
@@ -196,6 +206,7 @@ a {
     margin-bottom: 5px;
     height: 42px;
     width: 100%;
+    font-size: 16px;
 }
 
 .chat controlls {
@@ -203,8 +214,10 @@ a {
 }
 
 .chat input {
-    width: 80%;
+    width: 70%;
     text-align: center;
+    font-size: 14px;
+    height: 42px;
 }
 
 .chat .content .info {
@@ -217,7 +230,6 @@ a {
     display: block;
     margin: 0 auto;
     margin-bottom: 5px;
-    height: 30px;
     padding: 0px;
 }
 
@@ -225,6 +237,7 @@ a {
     list-style: none;
     padding: 0px;
     margin: 0px;
+    margin-top: 10px;
 }
 
 .chat li {
@@ -234,6 +247,14 @@ a {
 
 .emojiToggle {
     display: none;
+}
+
+.chat button:disabled {
+    background-color: rgb(170, 170, 170);
+}
+
+.chat li a {
+    font-size: 20px;
 }
 
 
@@ -254,11 +275,13 @@ a {
 .weather .day {
     display: table-cell;
     padding: 15px;
+    text-align: center;
 }
 
 .weather .content h1,
 .weather .content h2,
-.weather .content p {
+.weather .content p,
+.weather .content img {
     margin: 0px;
 }
 

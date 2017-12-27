@@ -62,14 +62,15 @@
 
     <template id="settings">
         <div class="content">
-            <p>Wallpaper</p>
             <a>
                 <img src="/image/wallpapers/bg1.jpg">
             </a>
             <a>
                 <img src="/image/wallpapers/bg2.jpg">
             </a>
-            <button class="changeWallpaper">Set as wallpaper</button>
+            <a>
+                <img src="/image/wallpapers/bg3.jpg">
+            </a>
         </div>
     </template>
 
@@ -128,6 +129,8 @@
                 <option value="11.97456,57.70887">Gothenburg</option>
                 <option value="16.356779,56.663445">Kalmar</option>
                 <option value="15.276023,56.210434">Ronneby</option>
+                <option value="15.291613,56.242729">Kallinge</option>
+                <option class="currentLocation" disabled value="">Your location</option>
             </select>
             <button>Update</button>
         </div>
@@ -151,5 +154,4 @@
 <body>
     <desktop-dock></desktop-dock>
 </body>
-
 </html>

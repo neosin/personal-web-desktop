@@ -45,6 +45,8 @@ class Weather extends DesktopWindow {
     this.currentWindow.classList.add('weather')
     setup.editAppContent('#weather', this.currentWindow)
 
+    this.getCurrentPosition()
+
     this.currentDay = this.dateObj.getDay()
     this.getData()
 
@@ -219,6 +221,22 @@ class Weather extends DesktopWindow {
     } else {
       this.temp = this.hourCounter === 10 ? temps[temps.length - 1] : value[0]
     }
+  }
+
+  getCurrentPosition () {
+    navigator.geolocation.getCurrentPosition(position => {
+      let long = position.coords.longitude.toString(10).slice(0, 9)
+      let lat = position.coords.latitude.toString(10).slice(0, 9)
+
+      let option = this.currentWindow.querySelector('.controlls .currentLocation')
+      option.selected = true
+      option.disabled = false
+      option.value = `${long},${lat}`
+
+      console.log(option.value)
+
+      this.changeLocation()
+    })
   }
 }
 
