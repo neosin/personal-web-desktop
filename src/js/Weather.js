@@ -19,7 +19,7 @@ class Weather extends DesktopWindow {
    * Creates an instance of Weather.
    *
    * @param {string} title String of the relative URL for the application window icon.
-   * @param {string} icon String of the title for the application window.
+   * @param {string} icon String of the relative URL for the title of the application window.
    * @memberof Weather
    */
   constructor (title, icon) {
@@ -43,20 +43,18 @@ class Weather extends DesktopWindow {
   createWeatherWindow () {
     this.createWindow()
     this.currentWindow.classList.add('weather')
-
     setup.editAppContent('#weather', this.currentWindow)
+
+    this.currentDay = this.dateObj.getDay()
+    this.getData()
 
     this.currentWindow.querySelector('.controlls button').addEventListener('click', event => {
       this.changeLocation()
     })
-
-    this.currentDay = this.dateObj.getDay()
-
-    this.getData()
   }
 
   /**
-   * Updates the choosen location.
+   * Updates the location for the weather.
    */
   changeLocation () {
     let selected = this.currentWindow.querySelector('select').value
@@ -67,17 +65,25 @@ class Weather extends DesktopWindow {
 
     this.url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${long}/lat/${lat}/data.json`
 
+    this.resetWeatherValues()
+    this.getData()
+  }
+
+  /**
+   * Resets the values that's used in the weather app.
+   */
+  resetWeatherValues () {
     setup.editAppContent('#weatherReset', this.currentWindow)
+
     this.dateObj = new Date()
     this.counter = 0
     this.currentDay = this.dateObj.getDay()
     this.hourCounter = 0
     this.dayCounter = 0
-    this.getData()
   }
 
   /**
-   * Gets the data from the SMHI API.
+   * Makes an request to the SMHI API.
    */
   getData () {
     setup.startLoading(this.currentWindow)
@@ -95,7 +101,7 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Calculates the different temperatures etc.
+   * Calculates the highest, lowest and the temperature for the vurrent time.
    */
   calculateWeather () {
     this.dateObj.setDate((this.dateObj.getDate() + this.dayCounter))
@@ -132,9 +138,12 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Prints out the data to the screen.
+   * Writes out each day to the DOM.
    *
    * @param {number} temp The temperature closest to the current hour.
+   * @param {number} weatherStatus A number representing the weather condition.
+   * @param {number} lowest The coldest temperature of the day.
+   * @param {number} highest The warmest temperature of the day.
    */
   displayWeather (temp, weatherStatus, lowest, highest) {
     let template = document.querySelector('#weatherDay')
@@ -163,24 +172,24 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Gets the correct text for the specific day.
+   * Get's the correct name for each day.
    */
   getDayName () {
-    let nameOfDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    let nameOfDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     let day = this.dateObj.getDay()
     let dayText
 
-    this.currentDay === day ? dayText = 'Today' : dayText = nameOfDays[day - 1]
+    dayText = day === this.currentDay ? 'Today' : nameOfDays[day]
 
     return dayText
   }
 
   /**
-   * Calculates the weather status text.
+   * Get's the correct weather status for each day.
    *
-   * @param {number} statusCode The number recived from the request.
+   * @param {number} weatherStatus A number representing the weather status of the current time.
    */
-  getStatus (statusCode) {
+  getStatus (weatherStatus) {
     let weatherStatusList = ['Clear sky', 'Nearly clear sky', 'Variable cloudiness', 'Halfclear sky',
       'Cloudy sky', 'Overcast', 'Fog', 'Light rain showers', 'Moderate rain showers',
       'Heavy rain showers', 'Thunderstorm', 'Light sleet showers', 'Moderate sleet showers',
@@ -188,13 +197,13 @@ class Weather extends DesktopWindow {
       'Light rain', 'Moderate rain', 'Heavy rain', 'Thunder', 'Light sleet', 'Moderate sleet',
       'Heavy sleet', 'Light snowfall', 'Moderate snowfall', 'Heavy snowfall']
 
-    return weatherStatusList[statusCode - 1]
+    return weatherStatusList[weatherStatus - 1]
   }
 
   /**
-   * Checks if the data has weather info that matches the closest hour.
+   * Check's if there is a time that matches the current hour, else use the last time in the list.
    *
-   * @param {object[]} temps Array of objects with temperatures and their closest time.
+   * @param {object[]} temps The temperatures for each day.
    */
   checkCurrentWeatherTime (temps) {
     let value = temps.filter(current => {
@@ -207,10 +216,8 @@ class Weather extends DesktopWindow {
     if (value.length === 0 && this.hourCounter !== 10) {
       this.hourCounter++
       this.checkCurrentWeatherTime(temps)
-    } else if (this.hourCounter === 10) {
-      this.temp = temps[temps.length - 1]
     } else {
-      this.temp = value[0]
+      this.temp = this.hourCounter === 10 ? temps[temps.length - 1] : value[0]
     }
   }
 }

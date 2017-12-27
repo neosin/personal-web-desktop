@@ -19,7 +19,7 @@
    * Creates an instance of MemoryGame.
    *
    * @param {string} title String of the relative URL for the application window icon.
-   * @param {string} icon String of the title for the application window.
+   * @param {string} icon String of the relative URL for the title of the application window.
    * @memberof MemoryGame
    */
    constructor (title, icon, x = 4, y = 4) {

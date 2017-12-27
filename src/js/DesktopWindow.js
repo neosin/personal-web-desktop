@@ -14,6 +14,11 @@
   * Class representing a window.
   */
  class DesktopWindow {
+  /**
+   * Creates an instance of DesktopWindow.
+   *
+   * @memberof DesktopWindow
+   */
    constructor () {
      this.currentWindow = null
    }

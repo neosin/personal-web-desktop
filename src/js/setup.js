@@ -1,5 +1,5 @@
 /**
- * Module containing setup functions for windows etc.
+ * Module containing setup functions for windows loading screens etc.
  *
  * @module src/js/setup
  * @author Rasmus Falk
@@ -29,11 +29,11 @@
    })
  }
 
-/**
- * Adds a given template to the DOM.
- *
- * @param {string} id The ID of the template that will be added.
- */
+ /**
+  * Adds a given template to the DOM.
+  *
+  * @param {string} id The ID of the template that will be added.
+  */
  function addTemplateBody (id) {
    let templateClone = document.querySelector(id)
    let template = document.importNode(templateClone.content, true)
@@ -41,6 +41,12 @@
    document.body.appendChild(template)
  }
 
+ /**
+  * changes the content of an application window.
+  *
+  * @param {string} id The ID of the template that will be added.
+  * @param {object} window The window containing the content.
+  */
  function editAppContent (id, window) {
    if (window.querySelector('.content')) {
      let remove = window.querySelector('.content')
@@ -112,6 +118,12 @@
    }
  }
 
+ /**
+  * Enables the button if the text/input area is not empty.
+  *
+  * @param {object} input The input or textarea that will be sent using a button.
+  * @param {object} button The button that will be enabled/disabled.
+  */
  function enableButton (input, button) {
    setTimeout(() => {
      if (input.value.trim() !== '') {

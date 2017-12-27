@@ -9,7 +9,7 @@
  'use strict'
 
  /**
-  * Is used to be able to drag a window.
+  * Is used to be able to drag and drop a window.
   */
  function dragDrop () {
    let offsetX, offsetY

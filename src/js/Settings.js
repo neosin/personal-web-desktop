@@ -15,12 +15,12 @@ const DesktopWindow = require('./DesktopWindow')
  * Class representing a settings application.
  */
 class Settings extends DesktopWindow {
-  /**
-   * Creates an instance of Settings.
-   *
-   * @param {string} title String of the relative URL for the application window icon.
-   * @param {string} icon String of the title for the application window.
-   */
+ /**
+  * Creates an instance of Settings.
+  *
+  * @param {string} title String of the relative URL for the application window icon.
+  * @param {string} icon String of the relative URL for the title of the application window.
+  */
   constructor (title, icon) {
     super()
 

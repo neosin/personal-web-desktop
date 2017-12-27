@@ -19,7 +19,7 @@
    * Creates an instance of Chat
    *
    * @param {string} title String of the relative URL for the application window icon.
-   * @param {string} icon String of the title for the application window.
+   * @param {string} icon String of the relative URL for the title of the application window.
    * @memberof Chat
    */
    constructor (title, icon) {
@@ -34,7 +34,6 @@
 
    /**
     * Creates a new chat window.
-    *
     */
    createChatWindow () {
      this.createWindow()
@@ -45,7 +44,7 @@
    }
 
    /**
-    * Set a nickname for the current user.
+    * Sets a nickname for the current user.
     */
    chooseNickname () {
      if (!window.localStorage.getItem('chatName')) {
