@@ -223,6 +223,9 @@ class Weather extends DesktopWindow {
     }
   }
 
+  /**
+   * Get's the users long and lat cordinates.
+   */
   getCurrentPosition () {
     navigator.geolocation.getCurrentPosition(position => {
       let long = position.coords.longitude.toString(10).slice(0, 9)
@@ -232,8 +235,6 @@ class Weather extends DesktopWindow {
       option.selected = true
       option.disabled = false
       option.value = `${long},${lat}`
-
-      console.log(option.value)
 
       this.changeLocation()
     })

@@ -14,6 +14,7 @@
  const Chat = require('./Chat')
  const Weather = require('./Weather')
  const setup = require('./setup')
+ const PhotoBooth = require('./PhotoBooth')
 
  template.innerHTML = `
  <style>
@@ -39,6 +40,7 @@
    <li id="memory"><a href="#"><image src="/image/icons/game.png"></a></li>
    <li id="chat"><a href="#"><img src="/image/icons/chat.png"></a></li>
    <li id="weather"><a href="#"><img src="/image/icons/weather.png"></a></li>
+   <li id="camera"><a href="#"><img src="/image/icons/camera.png"></a></li>
    <li id="settings"><a href="#"><img src="/image/icons/settings.png"></a></li>
    <li id="trash"><a href="#"><img src="/image/icons/trash.png"></a></li>
  </ul>
@@ -76,6 +78,8 @@
          new Weather('Weather', '/image/icons/weather.png').createWeatherWindow()
        } else if (event.target.closest('li').id === 'trash') {
          setup.clearDesktop()
+       } else if (event.target.closest('li').id === 'camera') {
+         new PhotoBooth('Photo Booth', '/image/icons/camera.png').createPhotoBoothWindow()
        }
      })
    }

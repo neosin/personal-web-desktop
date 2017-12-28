@@ -301,3 +301,9 @@ select {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+/* PhotoBooth */
+
+.photoBooth {
+    width: 500px;
+}
