@@ -46,7 +46,25 @@ class PhotoBooth extends DesktopWindow {
 
         videoElement.srcObject = stream
         videoElement.play()
+
+        this.currentWindow.querySelector('.content .snap').addEventListener('click', event => {
+          this.takePhoto()
+        })
       })
+  }
+
+  takePhoto () {
+    let videoElement = this.currentWindow.querySelector('video')
+
+    setup.editAppContent('#takenPhoto', this.currentWindow)
+
+    let canvas = this.currentWindow.querySelector('canvas')
+    let context = canvas.getContext('2d')
+
+    canvas.width = 450
+    canvas.height = 450
+
+    context.drawImage(videoElement, 0, 0, 450, 450)
   }
 }
 
