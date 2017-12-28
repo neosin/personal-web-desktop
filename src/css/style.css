@@ -307,3 +307,7 @@ select {
 .photoBooth {
     width: 500px;
 }
+
+.photoBooth .taken {
+    display: none;
+}

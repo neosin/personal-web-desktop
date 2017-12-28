@@ -27,6 +27,9 @@ class PhotoBooth extends DesktopWindow {
 
     this.title = title
     this.icon = icon
+    this.stream = null
+    this.videoElement = undefined
+    this.filter = undefined
   }
 
   createPhotoBoothWindow () {
@@ -41,30 +44,48 @@ class PhotoBooth extends DesktopWindow {
 
     navigator.mediaDevices.getUserMedia(config)
       .then(stream => {
-        setup.editAppContent('#photoBooth', this.currentWindow)
-        let videoElement = this.currentWindow.querySelector('video')
-
-        videoElement.srcObject = stream
-        videoElement.play()
-
-        this.currentWindow.querySelector('.content .snap').addEventListener('click', event => {
-          this.takePhoto()
-        })
+        this.stream = stream
+        this.setupPhotoBooth()
       })
   }
 
-  takePhoto () {
-    let videoElement = this.currentWindow.querySelector('video')
-
-    setup.editAppContent('#takenPhoto', this.currentWindow)
-
+  drawPhoto (element) {
     let canvas = this.currentWindow.querySelector('canvas')
     let context = canvas.getContext('2d')
+    context.filter = this.filter
 
     canvas.width = 450
     canvas.height = 450
 
-    context.drawImage(videoElement, 0, 0, 450, 450)
+    context.drawImage(element, 0, 0, 450, 450)
+  }
+
+  takenPhoto () {
+    let preview = this.currentWindow.querySelector('.preview')
+    preview.style.display = 'none'
+
+    let taken = this.currentWindow.querySelector('.taken')
+    taken.style.display = 'block'
+
+    this.drawPhoto(this.videoElement)
+
+    this.currentWindow.querySelector('.newPhoto').addEventListener('click', event => {
+      preview.style.display = 'block'
+      taken.style.display = 'none'
+    })
+  }
+
+  setupPhotoBooth () {
+    setup.editAppContent('#photoBooth', this.currentWindow)
+
+    this.videoElement = this.currentWindow.querySelector('video')
+
+    this.videoElement.srcObject = this.stream
+    this.videoElement.play()
+
+    this.currentWindow.querySelector('.content .snap').addEventListener('click', event => {
+      this.takenPhoto()
+    })
   }
 }
 

@@ -154,16 +154,14 @@
 
     <template id="photoBooth">
         <div class="content">
-            <video class="video"></video>
-            <button class="snap">Snap!</button>
-        </div>
-    </template>
-
-    <template id="takenPhoto">
-        <div class="content">
-                <canvas></canvas>
-                <button>Save</button>
-                <button>Remove</button>
+            <div class="taken">
+              <canvas class="canvas"></canvas>
+              <button class="newPhoto">Take new!</button>
+            </div>
+            <div class="preview">
+                    <video class="video"></video>
+                    <button class="snap">Snap!</button>
+            </div>
         </div>
     </template>
 </head>
