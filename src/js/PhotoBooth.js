@@ -46,7 +46,20 @@ class PhotoBooth extends DesktopWindow {
 
         userCamera.srcObject = video
         userCamera.play()
+        this.stopStream(video)
       })
+  }
+
+  stopStream (stream) {
+    setTimeout(() => {
+      if (!this.currentWindow.contains(document.querySelector('video'))) {
+        stream.getTracks().forEach(element => {
+          element.stop()
+        })
+      } else {
+        this.stopStream(stream)
+      }
+    }, 100)
   }
 }
 
