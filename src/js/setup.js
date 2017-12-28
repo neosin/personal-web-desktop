@@ -24,6 +24,11 @@
      }
 
      if (event.target.className === 'close') {
+       if (currentWindow.closest('.photoBooth')) {
+         let videoElement = currentWindow.closest('.photoBooth').querySelector('video')
+         videoElement.srcObject.getTracks()[0].stop()
+       }
+
        document.body.removeChild(currentWindow)
      }
    })

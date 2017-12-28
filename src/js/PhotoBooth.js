@@ -33,33 +33,20 @@ class PhotoBooth extends DesktopWindow {
     this.createWindow()
     this.currentWindow.classList.add('photoBooth')
 
-    this.getCamera()
+    this.getCameraStream()
   }
 
-  getCamera () {
+  getCameraStream () {
     let config = { audio: false, video: {width: 450, height: 450} }
 
     navigator.mediaDevices.getUserMedia(config)
-      .then(video => {
+      .then(stream => {
         setup.editAppContent('#photoBooth', this.currentWindow)
-        let userCamera = this.currentWindow.querySelector('video')
+        let videoElement = this.currentWindow.querySelector('video')
 
-        userCamera.srcObject = video
-        userCamera.play()
-        this.stopStream(video)
+        videoElement.srcObject = stream
+        videoElement.play()
       })
-  }
-
-  stopStream (stream) {
-    setTimeout(() => {
-      if (!this.currentWindow.contains(document.querySelector('video'))) {
-        stream.getTracks().forEach(element => {
-          element.stop()
-        })
-      } else {
-        this.stopStream(stream)
-      }
-    }, 100)
   }
 }
 
