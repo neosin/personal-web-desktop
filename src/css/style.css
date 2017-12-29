@@ -311,3 +311,11 @@ select {
 .photoBooth .taken {
     display: none;
 }
+
+.photoBooth .thumb img {
+    width: 60px;
+}
+
+.photoBooth .filterImg {
+    display: none;
+}

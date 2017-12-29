@@ -30,6 +30,7 @@ class PhotoBooth extends DesktopWindow {
     this.stream = null
     this.videoElement = undefined
     this.filter = undefined
+    this.url = undefined
   }
 
   createPhotoBoothWindow () {
@@ -49,15 +50,15 @@ class PhotoBooth extends DesktopWindow {
       })
   }
 
-  drawPhoto (element) {
-    let canvas = this.currentWindow.querySelector('canvas')
+  drawPhoto () {
+    let canvas = this.currentWindow.querySelector('.canvasRender')
     let context = canvas.getContext('2d')
-    context.filter = this.filter
 
     canvas.width = 450
     canvas.height = 450
 
-    context.drawImage(element, 0, 0, 450, 450)
+    context.drawImage(this.videoElement, 0, 0, 450, 450)
+    this.url = canvas.toDataURL()
   }
 
   takenPhoto () {
@@ -67,12 +68,35 @@ class PhotoBooth extends DesktopWindow {
     let taken = this.currentWindow.querySelector('.taken')
     taken.style.display = 'block'
 
-    this.drawPhoto(this.videoElement)
+    this.drawPhoto()
+    this.addFilter()
 
     this.currentWindow.querySelector('.newPhoto').addEventListener('click', event => {
       preview.style.display = 'block'
       taken.style.display = 'none'
     })
+  }
+
+  addFilter () {
+    let render = this.currentWindow.querySelector('.renderImg')
+    let filter = this.currentWindow.querySelector('.filterImg')
+    let renderedImg = this.currentWindow.querySelector('.renderedImg')
+
+    render.style.display = 'none'
+    filter.style.display = 'block'
+    renderedImg.src = this.url
+
+    let canvas = this.currentWindow.querySelector('.canvasFilter')
+    let context = canvas.getContext('2d')
+
+    context.filter = this.filter
+
+    canvas.width = 450
+    canvas.height = 450
+
+    context.drawImage(renderedImg, 0, 0, 450, 450)
+
+    console.log(canvas)
   }
 
   setupPhotoBooth () {
@@ -83,8 +107,19 @@ class PhotoBooth extends DesktopWindow {
     this.videoElement.srcObject = this.stream
     this.videoElement.play()
 
+    this.currentWindow.querySelectorAll('.thumb img').forEach(current => {
+      current.style.filter = current.getAttribute('data-filter')
+    })
+
     this.currentWindow.querySelector('.content .snap').addEventListener('click', event => {
       this.takenPhoto()
+    })
+
+    this.currentWindow.querySelector('.thumb').addEventListener('click', event => {
+      this.filter = event.target.getAttribute('data-filter')
+
+      let video = this.currentWindow.querySelector('video')
+      video.style.filter = this.filter
     })
   }
 }
