@@ -80,6 +80,25 @@
    currentWindow.style.zIndex = 100
  }
 
+ function windowStack (currentWindow) {
+   let allWindows = document.querySelectorAll('.window')
+   let focusedWindow
+
+   allWindows.forEach(current => {
+     if (current.style.zIndex > 0) {
+       console.log(current)
+     }
+   })
+
+   if (focusedWindow) {
+     currentWindow.style.top = `${focusedWindow.offsetTop + 30}px`
+     currentWindow.style.left = `${focusedWindow.offsetLeft + 30}px`
+   } else if (allWindows.length > 1) {
+     currentWindow.style.top = `${allWindows[allWindows.length - 2].offsetTop + 30}px`
+     currentWindow.style.left = `${allWindows[allWindows.length - 2].offsetLeft + 30}px`
+   }
+ }
+
  /**
   * Keeps the scrollbar at the bottom of the content window.
   *
@@ -151,3 +170,4 @@
  module.exports.stopLoading = stopLoading
  module.exports.clearDesktop = clearDesktop
  module.exports.enableButton = enableButton
+ module.exports.windowStack = windowStack

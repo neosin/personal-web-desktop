@@ -32,6 +32,8 @@
      let allWindows = document.querySelectorAll('.window')
      this.currentWindow = allWindows[allWindows.length - 1]
 
+     setup.windowStack(this.currentWindow)
+
      this.addInformation()
 
      this.currentWindow.addEventListener('focus', event => {
