@@ -305,7 +305,12 @@ select {
 /* PhotoBooth */
 
 .photoBooth {
+    width: 600px;
+}
+
+.photoBooth video {
     width: 500px;
+    height: 500px;
 }
 
 .photoBooth .taken {
@@ -318,4 +323,8 @@ select {
 
 .photoBooth .filterImg {
     display: none;
+}
+
+.photoBooth .renderedImg {
+    display: none
 }

@@ -155,19 +155,16 @@
     <template id="photoBooth">
         <div class="content">
             <div class="taken">
-                <div class="filterImg">
-                    <canvas class="canvasFilter"></canvas>
-                    <img class="renderedImg" src="#">
-                </div>
-                <div class="renderImg">
-                    <canvas class="canvasRender"></canvas>
-                </div>
+                <canvas class="canvasRender"></canvas>
                 <button class="newPhoto">Take new!</button>
             </div>
             <div class="preview">
                 <video class="video"></video>
                 <button class="snap">Snap!</button>
                 <div class="thumb">
+                    <a href="#">
+                         <img src="/image/photoBooth/filterPreview.jpg" data-filter="none">
+                            </a>
                     <a href="#">
                         <img src="/image/photoBooth/filterPreview.jpg" data-filter="grayscale(80%)">
                     </a>

@@ -30,7 +30,6 @@ class PhotoBooth extends DesktopWindow {
     this.stream = null
     this.videoElement = undefined
     this.filter = undefined
-    this.url = undefined
   }
 
   createPhotoBoothWindow () {
@@ -41,7 +40,7 @@ class PhotoBooth extends DesktopWindow {
   }
 
   getCameraStream () {
-    let config = { audio: false, video: {width: 450, height: 450} }
+    let config = { audio: false, video: {width: 1280, height: 720} }
 
     navigator.mediaDevices.getUserMedia(config)
       .then(stream => {
@@ -50,53 +49,31 @@ class PhotoBooth extends DesktopWindow {
       })
   }
 
-  drawPhoto () {
+  renderPhoto () {
     let canvas = this.currentWindow.querySelector('.canvasRender')
     let context = canvas.getContext('2d')
 
     canvas.width = 450
     canvas.height = 450
 
+    context.filter = this.filter
+
     context.drawImage(this.videoElement, 0, 0, 450, 450)
-    this.url = canvas.toDataURL()
   }
 
   takenPhoto () {
     let preview = this.currentWindow.querySelector('.preview')
-    preview.style.display = 'none'
-
     let taken = this.currentWindow.querySelector('.taken')
-    taken.style.display = 'block'
 
-    this.drawPhoto()
-    this.addFilter()
+    taken.style.display = 'block'
+    preview.style.display = 'none'
 
     this.currentWindow.querySelector('.newPhoto').addEventListener('click', event => {
       preview.style.display = 'block'
       taken.style.display = 'none'
     })
-  }
 
-  addFilter () {
-    let render = this.currentWindow.querySelector('.renderImg')
-    let filter = this.currentWindow.querySelector('.filterImg')
-    let renderedImg = this.currentWindow.querySelector('.renderedImg')
-
-    render.style.display = 'none'
-    filter.style.display = 'block'
-    renderedImg.src = this.url
-
-    let canvas = this.currentWindow.querySelector('.canvasFilter')
-    let context = canvas.getContext('2d')
-
-    context.filter = this.filter
-
-    canvas.width = 450
-    canvas.height = 450
-
-    context.drawImage(renderedImg, 0, 0, 450, 450)
-
-    console.log(canvas)
+    this.renderPhoto()
   }
 
   setupPhotoBooth () {
