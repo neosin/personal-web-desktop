@@ -33,13 +33,20 @@ class PhotoBooth extends DesktopWindow {
     this.url = undefined
   }
 
+  /**
+   * Creates a new photo booth window.
+   */
   createPhotoBoothWindow () {
     this.createWindow()
     this.currentWindow.classList.add('photoBooth')
+    setup.startLoading(this.currentWindow)
 
     this.getCameraStream()
   }
 
+  /**
+   * Get's the webcam stream from the user.
+   */
   getCameraStream () {
     let config = { audio: false, video: {width: 640, height: 480} }
 
@@ -50,6 +57,9 @@ class PhotoBooth extends DesktopWindow {
       })
   }
 
+  /**
+   * Renders the taken photo.
+   */
   renderPhoto () {
     let canvas = this.currentWindow.querySelector('.canvasRender')
     let context = canvas.getContext('2d')
@@ -64,6 +74,9 @@ class PhotoBooth extends DesktopWindow {
     this.url = canvas.toDataURL()
   }
 
+  /**
+   * Screen for when the photo is taken.
+   */
   takenPhoto () {
     let preview = this.currentWindow.querySelector('.preview')
     let taken = this.currentWindow.querySelector('.taken')
@@ -86,7 +99,11 @@ class PhotoBooth extends DesktopWindow {
     this.renderPhoto()
   }
 
+  /**
+   * Screen for when the application is first opened.
+   */
   setupPhotoBooth () {
+    setup.stopLoading(this.currentWindow)
     setup.editAppContent('#photoBooth', this.currentWindow)
 
     this.videoElement = this.currentWindow.querySelector('video')

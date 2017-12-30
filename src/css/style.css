@@ -1,7 +1,7 @@
 /* Global */
 
 body {
-    background-image: url('/image/wallpapers/bg1.jpg');
+    background-image: url('/image/wallpapers/bg3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -316,18 +316,6 @@ select {
     display: none;
 }
 
-.photoBooth .snap img, .photoBooth .newPhoto img, .photoBooth .savePhoto img {
-    width: 70px;
-}
-
-.photoBooth .thumb img {
-    height: 70px;
-}
-
-.photoBooth .filterImg {
-    display: none;
-}
-
-.photoBooth .renderedImg {
-    display: none
+.photoBooth .content img {
+    padding: 4px;
 }
