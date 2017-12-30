@@ -80,6 +80,11 @@
    currentWindow.style.zIndex = 100
  }
 
+ /**
+  * Controlls the stacking of the application windows.
+  *
+  * @param {object} currentWindow The window that is being added to the DOM.
+  */
  function windowStack (currentWindow) {
    let allWindows = document.querySelectorAll('.window')
    let focusedWindow

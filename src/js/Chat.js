@@ -70,6 +70,7 @@
     * Loads the chat content.
     */
    loadChat () {
+     this.checkNotificationPermission()
      this.webSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'chat')
      this.nickname = window.localStorage.getItem('chatName')
 
@@ -138,6 +139,7 @@
      if (this.response.type === 'notification') {
        message.textContent += `${this.response.data}`
      } else if (this.response.type === 'message') {
+       this.newNotification(this.response)
        message.textContent += `\n${this.response.username}: ${this.response.data}`
      }
    }
@@ -175,6 +177,24 @@
      if (message.value.search('/:thinking:/')) {
        message.value = message.value.replace(/:thinking:/g, '\uD83E\uDD14')
      }
+   }
+
+   checkNotificationPermission () {
+     if (window.Notification.permission === 'default') {
+       window.Notification.requestPermission()
+       .then(this.checkNotificationPermission())
+     }
+   }
+
+   newNotification (message) {
+     let config = {
+       body: `${message.username}, ${message.data}`,
+       icon: '/image/icons/chat.png'
+     }
+
+     let notification = new window.Notification('New Message!', config)
+
+     setTimeout(notification.close.bind(notification), 6000)
    }
  }
 
