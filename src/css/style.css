@@ -305,20 +305,23 @@ select {
 /* PhotoBooth */
 
 .photoBooth {
-    width: 600px;
+    width: 640px;
 }
 
-.photoBooth video {
-    width: 500px;
-    height: 500px;
+.photoBooth .windowContent {
+    padding: 0px;
 }
 
 .photoBooth .taken {
     display: none;
 }
 
+.photoBooth .snap img, .photoBooth .newPhoto img, .photoBooth .savePhoto img {
+    width: 70px;
+}
+
 .photoBooth .thumb img {
-    width: 60px;
+    height: 70px;
 }
 
 .photoBooth .filterImg {

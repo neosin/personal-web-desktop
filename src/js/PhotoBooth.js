@@ -30,6 +30,7 @@ class PhotoBooth extends DesktopWindow {
     this.stream = null
     this.videoElement = undefined
     this.filter = undefined
+    this.url = undefined
   }
 
   createPhotoBoothWindow () {
@@ -40,7 +41,7 @@ class PhotoBooth extends DesktopWindow {
   }
 
   getCameraStream () {
-    let config = { audio: false, video: {width: 1280, height: 720} }
+    let config = { audio: false, video: {width: 640, height: 480} }
 
     navigator.mediaDevices.getUserMedia(config)
       .then(stream => {
@@ -53,12 +54,14 @@ class PhotoBooth extends DesktopWindow {
     let canvas = this.currentWindow.querySelector('.canvasRender')
     let context = canvas.getContext('2d')
 
-    canvas.width = 450
-    canvas.height = 450
+    canvas.width = 640
+    canvas.height = 480
 
     context.filter = this.filter
 
-    context.drawImage(this.videoElement, 0, 0, 450, 450)
+    context.drawImage(this.videoElement, 0, 0, 640, 480)
+
+    this.url = canvas.toDataURL()
   }
 
   takenPhoto () {
@@ -71,6 +74,13 @@ class PhotoBooth extends DesktopWindow {
     this.currentWindow.querySelector('.newPhoto').addEventListener('click', event => {
       preview.style.display = 'block'
       taken.style.display = 'none'
+    })
+
+    this.currentWindow.querySelector('.savePhoto').addEventListener('click', event => {
+      let link = event.target.closest('A')
+
+      link.href = this.url
+      link.download = 'photo'
     })
 
     this.renderPhoto()
