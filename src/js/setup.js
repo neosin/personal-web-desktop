@@ -86,7 +86,8 @@
 
    allWindows.forEach(current => {
      if (current.style.zIndex > 0) {
-       console.log(current)
+       focusedWindow = current
+       focusedWindow.style.zIndex = 0
      }
    })
 
