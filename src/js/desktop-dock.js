@@ -33,6 +33,11 @@
    :host li {
        display: inline-block;
        padding: 10px;
+       transition: transform 0.2s; 
+   }
+
+   :host li:hover {
+       transform: scale(1.3);
    }
  </style>
 
