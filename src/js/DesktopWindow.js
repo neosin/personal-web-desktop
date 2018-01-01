@@ -32,12 +32,17 @@
      let allWindows = document.querySelectorAll('.window')
      this.currentWindow = allWindows[allWindows.length - 1]
 
-     setup.windowStack(this.currentWindow)
-
+     this.windowStack()
      this.addInformation()
 
      this.currentWindow.addEventListener('focus', event => {
-       setup.windowFocus(this.currentWindow)
+       let allWindows = document.querySelectorAll('.window')
+
+       for (let i = 0; i < allWindows.length; i++) {
+         allWindows[i].style.zIndex = 0
+       }
+
+       this.currentWindow.style.zIndex = 100
      })
    }
 
@@ -50,6 +55,38 @@
 
      titleElement.textContent = this.title
      iconElement.src = this.icon
+   }
+
+   /**
+    * Controlls the stacking of the application windows.
+    */
+   windowStack () {
+     this.windowBounce()
+
+     let allWindows = document.querySelectorAll('.window')
+     let focusedWindow
+
+     allWindows.forEach(current => {
+       if (current.style.zIndex > 50) {
+         focusedWindow = current
+         focusedWindow.style.zIndex = 49
+       }
+     })
+
+     if (focusedWindow) {
+       this.currentWindow.style.top = `${focusedWindow.offsetTop + 30}px`
+       this.currentWindow.style.left = `${focusedWindow.offsetLeft + 30}px`
+     } else if (allWindows.length > 1) {
+       this.currentWindow.style.top = `${allWindows[allWindows.length - 2].offsetTop + 30}px`
+       this.currentWindow.style.left = `${allWindows[allWindows.length - 2].offsetLeft + 30}px`
+     }
+   }
+
+   windowBounce () {
+     let Wwidth = window.innerWidth
+     let Wheight = window.innerHeight
+
+     console.log(this.currentWindow.offsetTop)
    }
 }
 

@@ -66,46 +66,6 @@
  }
 
  /**
-  * Controlls which window that's focused.
-  *
-  * @param {object} currentWindow The window that is being clicked.
-  */
- function windowFocus (currentWindow) {
-   let allWindows = document.querySelectorAll('.window')
-
-   for (let i = 0; i < allWindows.length; i++) {
-     allWindows[i].style.zIndex = 0
-   }
-
-   currentWindow.style.zIndex = 100
- }
-
- /**
-  * Controlls the stacking of the application windows.
-  *
-  * @param {object} currentWindow The window that is being added to the DOM.
-  */
- function windowStack (currentWindow) {
-   let allWindows = document.querySelectorAll('.window')
-   let focusedWindow
-
-   allWindows.forEach(current => {
-     if (current.style.zIndex > 0) {
-       focusedWindow = current
-       focusedWindow.style.zIndex = 0
-     }
-   })
-
-   if (focusedWindow) {
-     currentWindow.style.top = `${focusedWindow.offsetTop + 30}px`
-     currentWindow.style.left = `${focusedWindow.offsetLeft + 30}px`
-   } else if (allWindows.length > 1) {
-     currentWindow.style.top = `${allWindows[allWindows.length - 2].offsetTop + 30}px`
-     currentWindow.style.left = `${allWindows[allWindows.length - 2].offsetLeft + 30}px`
-   }
- }
-
- /**
   * Keeps the scrollbar at the bottom of the content window.
   *
   * @param {object} scrollContent The content containing the scrollbar.
@@ -169,11 +129,9 @@
  // Exports
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
- module.exports.windowFocus = windowFocus
  module.exports.setupWindows = setupWindows
  module.exports.dynamicScroll = dynamicScroll
  module.exports.startLoading = startLoading
  module.exports.stopLoading = stopLoading
  module.exports.clearDesktop = clearDesktop
  module.exports.enableButton = enableButton
- module.exports.windowStack = windowStack

@@ -70,8 +70,9 @@
     * Loads the chat content.
     */
    loadChat () {
-     this.checkNotificationPermission()
+     window.Notification.requestPermission()
      this.webSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'chat')
+
      this.nickname = window.localStorage.getItem('chatName')
 
      this.webSocket.addEventListener('open', event => {
@@ -139,7 +140,10 @@
      if (this.response.type === 'notification') {
        message.textContent += `${this.response.data}`
      } else if (this.response.type === 'message') {
-       this.newNotification(this.response)
+       if (document.hasFocus()) {
+         this.newNotification(this.response)
+       }
+
        message.textContent += `\n${this.response.username}: ${this.response.data}`
      }
    }
@@ -179,13 +183,11 @@
      }
    }
 
-   checkNotificationPermission () {
-     if (window.Notification.permission === 'default') {
-       window.Notification.requestPermission()
-       .then(this.checkNotificationPermission())
-     }
-   }
-
+   /**
+    * Creates a new notification.
+    *
+    * @param {object} message The message from the server.
+    */
    newNotification (message) {
      let config = {
        body: `${message.username}, ${message.data}`,
