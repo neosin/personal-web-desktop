@@ -61,10 +61,10 @@
     * Controlls the stacking of the application windows.
     */
    windowStack () {
-     this.windowBounce()
-
      let allWindows = document.querySelectorAll('.window')
      let focusedWindow
+
+     this.offsetTop = 0
 
      allWindows.forEach(current => {
        if (current.style.zIndex > 50) {
@@ -80,13 +80,14 @@
        this.currentWindow.style.top = `${allWindows[allWindows.length - 2].offsetTop + 30}px`
        this.currentWindow.style.left = `${allWindows[allWindows.length - 2].offsetLeft + 30}px`
      }
+
+     this.windowBounce()
    }
 
    windowBounce () {
-     let Wwidth = window.innerWidth
-     let Wheight = window.innerHeight
-
-     console.log(this.currentWindow.offsetTop)
+     if (this.currentWindow.offsetTop > window.innerHeight - 20) {
+       this.currentWindow.style.top = '8px'
+     }
    }
 }
 
