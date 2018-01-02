@@ -140,7 +140,7 @@
      if (this.response.type === 'notification') {
        message.textContent += `${this.response.data}`
      } else if (this.response.type === 'message') {
-       if (document.hasFocus()) {
+       if (!document.hasFocus()) {
          this.newNotification(this.response)
        }
 
@@ -191,7 +191,7 @@
    newNotification (message) {
      let config = {
        body: `${message.username}, ${message.data}`,
-       icon: '/image/icons/chat.png'
+       icon: '/image/appIcons/chat.png'
      }
 
      let notification = new window.Notification('New Message!', config)

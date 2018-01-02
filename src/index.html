@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <title>PWD</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="/css/desktopWindow.css">
+    <link rel="stylesheet" href="/css/memory.css">
+    <link rel="stylesheet" href="/css/photoBooth.css">
+    <link rel="stylesheet" href="/css/settings.css">
+    <link rel="stylesheet" href="/css/weather.css">
     <script src="build.js" defer></script>
 
     <!-- Window -->
@@ -17,7 +23,7 @@
                     <button class="minimize">-</button>
                 </div>
                 <div class="center">
-                    <img>
+                    <img src="#" alt="icon">
                     <p></p>
                 </div>
             </div>
@@ -54,7 +60,7 @@
 
     <template id="memoryBricks">
         <a href="#">
-            <img src="/image/memory/0.png">
+            <img src="/image/memory/0.png" alt="memory brick">
         </a>
     </template>
 
@@ -62,14 +68,14 @@
 
     <template id="settings">
         <div class="content">
-            <a>
-                <img src="/image/wallpapers/bg1.jpg">
+            <a href="#">
+                <img src="/image/wallpapers/bg1.jpg" alt="mountains">
             </a>
-            <a>
-                <img src="/image/wallpapers/bg2.jpg">
+            <a href="#">
+                <img src="/image/wallpapers/bg2.jpg" alt="forest">
             </a>
-            <a>
-                <img src="/image/wallpapers/bg3.jpg">
+            <a href="#">
+                <img src="/image/wallpapers/bg3.jpg" alt="tree and leaves">
             </a>
         </div>
     </template>
@@ -87,25 +93,25 @@
             <div class="emojiSection emojiToggle">
                 <ul>
                     <li>
-                        <a data-custom-value=":smile:">&#x1F642</a>
+                        <a href="#" data-emoji=":smile:">&#x1F642</a>
                     </li>
                     <li>
-                        <a data-custom-value=":happy:">&#x1F600</a>
+                        <a href="#" data-emoji=":happy:">&#x1F600</a>
                     </li>
                     <li>
-                        <a data-custom-value=":cool:">&#x1F60E</a>
+                        <a href="#" data-emoji=":cool:">&#x1F60E</a>
                     </li>
                     <li>
-                        <a data-custom-value=":surprised:">&#x1F62E</a>
+                        <a href="#" data-emoji=":surprised:">&#x1F62E</a>
                     </li>
                     <li>
-                        <a data-custom-value=":cheeky:">&#x1F61B</a>
+                        <a href="#" data-emoji=":cheeky:">&#x1F61B</a>
                     </li>
                     <li>
-                        <a data-custom-value=":horns:">&#x1F918</a>
+                        <a href="#" data-emoji=":horns:">&#x1F918</a>
                     </li>
                     <li>
-                        <a data-custom-value=":thinking:">&#x1F914</a>
+                        <a href="#" data-emoji=":thinking:">&#x1F914</a>
                     </li>
                 </ul>
             </div>
@@ -156,24 +162,24 @@
         <div class="content">
             <div class="taken">
                 <canvas class="canvasRender"></canvas>
-                <a href="#" class="newPhoto"><img src="image/photoBooth/remove.png"></button>
-                <a href="#" class="savePhoto"><img src="image/photoBooth/save.png"></button>
+                <a href="#" class="newPhoto"><img src="image/photoBooth/remove.png" alt="new photo"></button>
+                <a href="#" class="savePhoto"><img src="image/photoBooth/save.png" alt="save photo"></button>
             </div>
             <div class="preview">
                 <video class="video"></video>
                 <div class="thumb">
                     <a href="#">
-                         <img src="/image/photoBooth/filterPreview.jpg" data-filter="none">
+                         <img src="/image/photoBooth/filterPreview.jpg" data-filter="none" alt="no filter">
                             </a>
                     <a href="#">
-                        <img src="/image/photoBooth/filterPreview.jpg" data-filter="grayscale(80%)">
+                        <img src="/image/photoBooth/filterPreview.jpg" data-filter="grayscale(80%)" alt="grayscale">
                     </a>
                     <a class="snap" href="#"><img src="/image/photoBooth/snap.png"></a>
                     <a href="#">
-                        <img src="/image/photoBooth/filterPreview.jpg" data-filter="hue-rotate(90deg)">
+                        <img src="/image/photoBooth/filterPreview.jpg" data-filter="hue-rotate(90deg)" alt="hue-rotate">
                     </a>
                     <a href="#">
-                        <img src="/image/photoBooth/filterPreview.jpg" data-filter="contrast(200%)">
+                        <img src="/image/photoBooth/filterPreview.jpg" data-filter="contrast(200%)" alt="contrast">
                     </a>
                 </div>
             </div>

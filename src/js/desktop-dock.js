@@ -43,12 +43,11 @@
  </style>
 
  <ul id="dock">
-   <li id="memory"><a href="#"><image src="/image/icons/game.png"></a></li>
-   <li id="chat"><a href="#"><img src="/image/icons/chat.png"></a></li>
-   <li id="weather"><a href="#"><img src="/image/icons/weather.png"></a></li>
-   <li id="camera"><a href="#"><img src="/image/icons/camera.png"></a></li>
-   <li id="settings"><a href="#"><img src="/image/icons/settings.png"></a></li>
-   <li id="trash"><a href="#"><img src="/image/icons/trash.png"></a></li>
+   <li id="memory"><a href="#"><image src="/image/appIcons/game.png"></a></li>
+   <li id="chat"><a href="#"><img src="/image/appIcons/chat.png"></a></li>
+   <li id="weather"><a href="#"><img src="/image/appIcons/weather.png"></a></li>
+   <li id="camera"><a href="#"><img src="/image/appIcons/camera.png"></a></li>
+   <li id="settings"><a href="#"><img src="/image/appIcons/settings.png"></a></li>
  </ul>
 `
 
@@ -75,17 +74,15 @@
 
      this.shadowRoot.addEventListener('click', event => {
        if (event.target.closest('li').id === 'memory') {
-         new Memory('Memory', '/image/icons/game.png').createMemoryWindow()
+         new Memory('Memory', '/image/appIcons/game.png').createMemoryWindow()
        } else if (event.target.closest('li').id === 'chat') {
-         new Chat('Chat', '/image/icons/chat.png').createChatWindow()
+         new Chat('Chat', '/image/appIcons/chat.png').createChatWindow()
        } else if (event.target.closest('li').id === 'settings') {
-         new Settings('Settings', '/image/icons/settings.png').createSettingsWindow()
+         new Settings('Settings', '/image/appIcons/settings.png').createSettingsWindow()
        } else if (event.target.closest('li').id === 'weather') {
-         new Weather('Weather', '/image/icons/weather.png').createWeatherWindow()
-       } else if (event.target.closest('li').id === 'trash') {
-         setup.clearDesktop()
+         new Weather('Weather', '/image/appIcons/weather.png').createWeatherWindow()
        } else if (event.target.closest('li').id === 'camera') {
-         new PhotoBooth('Photo Booth', '/image/icons/camera.png').createPhotoBoothWindow()
+         new PhotoBooth('Photo Booth', '/image/appIcons/camera.png').createPhotoBoothWindow()
        }
      })
    }

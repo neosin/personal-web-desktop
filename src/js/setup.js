@@ -98,17 +98,6 @@
  }
 
  /**
-  * Closes every window on the desktop.
-  */
- function clearDesktop () {
-   let windows = document.querySelectorAll('.window')
-
-   for (let i = 0; i < windows.length; i++) {
-     document.body.removeChild(windows[i])
-   }
- }
-
- /**
   * Enables the button if the text/input area is not empty.
   *
   * @param {object} input The input or textarea that will be sent using a button.
@@ -133,5 +122,4 @@
  module.exports.dynamicScroll = dynamicScroll
  module.exports.startLoading = startLoading
  module.exports.stopLoading = stopLoading
- module.exports.clearDesktop = clearDesktop
  module.exports.enableButton = enableButton

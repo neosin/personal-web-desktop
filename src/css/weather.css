@@ -1,0 +1,44 @@
+
+/* Weather */
+
+.weather {
+    width: 850px;
+    background: linear-gradient(rgb(49, 117, 161), rgb(6, 83, 146))
+}
+
+.weather .content {
+    color: rgb(255, 255, 255);
+    padding: 0px;
+    display: table;
+    margin: 0 auto;
+}
+
+.weather .day {
+    display: table-cell;
+    padding: 15px;
+    text-align: center;
+}
+
+.weather .content h1,
+.weather .content h2,
+.weather .content p,
+.weather .content img {
+    margin: 0px;
+}
+
+.weather .content h1 {
+    font-size: 60px;
+}
+
+.weather .content h2 {
+    font-size: 30px;
+}
+
+.weather .content p {
+    font-size: 20px;
+}
+
+.weather .controlls {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

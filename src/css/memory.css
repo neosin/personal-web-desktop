@@ -1,0 +1,13 @@
+/* Memory */
+
+.memory {
+    width: 314px;
+}
+
+.memory .controlls {
+    margin-bottom: 10px;
+}
+
+.memory h2 {
+    margin: 0px;
+}

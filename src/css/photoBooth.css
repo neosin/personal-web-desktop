@@ -1,0 +1,17 @@
+/* PhotoBooth */
+
+.photoBooth {
+    width: 640px;
+}
+
+.photoBooth .windowContent {
+    padding: 0px;
+}
+
+.photoBooth .taken {
+    display: none;
+}
+
+.photoBooth .content img {
+    padding: 4px;
+}

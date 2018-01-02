@@ -1,0 +1,14 @@
+/* Settings */
+
+.settings {
+    width: 365px;
+}
+
+.settings .content img {
+    width: 345px;
+    height: 200px;
+}
+
+.settings .content a:hover {
+    opacity: 0.7;
+}
