@@ -12,10 +12,6 @@ a {
     text-decoration: none;
 }
 
-b {
-    color: rgb(0, 153, 224);
-}
-
 .loading {
     border: 16px solid rgb(226, 226, 226);
     border-top: 16px solid rgb(0, 153, 224);

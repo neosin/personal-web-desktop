@@ -143,14 +143,14 @@
      if (this.response.type === 'notification') {
        message.textContent += `${this.response.data}`
      } else if (this.response.type === 'message') {
-       if (!document.hasFocus()) {
+       if (!document.hasFocus() && document.querySelector('.chat')) {
          this.newNotification(this.response)
        }
 
        if (this.response.user) {
-         message.innerHTML += `\n<b>${this.response.username}:</b> ${this.response.data}`
+         message.innerHTML += `\n<b class="user">${this.response.username}:</b> ${this.response.data}`
        } else {
-         message.innerHTML += `\n${this.response.username}: ${this.response.data}`
+         message.innerHTML += `\n<b  class="other">${this.response.username}:</b> ${this.response.data}`
        }
      }
    }
@@ -187,6 +187,10 @@
 
      if (message.value.search('/:thinking:/')) {
        message.value = message.value.replace(/:thinking:/g, '\uD83E\uDD14')
+     }
+
+     if (message.value.search('/:blush:/')) {
+       message.value = message.value.replace(/:blush:/g, '\uD83D\uDE0A')
      }
    }
 

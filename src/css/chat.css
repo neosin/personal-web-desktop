@@ -95,3 +95,11 @@
 .chat li a {
     font-size: 20px;
 }
+
+.user {
+    color: rgb(0, 153, 224);
+}
+
+.other {
+    color: red; 
+}
