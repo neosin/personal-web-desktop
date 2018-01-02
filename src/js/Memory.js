@@ -29,6 +29,8 @@
      this.icon = icon
      this.x = x
      this.y = y
+     this.timer = undefined
+     this.time = 0
      this.appContent = null
      this.bricks = []
      this.brickCounter = 0
@@ -77,9 +79,18 @@
      this.attempts = 0
      this.brickCounter = 0
      this.bricks.length = 0
+     this.time = 0
+     clearTimeout(this.timer)
+     this.timer = undefined
 
      setup.editAppContent('.memoryReset', this.currentWindow)
      this.startGame()
+   }
+
+   startTimer () {
+     this.timer = setInterval(() => {
+       this.time += 0.1
+     }, 100)
    }
 
    /**
@@ -128,6 +139,10 @@
      let element = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
 
      if (element.nodeName === 'IMG' && element !== this.prevBrick) {
+       if (!this.timer) {
+         this.startTimer()
+       }
+
        element.src = `image/memory/${element.id.slice(1)}.png`
        this.clickedBricks.push(element)
 
@@ -162,10 +177,15 @@
        this.attempts++
 
        if (this.brickCounter === this.bricks.length) {
+         clearInterval(this.timer)
+
          setup.editAppContent('#memoryCompleted', this.currentWindow)
 
          let attempts = this.currentWindow.querySelector('.attempts')
          attempts.textContent += this.attempts
+
+         let time = this.currentWindow.querySelector('.time')
+         time.textContent += Math.round((this.time * 10) / 10)
 
          this.currentWindow.querySelector('.reset').addEventListener('click', event => {
            this.resetGame()
