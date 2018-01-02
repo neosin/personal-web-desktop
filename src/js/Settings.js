@@ -42,7 +42,7 @@ class Settings extends DesktopWindow {
 
     settingsContent.addEventListener('click', event => {
       if (event.target.nodeName === 'IMG') {
-        document.body.style.backgroundImage = `url(${event.target.src})`
+        document.body.style.backgroundImage = `url(${event.target.src.slice(0, 42)}.jpg)`
       }
     })
   }
