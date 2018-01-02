@@ -30,6 +30,7 @@
      this.nickname = null
      this.webSocket = null
      this.response = null
+     this.messageHistory = []
    }
 
    /**
@@ -37,8 +38,9 @@
     */
    createChatWindow () {
      this.createWindow()
-     setup.startLoading(this.currentWindow)
      this.currentWindow.classList.add('chat')
+
+     setup.startLoading(this.currentWindow)
 
      this.chooseNickname()
    }
@@ -100,7 +102,7 @@
 
        emojis.addEventListener('click', event => {
          if (event.target.nodeName === 'A') {
-           input.value += event.target.getAttribute('data-custom-value')
+           input.value += event.target.getAttribute('data-emoji')
          }
        })
 
@@ -124,7 +126,8 @@
        data: message.value,
        username: this.nickname,
        channel: 'chat',
-       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
+       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd',
+       user: true
      }
 
      this.webSocket.send(JSON.stringify(data))
@@ -144,7 +147,11 @@
          this.newNotification(this.response)
        }
 
-       message.textContent += `\n${this.response.username}: ${this.response.data}`
+       if (this.response.user) {
+         message.innerHTML += `\n<b>${this.response.username}:</b> ${this.response.data}`
+       } else {
+         message.innerHTML += `\n${this.response.username}: ${this.response.data}`
+       }
      }
    }
 

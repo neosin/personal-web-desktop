@@ -34,7 +34,6 @@ class Weather extends DesktopWindow {
     this.hourCounter = 0
     this.dayCounter = 0
     this.counter = 0
-    this.temp = undefined
   }
 
   /**
@@ -43,6 +42,7 @@ class Weather extends DesktopWindow {
   createWeatherWindow () {
     this.createWindow()
     this.currentWindow.classList.add('weather')
+
     setup.editAppContent('#weather', this.currentWindow)
 
     this.getCurrentPosition()
@@ -82,6 +82,7 @@ class Weather extends DesktopWindow {
     this.currentDay = this.dateObj.getDay()
     this.hourCounter = 0
     this.dayCounter = 0
+    this.temp = undefined
   }
 
   /**
@@ -107,7 +108,6 @@ class Weather extends DesktopWindow {
    */
   calculateWeather () {
     this.dateObj.setDate((this.dateObj.getDate() + this.dayCounter))
-    this.hourCounter = 0
 
     let temps = []
     let responseTimes = []
@@ -175,6 +175,8 @@ class Weather extends DesktopWindow {
 
   /**
    * Get's the correct name for each day.
+   *
+   * @returns {string} A string representing the name of the current day.
    */
   getDayName () {
     let nameOfDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -190,6 +192,7 @@ class Weather extends DesktopWindow {
    * Get's the correct weather status for each day.
    *
    * @param {number} weatherStatus A number representing the weather status of the current time.
+   * @returns {string} A string representing the weather condition for the current time.
    */
   getStatus (weatherStatus) {
     let weatherStatusList = ['Clear sky', 'Nearly clear sky', 'Variable cloudiness', 'Halfclear sky',
@@ -206,6 +209,7 @@ class Weather extends DesktopWindow {
    * Check's if there is a time that matches the current hour, else use the last time in the list.
    *
    * @param {object[]} temps The temperatures for each day.
+   * @returns {object} The temperature closest to the current time.
    */
   checkCurrentWeatherTime (temps) {
     let value = temps.filter(current => {
@@ -219,6 +223,8 @@ class Weather extends DesktopWindow {
       this.hourCounter++
       this.checkCurrentWeatherTime(temps)
     } else {
+      this.hourCounter = 0
+
       this.temp = this.hourCounter === 10 ? temps[temps.length - 1] : value[0]
     }
   }

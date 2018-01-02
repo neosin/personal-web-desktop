@@ -39,6 +39,7 @@ class PhotoBooth extends DesktopWindow {
   createPhotoBoothWindow () {
     this.createWindow()
     this.currentWindow.classList.add('photoBooth')
+
     setup.startLoading(this.currentWindow)
 
     this.getCameraStream()
@@ -68,7 +69,6 @@ class PhotoBooth extends DesktopWindow {
     canvas.height = 480
 
     context.filter = this.filter
-
     context.drawImage(this.videoElement, 0, 0, 640, 480)
 
     this.url = canvas.toDataURL()
