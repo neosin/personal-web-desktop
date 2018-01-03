@@ -48,6 +48,7 @@
     height: 42px;
     width: 100%;
     font-size: 16px;
+    background-color: rgb(0, 153, 224);
 }
 
 .chat controlls {

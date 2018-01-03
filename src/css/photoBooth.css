@@ -15,3 +15,11 @@
 .photoBooth .content img {
     padding: 4px;
 }
+
+.photoBooth .content img:hover {
+    opacity: 0.7
+} 
+
+.photoBooth .retry {
+    margin-bottom: 15px;
+}

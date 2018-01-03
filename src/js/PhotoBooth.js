@@ -56,6 +56,14 @@ class PhotoBooth extends DesktopWindow {
         this.stream = stream
         this.setupPhotoBooth()
       })
+      .catch(stream => {
+        setup.stopLoading(this.currentWindow)
+        setup.editAppContent('#photoBoothError', this.currentWindow)
+
+        this.currentWindow.querySelector('.retry').addEventListener('click', event => {
+          this.getCameraStream()
+        })
+      })
   }
 
   /**
