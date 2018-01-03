@@ -84,8 +84,6 @@
 
        setup.enableButton(input, button)
 
-       let chatMessageWindow = this.currentWindow.querySelector('.content')
-
        this.currentWindow.addEventListener('click', event => {
          if (event.target.closest('.emojiBtn')) {
            this.currentWindow.querySelector('.emojiSection').classList.toggle('emojiToggle')
@@ -106,7 +104,7 @@
 
          this.addMessageToWindow()
 
-         setup.dynamicScroll(chatMessageWindow)
+         setup.dynamicScroll(this.currentWindow.querySelector('.content'))
        })
      })
    }
@@ -158,37 +156,14 @@
    addEmojis () {
      let message = this.currentWindow.querySelector('textarea')
 
-     if (message.value.search('/:happy:/')) {
-       message.value = message.value.replace(/:happy:/g, '\uD83D\uDE00')
-     }
-
-     if (message.value.search('/:smile:/')) {
-       message.value = message.value.replace(/:smile:/g, '\uD83D\uDE42')
-     }
-
-     if (message.value.search('/:cool:/')) {
-       message.value = message.value.replace(/:cool:/g, '\uD83D\uDE0E')
-     }
-
-     if (message.value.search('/:surprised:/')) {
-       message.value = message.value.replace(/:surprised:/g, '\uD83D\uDE2E')
-     }
-
-     if (message.value.search('/:cheeky:/')) {
-       message.value = message.value.replace(/:cheeky:/g, '\uD83D\uDE1B')
-     }
-
-     if (message.value.search('/:horns:/')) {
-       message.value = message.value.replace(/:horns:/g, '\uD83E\uDD18')
-     }
-
-     if (message.value.search('/:thinking:/')) {
-       message.value = message.value.replace(/:thinking:/g, '\uD83E\uDD14')
-     }
-
-     if (message.value.search('/:blush:/')) {
-       message.value = message.value.replace(/:blush:/g, '\uD83D\uDE0A')
-     }
+     if (message.value.search('/:happy:/')) { message.value = message.value.replace(/:happy:/g, '\uD83D\uDE00') }
+     if (message.value.search('/:smile:/')) { message.value = message.value.replace(/:smile:/g, '\uD83D\uDE42') }
+     if (message.value.search('/:cool:/')) { message.value = message.value.replace(/:cool:/g, '\uD83D\uDE0E') }
+     if (message.value.search('/:surprised:/')) { message.value = message.value.replace(/:surprised:/g, '\uD83D\uDE2E') }
+     if (message.value.search('/:cheeky:/')) { message.value = message.value.replace(/:cheeky:/g, '\uD83D\uDE1B') }
+     if (message.value.search('/:horns:/')) { message.value = message.value.replace(/:horns:/g, '\uD83E\uDD18') }
+     if (message.value.search('/:thinking:/')) { message.value = message.value.replace(/:thinking:/g, '\uD83E\uDD14') }
+     if (message.value.search('/:blush:/')) { message.value = message.value.replace(/:blush:/g, '\uD83D\uDE0A') }
    }
 
    /**

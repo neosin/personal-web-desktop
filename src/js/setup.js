@@ -53,14 +53,14 @@
   * @param {object} window The window containing the content.
   */
  function editAppContent (id, window) {
+   let windowContent = window.querySelector('.windowContent')
+
    if (window.querySelector('.content')) {
      let remove = window.querySelector('.content')
-     let removeParent = window.querySelector('.windowContent')
 
-     removeParent.removeChild(remove)
+     windowContent.removeChild(remove)
    }
 
-   let windowContent = window.querySelector('.windowContent')
    let template = document.querySelector(id)
    windowContent.appendChild(document.importNode(template.content, true))
  }

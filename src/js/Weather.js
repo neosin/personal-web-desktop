@@ -43,9 +43,7 @@ class Weather extends DesktopWindow {
     this.getCurrentPosition()
     this.getData()
 
-    this.currentWindow.querySelector('.controlls button').addEventListener('click', event => {
-      this.changeLocation()
-    })
+    this.currentWindow.querySelector('.controlls button').addEventListener('click', event => this.changeLocation())
   }
 
   /**
@@ -82,9 +80,7 @@ class Weather extends DesktopWindow {
     setup.toggleLoading(this.currentWindow)
 
     window.fetch(this.url)
-    .then(response => {
-      return response.json()
-    })
+    .then(response => { return response.json() })
     .then(response => {
       this.response = response
       setup.toggleLoading(this.currentWindow)
@@ -126,18 +122,16 @@ class Weather extends DesktopWindow {
     let lowest = temps[temps.length - 1].value
 
     this.checkCurrentWeatherTime(temps, 0)
-    this.displayWeather(this.temp.value, this.temp.status, lowest, highest)
+    this.displayWeather(lowest, highest)
   }
 
   /**
    * Writes out each day to the DOM.
    *
-   * @param {number} temp The temperature closest to the current hour.
-   * @param {number} weatherStatus A number representing the weather condition.
    * @param {number} lowest The coldest temperature of the day.
    * @param {number} highest The warmest temperature of the day.
    */
-  displayWeather (temp, weatherStatus, lowest, highest) {
+  displayWeather (lowest, highest) {
     let template = document.querySelector('#weatherDay')
     let content = this.currentWindow.querySelector('.content')
     let dayTemplate
@@ -146,15 +140,10 @@ class Weather extends DesktopWindow {
     content.appendChild(dayTemplate)
 
     let counter = this.currentWindow.querySelectorAll('.day').length - 1
-    let day = this.currentWindow.querySelectorAll('.content h2')[counter]
-    let highLow = this.currentWindow.querySelectorAll('.content p')[counter]
-    let temperature = this.currentWindow.querySelectorAll('.content h1')[counter]
-    let statusText = this.currentWindow.querySelectorAll('.content h3')[counter]
-
-    day.textContent = this.getDayName()
-    highLow.textContent = `${highest}° / ${lowest}°`
-    temperature.textContent = `${temp}°`
-    statusText.textContent = this.getStatus(weatherStatus)
+    this.currentWindow.querySelectorAll('.content h2')[counter].textContent = this.getDayName()
+    this.currentWindow.querySelectorAll('.content p')[counter].textContent = `${highest}° / ${lowest}°`
+    this.currentWindow.querySelectorAll('.content h1')[counter].textContent = `${this.temp.value}°`
+    this.currentWindow.querySelectorAll('.content h3')[counter].textContent = this.getStatus(this.temp.status)
 
     if (this.currentWindow.querySelectorAll('.day').length < 5) {
       this.calculateWeather()

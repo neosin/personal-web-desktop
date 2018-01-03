@@ -78,6 +78,7 @@
      this.brickCounter = 0
      this.bricks.length = 0
      this.time = 0
+     this.prevBrick = null
 
      clearTimeout(this.timer)
      this.timer = undefined
@@ -132,15 +133,17 @@
    clickBrickEvent (event) {
      let element = event.target.closest('img')
 
-     if (element !== this.prevBrick) {
+     if (element !== this.prevBrick && element) {
        if (!this.timer) { this.timer = setInterval(() => { this.time += 0.1 }, 100) }
 
        element.src = `image/memory/${element.id.slice(1)}.png`
+
        this.clickedBricks.push(element)
-
-       this.checkClickedBricks(element)
-
        this.prevBrick = element
+
+       if (this.clickedBricks.length === 2) {
+         this.checkClickedBricks(element)
+       }
      }
    }
 
@@ -152,25 +155,23 @@
    checkClickedBricks (event) {
      let bricksClicked = this.clickedBricks.slice()
 
-     if (this.clickedBricks.length === 2) {
-       if (this.clickedBricks[0].src === this.clickedBricks[1].src) {
-         this.appContent.querySelectorAll(`#${event.id}`).forEach(current => {
-           current.closest('a').style.visibility = 'hidden'
-         })
+     if (bricksClicked[0].src === bricksClicked[1].src) {
+       bricksClicked[0].closest('a').style.visibility = 'hidden'
+       bricksClicked[1].closest('a').style.visibility = 'hidden'
 
-         this.brickCounter += 2
-       } else {
-         setTimeout(() => {
-           bricksClicked.forEach(current => { current.src = 'image/memory/0.png' })
-           this.prevBrick = null
-         }, 1000)
-       }
-
-       this.clickedBricks.length = 0
-       this.attempts++
-
-       this.checkIfCopleted()
+       this.brickCounter += 2
+     } else {
+       setTimeout(() => {
+         bricksClicked[0].src = '/image/memory/0.png'
+         bricksClicked[1].src = '/image/memory/0.png'
+       }, 1000)
      }
+
+     this.attempts++
+     this.clickedBricks.length = 0
+     this.prevBrick = null
+
+     this.checkIfCopleted()
    }
 
    /**
@@ -178,19 +179,14 @@
     */
    checkIfCopleted () {
      if (this.brickCounter === this.bricks.length) {
-       clearInterval(this.timer)
-
        setup.editAppContent('#memoryCompleted', this.currentWindow)
 
-       let attempts = this.currentWindow.querySelector('.attempts')
-       attempts.textContent += this.attempts
+       clearInterval(this.timer)
 
-       let time = this.currentWindow.querySelector('.time')
-       time.textContent += `${Math.round((this.time * 10) / 10)}s`
+       this.currentWindow.querySelector('.attempts').textContent += this.attempts
+       this.currentWindow.querySelector('.time').textContent += `${Math.round((this.time * 10) / 10)}s`
 
-       this.currentWindow.querySelector('.reset').addEventListener('click', event => {
-         this.resetGame()
-       })
+       this.currentWindow.querySelector('.reset').addEventListener('click', event => this.resetGame())
      }
    }
  }

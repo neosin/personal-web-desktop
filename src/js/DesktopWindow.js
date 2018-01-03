@@ -49,11 +49,8 @@
     * Adds icon and title to the opened application.
     */
    addInformation () {
-     let titleElement = this.currentWindow.querySelector('p')
-     let iconElement = this.currentWindow.querySelector('img')
-
-     titleElement.textContent = this.title
-     iconElement.src = this.icon
+     this.currentWindow.querySelector('p').textContent = this.title
+     this.currentWindow.querySelector('img').src = this.icon
    }
 
    /**

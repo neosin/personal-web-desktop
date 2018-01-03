@@ -30,13 +30,8 @@
      }
    })
 
-   document.addEventListener('dragover', event => {
-     event.preventDefault()
-   })
-
-   document.addEventListener('dragend', event => {
-     event.target.classList.remove('windowDrag')
-   })
+   document.addEventListener('dragover', event => event.preventDefault())
+   document.addEventListener('dragend', event => event.target.classList.remove('windowDrag'))
  }
 
  // Exports
