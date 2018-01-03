@@ -18,15 +18,13 @@ class PhotoBooth extends DesktopWindow {
  /**
   * Creates an instance of PhotoBooth.
   *
-  * @param {string} title String of the relative URL for the application window icon.
-  * @param {string} icon String of the relative URL for the title of the application window.
   * @memberof PhotoBooth
   */
-  constructor (title, icon) {
+  constructor () {
     super()
 
-    this.title = title
-    this.icon = icon
+    this.title = 'Photo Booth'
+    this.icon = '/image/appIcons/camera.png'
     this.stream = null
     this.videoElement = undefined
     this.filter = undefined

@@ -18,15 +18,13 @@
   /**
    * Creates an instance of MemoryGame.
    *
-   * @param {string} title String of the relative URL for the application window icon.
-   * @param {string} icon String of the relative URL for the title of the application window.
    * @memberof MemoryGame
    */
-   constructor (title, icon, x = 4, y = 4) {
+   constructor (x = 4, y = 4) {
      super()
 
-     this.title = title
-     this.icon = icon
+     this.title = 'Memory'
+     this.icon = '/image/appIcons/game.png'
      this.x = x
      this.y = y
      this.timer = undefined

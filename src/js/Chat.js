@@ -18,15 +18,13 @@
   /**
    * Creates an instance of Chat
    *
-   * @param {string} title String of the relative URL for the application window icon.
-   * @param {string} icon String of the relative URL for the title of the application window.
    * @memberof Chat
    */
-   constructor (title, icon) {
+   constructor () {
      super()
 
-     this.title = title
-     this.icon = icon
+     this.title = 'Chat'
+     this.icon = '/image/appIcons/chat.png'
      this.nickname = null
      this.webSocket = null
      this.response = null

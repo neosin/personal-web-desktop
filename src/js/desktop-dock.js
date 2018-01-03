@@ -75,15 +75,15 @@
 
      this.shadowRoot.querySelector('ul').addEventListener('click', event => {
        if (event.target.closest('#memory')) {
-         new Memory('Memory', '/image/appIcons/game.png').createMemoryWindow()
+         new Memory().createMemoryWindow()
        } else if (event.target.closest('#chat')) {
-         new Chat('Chat', '/image/appIcons/chat.png').createChatWindow()
+         new Chat().createChatWindow()
        } else if (event.target.closest('#settings')) {
-         new Settings('Settings', '/image/appIcons/settings.png').createSettingsWindow()
+         new Settings().createSettingsWindow()
        } else if (event.target.closest('#weather')) {
-         new Weather('Weather', '/image/appIcons/weather.png').createWeatherWindow()
+         new Weather().createWeatherWindow()
        } else if (event.target.closest('#camera')) {
-         new PhotoBooth('Photo Booth', '/image/appIcons/camera.png').createPhotoBoothWindow()
+         new PhotoBooth().createPhotoBoothWindow()
        }
      })
    }

@@ -18,15 +18,13 @@ class Settings extends DesktopWindow {
  /**
   * Creates an instance of Settings.
   *
-  * @param {string} title String of the relative URL for the application window icon.
-  * @param {string} icon String of the relative URL for the title of the application window.
   * @memberof Settings
   */
-  constructor (title, icon) {
+  constructor () {
     super()
 
-    this.title = title
-    this.icon = icon
+    this.title = 'Settings'
+    this.icon = '/image/appIcons/settings.png'
   }
 
   /**

@@ -18,17 +18,15 @@ class Weather extends DesktopWindow {
   /**
    * Creates an instance of Weather.
    *
-   * @param {string} title String of the relative URL for the application window icon.
-   * @param {string} icon String of the relative URL for the title of the application window.
    * @memberof Weather
    */
-  constructor (title, icon) {
+  constructor () {
     super()
 
     this.response = null
     this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
-    this.title = title
-    this.icon = icon
+    this.title = 'Weather'
+    this.icon = '/image/appIcons/weather.png'
     this.dateObj = new Date()
     this.currentDay = this.dateObj.getDay()
   }
