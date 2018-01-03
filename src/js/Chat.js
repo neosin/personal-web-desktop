@@ -39,7 +39,7 @@
      this.createWindow()
      this.currentWindow.classList.add('chat')
 
-     setup.startLoading(this.currentWindow)
+     setup.toggleLoading(this.currentWindow)
      window.Notification.requestPermission()
 
      this.checkNickname()
@@ -50,7 +50,7 @@
     */
    checkNickname () {
      if (!window.localStorage.getItem('chatName')) {
-       setup.stopLoading(this.currentWindow)
+       setup.toggleLoading(this.currentWindow)
        setup.editAppContent('#chatName', this.currentWindow)
 
        let input = this.currentWindow.querySelector('.content input')
@@ -78,7 +78,7 @@
      this.nickname = window.localStorage.getItem('chatName')
 
      this.webSocket.addEventListener('open', event => {
-       setup.stopLoading(this.currentWindow)
+       setup.toggleLoading(this.currentWindow)
        setup.editAppContent('#chat', this.currentWindow)
 
        let input = this.currentWindow.querySelector('textarea')

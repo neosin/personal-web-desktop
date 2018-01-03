@@ -40,7 +40,7 @@ class PhotoBooth extends DesktopWindow {
     this.createWindow()
     this.currentWindow.classList.add('photoBooth')
 
-    setup.startLoading(this.currentWindow)
+    setup.toggleLoading(this.currentWindow)
 
     this.getCameraStream()
   }
@@ -56,8 +56,8 @@ class PhotoBooth extends DesktopWindow {
         this.stream = stream
         this.setupPhotoBooth()
       })
-      .catch(stream => {
-        setup.stopLoading(this.currentWindow)
+      .catch(() => {
+        setup.toggleLoading(this.currentWindow)
         setup.editAppContent('#photoBoothError', this.currentWindow)
 
         this.currentWindow.querySelector('.retry').addEventListener('click', event => {
@@ -70,7 +70,7 @@ class PhotoBooth extends DesktopWindow {
    * Screen for when the application is first opened.
    */
   setupPhotoBooth () {
-    setup.stopLoading(this.currentWindow)
+    setup.toggleLoading(this.currentWindow)
     setup.editAppContent('#photoBooth', this.currentWindow)
 
     this.videoElement = this.currentWindow.querySelector('video')

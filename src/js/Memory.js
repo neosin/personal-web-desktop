@@ -188,7 +188,7 @@
        attempts.textContent += this.attempts
 
        let time = this.currentWindow.querySelector('.time')
-       time.textContent += Math.round((this.time * 10) / 10)
+       time.textContent += `${Math.round((this.time * 10) / 10)}s`
 
        this.currentWindow.querySelector('.reset').addEventListener('click', event => {
          this.resetGame()

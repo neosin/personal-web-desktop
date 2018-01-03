@@ -81,7 +81,7 @@ class Weather extends DesktopWindow {
    * Makes an request to the SMHI API.
    */
   getData () {
-    setup.startLoading(this.currentWindow)
+    setup.toggleLoading(this.currentWindow)
 
     window.fetch(this.url)
     .then(response => {
@@ -89,7 +89,7 @@ class Weather extends DesktopWindow {
     })
     .then(response => {
       this.response = response
-      setup.stopLoading(this.currentWindow)
+      setup.toggleLoading(this.currentWindow)
 
       this.calculateWeather(0)
     })
