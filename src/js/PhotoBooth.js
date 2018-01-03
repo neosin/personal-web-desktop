@@ -59,6 +59,36 @@ class PhotoBooth extends DesktopWindow {
   }
 
   /**
+   * Screen for when the application is first opened.
+   */
+  setupPhotoBooth () {
+    setup.stopLoading(this.currentWindow)
+    setup.editAppContent('#photoBooth', this.currentWindow)
+
+    this.videoElement = this.currentWindow.querySelector('video')
+
+    this.videoElement.srcObject = this.stream
+    this.videoElement.play()
+
+    this.currentWindow.querySelectorAll('.thumb img').forEach(current => {
+      current.style.filter = current.getAttribute('data-filter')
+    })
+
+    this.currentWindow.addEventListener('click', event => {
+      if (event.target.closest('.snap')) {
+        this.takenPhoto()
+      }
+
+      if (event.target.closest('.thumb')) {
+        this.filter = event.target.getAttribute('data-filter')
+
+        let video = this.currentWindow.querySelector('video')
+        video.style.filter = this.filter
+      }
+    })
+  }
+
+  /**
    * Renders the taken photo.
    */
   renderPhoto () {
@@ -97,34 +127,6 @@ class PhotoBooth extends DesktopWindow {
     })
 
     this.renderPhoto()
-  }
-
-  /**
-   * Screen for when the application is first opened.
-   */
-  setupPhotoBooth () {
-    setup.stopLoading(this.currentWindow)
-    setup.editAppContent('#photoBooth', this.currentWindow)
-
-    this.videoElement = this.currentWindow.querySelector('video')
-
-    this.videoElement.srcObject = this.stream
-    this.videoElement.play()
-
-    this.currentWindow.querySelectorAll('.thumb img').forEach(current => {
-      current.style.filter = current.getAttribute('data-filter')
-    })
-
-    this.currentWindow.querySelector('.content .snap').addEventListener('click', event => {
-      this.takenPhoto()
-    })
-
-    this.currentWindow.querySelector('.thumb').addEventListener('click', event => {
-      this.filter = event.target.getAttribute('data-filter')
-
-      let video = this.currentWindow.querySelector('video')
-      video.style.filter = this.filter
-    })
   }
 }
 

@@ -1,5 +1,5 @@
 /**
- * Module for the Memory Game.
+ * Module for the memory game.
  *
  * @module src/js/Memory.js
  * @author Rasmus Falk
@@ -80,17 +80,13 @@
      this.brickCounter = 0
      this.bricks.length = 0
      this.time = 0
+
      clearTimeout(this.timer)
      this.timer = undefined
 
-     setup.editAppContent('.memoryReset', this.currentWindow)
-     this.startGame()
-   }
+     setup.editAppContent('#memoryReset', this.currentWindow)
 
-   startTimer () {
-     this.timer = setInterval(() => {
-       this.time += 0.1
-     }, 100)
+     this.startGame()
    }
 
    /**
@@ -136,17 +132,16 @@
     * @param {object} event The brick that was clicked.
     */
    clickBrickEvent (event) {
-     let element = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
+     let element = event.target.closest('img')
 
-     if (element.nodeName === 'IMG' && element !== this.prevBrick) {
-       if (!this.timer) {
-         this.startTimer()
-       }
+     if (element !== this.prevBrick) {
+       if (!this.timer) { this.timer = setInterval(() => { this.time += 0.1 }, 100) }
 
        element.src = `image/memory/${element.id.slice(1)}.png`
        this.clickedBricks.push(element)
 
        this.checkClickedBricks(element)
+
        this.prevBrick = element
      }
    }
@@ -162,7 +157,7 @@
      if (this.clickedBricks.length === 2) {
        if (this.clickedBricks[0].src === this.clickedBricks[1].src) {
          this.appContent.querySelectorAll(`#${event.id}`).forEach(current => {
-           current.parentElement.style.visibility = 'hidden'
+           current.closest('a').style.visibility = 'hidden'
          })
 
          this.brickCounter += 2
@@ -176,21 +171,28 @@
        this.clickedBricks.length = 0
        this.attempts++
 
-       if (this.brickCounter === this.bricks.length) {
-         clearInterval(this.timer)
+       this.checkIfCopleted()
+     }
+   }
 
-         setup.editAppContent('#memoryCompleted', this.currentWindow)
+   /**
+    * Checks if the game is completed or not.
+    */
+   checkIfCopleted () {
+     if (this.brickCounter === this.bricks.length) {
+       clearInterval(this.timer)
 
-         let attempts = this.currentWindow.querySelector('.attempts')
-         attempts.textContent += this.attempts
+       setup.editAppContent('#memoryCompleted', this.currentWindow)
 
-         let time = this.currentWindow.querySelector('.time')
-         time.textContent += Math.round((this.time * 10) / 10)
+       let attempts = this.currentWindow.querySelector('.attempts')
+       attempts.textContent += this.attempts
 
-         this.currentWindow.querySelector('.reset').addEventListener('click', event => {
-           this.resetGame()
-         })
-       }
+       let time = this.currentWindow.querySelector('.time')
+       time.textContent += Math.round((this.time * 10) / 10)
+
+       this.currentWindow.querySelector('.reset').addEventListener('click', event => {
+         this.resetGame()
+       })
      }
    }
  }

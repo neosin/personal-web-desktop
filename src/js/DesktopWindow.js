@@ -32,12 +32,11 @@
      let allWindows = document.querySelectorAll('.window')
      this.currentWindow = allWindows[allWindows.length - 1]
 
-     this.windowStack()
+     this.windowPlacement()
      this.addInformation()
 
      this.currentWindow.addEventListener('focus', event => {
        let allWindows = document.querySelectorAll('.window')
-
        for (let i = 0; i < allWindows.length; i++) {
          allWindows[i].style.zIndex = 0
        }
@@ -58,13 +57,11 @@
    }
 
    /**
-    * Controlls the stacking of the application windows.
+    * Controlls the stacking and bouncing of the windows.
     */
-   windowStack () {
+   windowPlacement () {
      let allWindows = document.querySelectorAll('.window')
      let focusedWindow
-
-     this.offsetTop = 0
 
      allWindows.forEach(current => {
        if (current.style.zIndex > 50) {
@@ -81,11 +78,7 @@
        this.currentWindow.style.left = `${allWindows[allWindows.length - 2].offsetLeft + 30}px`
      }
 
-     this.windowBounce()
-   }
-
-   windowBounce () {
-     if (this.currentWindow.offsetTop > window.innerHeight - 20) {
+     if (this.currentWindow.offsetTop > window.innerHeight - 30) {
        this.currentWindow.style.top = '8px'
      }
    }

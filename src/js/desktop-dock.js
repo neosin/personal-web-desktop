@@ -8,13 +8,13 @@
 
  'use strict'
 
- const template = document.createElement('template')
  const Memory = require('./Memory')
  const Settings = require('./Settings')
  const Chat = require('./Chat')
  const Weather = require('./Weather')
  const setup = require('./setup')
  const PhotoBooth = require('./PhotoBooth')
+ const template = document.createElement('template')
 
  template.innerHTML = `
  <style>
@@ -62,6 +62,7 @@
    */
    constructor () {
      super()
+
      this.attachShadow({mode: 'open'})
      this.shadowRoot.appendChild(template.content.cloneNode(true))
    }
@@ -72,16 +73,16 @@
    connectedCallback () {
      setup.setupWindows()
 
-     this.shadowRoot.addEventListener('click', event => {
-       if (event.target.closest('li').id === 'memory') {
+     this.shadowRoot.querySelector('ul').addEventListener('click', event => {
+       if (event.target.closest('#memory')) {
          new Memory('Memory', '/image/appIcons/game.png').createMemoryWindow()
-       } else if (event.target.closest('li').id === 'chat') {
+       } else if (event.target.closest('#chat')) {
          new Chat('Chat', '/image/appIcons/chat.png').createChatWindow()
-       } else if (event.target.closest('li').id === 'settings') {
+       } else if (event.target.closest('#settings')) {
          new Settings('Settings', '/image/appIcons/settings.png').createSettingsWindow()
-       } else if (event.target.closest('li').id === 'weather') {
+       } else if (event.target.closest('#weather')) {
          new Weather('Weather', '/image/appIcons/weather.png').createWeatherWindow()
-       } else if (event.target.closest('li').id === 'camera') {
+       } else if (event.target.closest('#camera')) {
          new PhotoBooth('Photo Booth', '/image/appIcons/camera.png').createPhotoBoothWindow()
        }
      })

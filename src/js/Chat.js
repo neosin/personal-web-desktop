@@ -30,7 +30,6 @@
      this.nickname = null
      this.webSocket = null
      this.response = null
-     this.messageHistory = []
    }
 
    /**
@@ -41,14 +40,15 @@
      this.currentWindow.classList.add('chat')
 
      setup.startLoading(this.currentWindow)
+     window.Notification.requestPermission()
 
-     this.chooseNickname()
+     this.checkNickname()
    }
 
    /**
-    * Sets a nickname for the current user.
+    * Checks if the user already has a nickname, if not they get to choose one.
     */
-   chooseNickname () {
+   checkNickname () {
      if (!window.localStorage.getItem('chatName')) {
        setup.stopLoading(this.currentWindow)
        setup.editAppContent('#chatName', this.currentWindow)
@@ -60,7 +60,9 @@
 
        button.addEventListener('click', event => {
          window.localStorage.setItem('chatName', input.value)
+
          setup.startLoading(this.currentWindow)
+
          this.loadChat()
        })
      } else {
@@ -69,12 +71,10 @@
    }
 
    /**
-    * Loads the chat content.
+    * Loads the chat.
     */
    loadChat () {
-     window.Notification.requestPermission()
      this.webSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'chat')
-
      this.nickname = window.localStorage.getItem('chatName')
 
      this.webSocket.addEventListener('open', event => {
@@ -83,26 +83,23 @@
 
        let input = this.currentWindow.querySelector('textarea')
        let button = this.currentWindow.querySelector('.send')
-       let emojiBtn = this.currentWindow.querySelector('.emojiBtn')
-       let emojis = this.currentWindow.querySelector('ul')
-       let emojiSection = this.currentWindow.querySelector('.emojiSection')
 
        setup.enableButton(input, button)
 
        let chatMessageWindow = this.currentWindow.querySelector('.content')
 
-       button.addEventListener('click', event => {
-         this.addEmojis()
-         this.sendMessage()
-       })
+       this.currentWindow.addEventListener('click', event => {
+         if (event.target.closest('.emojiBtn')) {
+           this.currentWindow.querySelector('.emojiSection').classList.toggle('emojiToggle')
+         }
 
-       emojiBtn.addEventListener('click', event => {
-         emojiSection.classList.toggle('emojiToggle')
-       })
-
-       emojis.addEventListener('click', event => {
-         if (event.target.nodeName === 'A') {
+         if (event.target.closest('ul a')) {
            input.value += event.target.getAttribute('data-emoji')
+         }
+
+         if (event.target.closest('.send')) {
+           this.addEmojis()
+           this.sendMessage()
          }
        })
 
@@ -110,6 +107,7 @@
          this.response = JSON.parse(event.data)
 
          this.addMessageToWindow()
+
          setup.dynamicScroll(chatMessageWindow)
        })
      })
@@ -131,6 +129,7 @@
      }
 
      this.webSocket.send(JSON.stringify(data))
+
      message.value = ''
    }
 
@@ -138,19 +137,19 @@
     * Writes out the recived messages to the chat window.
     */
    addMessageToWindow () {
-     let message = this.currentWindow.querySelector('.content p')
+     let messages = this.currentWindow.querySelector('.content p')
 
      if (this.response.type === 'notification') {
-       message.textContent += `${this.response.data}`
+       messages.textContent += `${this.response.data}`
      } else if (this.response.type === 'message') {
        if (!document.hasFocus() && document.querySelector('.chat')) {
-         this.newNotification(this.response)
+         this.newNotification()
        }
 
        if (this.response.user) {
-         message.innerHTML += `\n<b class="user">${this.response.username}:</b> ${this.response.data}`
+         messages.innerHTML += `\n<b class="user">${this.response.username}:</b> ${this.response.data}`
        } else {
-         message.innerHTML += `\n<b  class="other">${this.response.username}:</b> ${this.response.data}`
+         messages.innerHTML += `\n<b  class="other">${this.response.username}:</b> ${this.response.data}`
        }
      }
    }
@@ -195,19 +194,17 @@
    }
 
    /**
-    * Creates a new notification.
-    *
-    * @param {object} message The message from the server.
+    * Creates a new notification for a chat message.
     */
-   newNotification (message) {
+   newNotification () {
      let config = {
-       body: `${message.username}, ${message.data}`,
+       body: `${this.response.username}, ${this.response.data}`,
        icon: '/image/appIcons/chat.png'
      }
 
      let notification = new window.Notification('New Message!', config)
 
-     setTimeout(notification.close.bind(notification), 6000)
+     setTimeout(notification.close.bind(notification), 5000)
    }
  }
 

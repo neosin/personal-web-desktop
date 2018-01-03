@@ -38,10 +38,8 @@ class Settings extends DesktopWindow {
 
     setup.editAppContent('#settings', this.currentWindow)
 
-    let settingsContent = this.currentWindow.querySelector('.content')
-
-    settingsContent.addEventListener('click', event => {
-      if (event.target.nodeName === 'IMG') {
+    this.currentWindow.querySelector('.content').addEventListener('click', event => {
+      if (event.target.closest('img')) {
         document.body.style.backgroundImage = `url(${event.target.src.slice(0, 42)}.jpg)`
       }
     })
