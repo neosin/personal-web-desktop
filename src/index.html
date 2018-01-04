@@ -163,44 +163,45 @@
 
     <!--- PhotoBooth -->
 
-    <template id="photoBooth">
+    <template id="photoTaken">
         <div class="content">
-            <div class="taken">
-                <canvas class="canvasRender"></canvas>
-                <a href="#" class="newPhoto">
-                    <img src="image/photoBooth/remove.png" alt="new photo">
+            <canvas class="canvasRender"></canvas>
+            <a href="#" class="newPhoto">
+                <img src="image/photoBooth/remove.png" alt="new photo">
+                </button>
+                <a href="#" class="savePhoto">
+                    <img src="image/photoBooth/save.png" alt="save photo">
+                </a>
                     </button>
-                    <a href="#" class="savePhoto">
-                        <img src="image/photoBooth/save.png" alt="save photo">
-                        </button>
-            </div>
-            <div class="preview">
-                <video class="video"></video>
-                <div class="thumb">
-                    <a href="#">
-                        <img src="/image/photoBooth/filterPreview.png" data-filter="none" alt="no filter">
-                    </a>
-                    <a href="#">
-                        <img src="/image/photoBooth/filterPreview.png" data-filter="grayscale(80%)" alt="grayscale">
-                    </a>
-                    <a href="#">
-                        <img src="/image/photoBooth/filterPreview.png" data-filter="hue-rotate(90deg)" alt="hue-rotate">
-                    </a>
-                    <a class="snap" href="#">
-                        <img src="/image/photoBooth/snap.png">
-                    </a>
-                    <a href="#">
-                        <img src="/image/photoBooth/filterPreview.png" data-filter="contrast(200%)" alt="contrast">
-                    </a>
-                    <a href="#">
-                        <img src="/image/photoBooth/filterPreview.png" data-filter="invert(100%)" alt="invert">
-                    </a>
-                    <a href="#">
-                        <img src="/image/photoBooth/filterPreview.png" data-filter="saturate(8)" alt="saturate">
-                    </a>
-                </div>
-            </div>
         </div>
+    </template>
+
+    <template id="photoPreview">
+        <div class="content">
+            <video class="video"></video>
+            <div class="thumb">
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="none" alt="no filter">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="grayscale(80%)" alt="grayscale">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="hue-rotate(90deg)" alt="hue-rotate">
+                </a>
+                <a class="snap" href="#">
+                    <img src="/image/photoBooth/snap.png">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="contrast(200%)" alt="contrast">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="invert(100%)" alt="invert">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="saturate(8)" alt="saturate">
+                </a>
+            </div>
     </template>
 
     <template id="photoBoothError">
@@ -208,7 +209,6 @@
             <h1>Sorry...</h1>
             <h2>We can not find your camera</h2>
             <p>Please check your browser settings or allow the application to use your camera</p>
-            <button class="retry">Try again...</button>
         </div>
     </template>
 </head>

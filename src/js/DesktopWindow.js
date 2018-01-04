@@ -37,20 +37,20 @@
 
      this.currentWindow.addEventListener('focus', event => {
        let allWindows = document.querySelectorAll('.window')
-       for (let i = 0; i < allWindows.length; i++) {
-         allWindows[i].style.zIndex = 0
-       }
+
+       for (let i = 0; i < allWindows.length; i++) { allWindows[i].style.zIndex = 0 }
 
        this.currentWindow.style.zIndex = 100
      })
    }
 
    /**
-    * Adds icon and title to the opened application.
+    * Adds icon, title and class to the opened application.
     */
    addInformation () {
      this.currentWindow.querySelector('p').textContent = this.title
      this.currentWindow.querySelector('img').src = this.icon
+     this.currentWindow.classList.add(this.title.charAt(0).toLowerCase() + this.title.slice(1))
    }
 
    /**
@@ -75,9 +75,7 @@
        this.currentWindow.style.left = `${allWindows[allWindows.length - 2].offsetLeft + 30}px`
      }
 
-     if (this.currentWindow.offsetTop > window.innerHeight - 30) {
-       this.currentWindow.style.top = '8px'
-     }
+     if (this.currentWindow.offsetTop > window.innerHeight - 30) { this.currentWindow.style.top = '8px' }
    }
 }
 

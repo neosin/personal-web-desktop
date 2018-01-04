@@ -74,17 +74,11 @@
      setup.setupWindows()
 
      this.shadowRoot.querySelector('ul').addEventListener('click', event => {
-       if (event.target.closest('#memory')) {
-         new Memory().createMemoryWindow()
-       } else if (event.target.closest('#chat')) {
-         new Chat().createChatWindow()
-       } else if (event.target.closest('#settings')) {
-         new Settings().createSettingsWindow()
-       } else if (event.target.closest('#weather')) {
-         new Weather().createWeatherWindow()
-       } else if (event.target.closest('#camera')) {
-         new PhotoBooth().createPhotoBoothWindow()
-       }
+       if (event.target.closest('#memory')) { new Memory().createMemoryWindow() }
+       if (event.target.closest('#chat')) { new Chat().createChatWindow() }
+       if (event.target.closest('#settings')) { new Settings().createSettingsWindow() }
+       if (event.target.closest('#weather')) { new Weather().createWeatherWindow() }
+       if (event.target.closest('#camera')) { new PhotoBooth().createPhotoBoothWindow() }
      })
    }
  }

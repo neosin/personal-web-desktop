@@ -17,20 +17,10 @@
    dragDrop.dragDrop()
 
    document.addEventListener('click', event => {
-     let currentWindow = event.target.closest('.window')
+     let current = event.target.closest('.window')
 
-     if (event.target.className === 'minimize') {
-       currentWindow.querySelector('.windowContent').classList.toggle('windowMinimize')
-     }
-
-     if (event.target.className === 'close') {
-       if (currentWindow.closest('.photoBooth')) {
-         let videoElement = currentWindow.closest('.photoBooth').querySelector('video')
-         videoElement.srcObject.getTracks()[0].stop()
-       }
-
-       document.body.removeChild(currentWindow)
-     }
+     if (event.target.className === 'minimize') { current.querySelector('.windowContent').classList.toggle('windowMinimize') }
+     if (event.target.className === 'close') { document.body.removeChild(current) }
    })
  }
 
@@ -47,7 +37,7 @@
  }
 
  /**
-  * changes the content of an application window.
+  * changes the content of an application.
   *
   * @param {string} id The ID of the template that will be added.
   * @param {object} window The window containing the content.
@@ -66,18 +56,18 @@
  }
 
  /**
-  * Keeps the scrollbar at the bottom of the content window.
+  * Keeps the scrollbar at the bottom of the element.
   *
-  * @param {object} scrollContent The content containing the scrollbar.
+  * @param {object} scrollContent The element containing the scrollbar.
   */
  function dynamicScroll (scrollContent) {
    scrollContent.scrollTop = scrollContent.scrollHeight
  }
 
  /**
-  * Stops the loading animation.
+  * Toggles the loading animation.
   *
-  * @param {object} currentWindow The window that has a loading animation.
+  * @param {object} currentWindow The window that has/will get a loading animation.
   */
  function toggleLoading (currentWindow) {
    if (currentWindow.querySelector('.loading')) {
@@ -91,19 +81,14 @@
  }
 
  /**
-  * Enables the button if the text/input area is not empty.
+  * Toggles the button depending on the content in the input/textarea.
   *
   * @param {object} input The input or textarea that will be sent using a button.
   * @param {object} button The button that will be enabled/disabled.
   */
  function enableButton (input, button) {
    setTimeout(() => {
-     if (input.value.trim() !== '') {
-       button.disabled = false
-     } else {
-       button.disabled = true
-     }
-
+     input.value.trim() ? button.disabled = false : button.disabled = true
      enableButton(input, button)
    }, 100)
  }

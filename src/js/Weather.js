@@ -23,10 +23,10 @@ class Weather extends DesktopWindow {
   constructor () {
     super()
 
-    this.response = null
-    this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
     this.title = 'Weather'
     this.icon = '/image/appIcons/weather.png'
+    this.response = null
+    this.url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.068581/lat/59.329324/data.json'
     this.dateObj = new Date()
     this.currentDay = this.dateObj.getDay()
   }
@@ -36,8 +36,6 @@ class Weather extends DesktopWindow {
    */
   createWeatherWindow () {
     this.createWindow()
-    this.currentWindow.classList.add('weather')
-
     setup.editAppContent('#weather', this.currentWindow)
 
     this.getCurrentPosition()
@@ -74,7 +72,7 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Makes an request to the SMHI API.
+   * Makes a request to the SMHI Weather API.
    */
   getData () {
     setup.toggleLoading(this.currentWindow)
@@ -91,6 +89,8 @@ class Weather extends DesktopWindow {
 
   /**
    * Calculates the highest, lowest and current temperature for the current time.
+   *
+   * @param {number} dayCounter The day that will be calculated.
    */
   calculateWeather (dayCounter = 1) {
     this.dateObj.setDate((this.dateObj.getDate() + dayCounter))
@@ -140,6 +140,7 @@ class Weather extends DesktopWindow {
     content.appendChild(dayTemplate)
 
     let counter = this.currentWindow.querySelectorAll('.day').length - 1
+
     this.currentWindow.querySelectorAll('.content h2')[counter].textContent = this.getDayName()
     this.currentWindow.querySelectorAll('.content p')[counter].textContent = `${highest}° / ${lowest}°`
     this.currentWindow.querySelectorAll('.content h1')[counter].textContent = `${this.temp.value}°`

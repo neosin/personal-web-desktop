@@ -43,8 +43,6 @@
     */
    createMemoryWindow () {
      this.createWindow()
-     this.currentWindow.classList.add('memory')
-
      setup.editAppContent('#memoryDefault', this.currentWindow)
 
      this.startGame()
@@ -141,18 +139,14 @@
        this.clickedBricks.push(element)
        this.prevBrick = element
 
-       if (this.clickedBricks.length === 2) {
-         this.checkClickedBricks(element)
-       }
+       if (this.clickedBricks.length === 2) { this.checkClickedBricks(element) }
      }
    }
 
    /**
-    * Checks if two bricks are clicked and then if they are the same.
-    *
-    * @param {object} event The brick that was clicked.
+    * Checks if the bricks that are clicked matches.
     */
-   checkClickedBricks (event) {
+   checkClickedBricks () {
      let bricksClicked = this.clickedBricks.slice()
 
      if (bricksClicked[0].src === bricksClicked[1].src) {

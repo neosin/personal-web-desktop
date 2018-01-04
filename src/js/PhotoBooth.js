@@ -23,7 +23,7 @@ class PhotoBooth extends DesktopWindow {
   constructor () {
     super()
 
-    this.title = 'Photo Booth'
+    this.title = 'PhotoBooth'
     this.icon = '/image/appIcons/camera.png'
     this.stream = null
     this.videoElement = undefined
@@ -36,10 +36,8 @@ class PhotoBooth extends DesktopWindow {
    */
   createPhotoBoothWindow () {
     this.createWindow()
-    this.currentWindow.classList.add('photoBooth')
 
     setup.toggleLoading(this.currentWindow)
-
     this.getCameraStream()
   }
 
@@ -53,21 +51,20 @@ class PhotoBooth extends DesktopWindow {
       .then(stream => {
         this.stream = stream
         this.setupPhotoBooth()
+
+        setup.toggleLoading(this.currentWindow)
       })
       .catch(() => {
         setup.toggleLoading(this.currentWindow)
         setup.editAppContent('#photoBoothError', this.currentWindow)
-
-        this.currentWindow.querySelector('.retry').addEventListener('click', event => this.getCameraStream())
       })
   }
 
   /**
-   * Screen for when the application is first opened.
+   * Displays the different filters, the stream etc.
    */
   setupPhotoBooth () {
-    setup.toggleLoading(this.currentWindow)
-    setup.editAppContent('#photoBooth', this.currentWindow)
+    setup.editAppContent('#photoPreview', this.currentWindow)
 
     this.videoElement = this.currentWindow.querySelector('video')
 
@@ -79,9 +76,7 @@ class PhotoBooth extends DesktopWindow {
     })
 
     this.currentWindow.addEventListener('click', event => {
-      if (event.target.closest('.snap')) {
-        this.takenPhoto()
-      }
+      if (event.target.closest('.snap')) { this.takenPhoto() }
 
       if (event.target.closest('.thumb')) {
         this.filter = event.target.getAttribute('data-filter')
@@ -89,6 +84,10 @@ class PhotoBooth extends DesktopWindow {
         let video = this.currentWindow.querySelector('video')
         video.style.filter = this.filter
       }
+    })
+
+    this.currentWindow.querySelector('.close').addEventListener('click', event => {
+      this.stream.getTracks()[0].stop()
     })
   }
 
@@ -112,15 +111,10 @@ class PhotoBooth extends DesktopWindow {
    * Screen for when the photo is taken.
    */
   takenPhoto () {
-    let preview = this.currentWindow.querySelector('.preview')
-    let taken = this.currentWindow.querySelector('.taken')
-
-    taken.style.display = 'block'
-    preview.style.display = 'none'
+    setup.editAppContent('#photoTaken', this.currentWindow)
 
     this.currentWindow.querySelector('.newPhoto').addEventListener('click', event => {
-      preview.style.display = 'block'
-      taken.style.display = 'none'
+      this.setupPhotoBooth()
     })
 
     this.currentWindow.querySelector('.savePhoto').addEventListener('click', event => {

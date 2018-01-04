@@ -35,11 +35,7 @@
     */
    createChatWindow () {
      this.createWindow()
-     this.currentWindow.classList.add('chat')
-
-     setup.toggleLoading(this.currentWindow)
      window.Notification.requestPermission()
-
      this.checkNickname()
    }
 
@@ -48,7 +44,6 @@
     */
    checkNickname () {
      if (!window.localStorage.getItem('chatName')) {
-       setup.toggleLoading(this.currentWindow)
        setup.editAppContent('#chatName', this.currentWindow)
 
        let input = this.currentWindow.querySelector('.content input')
@@ -58,20 +53,17 @@
 
        button.addEventListener('click', event => {
          window.localStorage.setItem('chatName', input.value)
-
-         setup.toggleLoading(this.currentWindow)
-
          this.loadChat()
        })
-     } else {
-       this.loadChat()
-     }
+     } else { this.loadChat() }
    }
 
    /**
     * Loads the chat.
     */
    loadChat () {
+     setup.toggleLoading(this.currentWindow)
+
      this.webSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'chat')
      this.nickname = window.localStorage.getItem('chatName')
 
@@ -99,11 +91,12 @@
          }
        })
 
+       this.currentWindow.querySelector('.close').addEventListener('click', event => this.webSocket.close())
+
        this.webSocket.addEventListener('message', event => {
          this.response = JSON.parse(event.data)
 
          this.addMessageToWindow()
-
          setup.dynamicScroll(this.currentWindow.querySelector('.content'))
        })
      })
@@ -135,18 +128,13 @@
    addMessageToWindow () {
      let messages = this.currentWindow.querySelector('.content p')
 
-     if (this.response.type === 'notification') {
-       messages.textContent += `${this.response.data}`
-     } else if (this.response.type === 'message') {
-       if (!document.hasFocus() && document.querySelector('.chat')) {
-         this.newNotification()
-       }
+     if (this.response.type === 'notification') { messages.textContent += `${this.response.data}` }
 
-       if (this.response.user) {
-         messages.innerHTML += `\n<b class="user">${this.response.username}:</b> ${this.response.data}`
-       } else {
-         messages.innerHTML += `\n<b  class="other">${this.response.username}:</b> ${this.response.data}`
-       }
+     if (this.response.type === 'message') {
+       if (!document.hasFocus()) { this.newNotification() }
+
+       if (this.response.user) { messages.innerHTML += `\n<b class="user">${this.response.username}:</b> ${this.response.data}` }
+       if (!this.response.user) { messages.innerHTML += `\n<b  class="other">${this.response.username}:</b> ${this.response.data}` }
      }
    }
 
@@ -170,11 +158,8 @@
     * Creates a new notification for a chat message.
     */
    newNotification () {
-     let config = {
-       body: `${this.response.username}, ${this.response.data}`,
-       icon: '/image/appIcons/chat.png'
-     }
-
+     let message = `${this.response.username}, ${this.response.data}`
+     let config = { body: message, icon: '/image/appIcons/chat.png' }
      let notification = new window.Notification('New Message!', config)
 
      setTimeout(notification.close.bind(notification), 5000)
