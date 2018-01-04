@@ -5,7 +5,7 @@
 }
 
 .chat .windowContent {
-    background-color: rgb(27, 27, 27);
+    background-color: #3B3F42;
 }
 
 .chat .content {
@@ -17,12 +17,12 @@
 }
 
 .chatMessages {
-    background-color: rgb(82, 82, 82);
+    border: 1px solid #FEFEFE;
     height: 200px;
 }
 
 .chat .content p {
-    color: rgb(226, 226, 226);
+    color: #FEFEFE;
     margin: 0px;
     white-space: pre-line;
     line-height: 1.5;
@@ -38,17 +38,27 @@
     font-size: 14px;
     padding: 5px;
     resize: none;
+    background-color: #FEFEFE;
 }
 
-.chat .send,
-.chat .emojiBtn,
-.chat .set {
+.chat textarea:focus,
+.chat input:focus {
+    outline: none;
+    outline: 2px solid #FBBA42;
+}
+
+.chat .windowContent button:focus {
+    outline: none;
+    outline: 2px solid #FEFEFE;
+}
+
+.chat .windowContent button {
     margin-top: 5px;
     margin-bottom: 5px;
     height: 42px;
     width: 100%;
     font-size: 16px;
-    background-color: rgb(0, 153, 224);
+    background-color: #FBBA42;
 }
 
 .chat controlls {
@@ -60,11 +70,13 @@
     text-align: center;
     font-size: 14px;
     height: 42px;
+    background-color: #FEFEFE;
 }
 
 .chat .content .info {
     text-align: center;
     margin-bottom: 5px;
+    color: #FEFEFE;
 }
 
 .chat .set,
@@ -100,9 +112,9 @@
 }
 
 .user {
-    color: rgb(0, 153, 224);
+    color: #56B9D0;
 }
 
 .other {
-    color: red; 
+    color: #F24C27;
 }

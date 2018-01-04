@@ -145,9 +145,7 @@ class Weather extends DesktopWindow {
     this.currentWindow.querySelectorAll('.content h1')[counter].textContent = `${this.temp.value}°`
     this.currentWindow.querySelectorAll('.content h3')[counter].textContent = this.getStatus(this.temp.status)
 
-    if (this.currentWindow.querySelectorAll('.day').length < 5) {
-      this.calculateWeather()
-    }
+    if (this.currentWindow.querySelectorAll('.day').length < 5) { this.calculateWeather() }
   }
 
   /**

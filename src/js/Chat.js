@@ -59,7 +59,7 @@
        button.addEventListener('click', event => {
          window.localStorage.setItem('chatName', input.value)
 
-         setup.startLoading(this.currentWindow)
+         setup.toggleLoading(this.currentWindow)
 
          this.loadChat()
        })

@@ -14,7 +14,7 @@ a {
 
 .loading {
     border: 16px solid rgb(226, 226, 226);
-    border-top: 16px solid rgb(0, 153, 224);
+    border-top: 16px solid #56B9D0;
     border-radius: 50%;
     width: 120px;
     height: 120px;

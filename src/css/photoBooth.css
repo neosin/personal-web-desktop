@@ -6,6 +6,7 @@
 
 .photoBooth .windowContent {
     padding: 0px;
+    background-color: rgb(41, 41, 41);
 }
 
 .photoBooth .taken {
@@ -18,7 +19,7 @@
 
 .photoBooth .content img:hover {
     opacity: 0.7
-} 
+}
 
 .photoBooth .retry {
     margin-bottom: 15px;
