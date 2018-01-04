@@ -80,9 +80,7 @@ class PhotoBooth extends DesktopWindow {
 
       if (event.target.closest('.thumb')) {
         this.filter = event.target.getAttribute('data-filter')
-
-        let video = this.currentWindow.querySelector('video')
-        video.style.filter = this.filter
+        this.videoElement.style.filter = this.filter
       }
     })
 
