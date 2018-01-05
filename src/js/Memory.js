@@ -36,6 +36,7 @@
      this.attempts = 0
      this.prevBrick = null
      this.clickRef = this.clickBrickEvent.bind(this)
+     this.name = undefined
    }
 
    /**
@@ -43,15 +44,33 @@
     */
    createMemoryWindow () {
      this.createWindow()
-     setup.editAppContent('#memoryDefault', this.currentWindow)
+     this.enterNickname()
+   }
 
-     this.startGame()
+   /**
+    * If the user hasn't entered a nickname he/she can do so.
+    */
+   enterNickname () {
+     setup.editAppContent('#memoryName', this.currentWindow)
+
+     let button = this.currentWindow.querySelector('.content button')
+     let input = this.currentWindow.querySelector('.content input')
+
+     setup.enableButton(input, button)
+
+     button.addEventListener('click', event => {
+       window.localStorage.setItem('memoryName', input.value)
+
+       setup.editAppContent('#memoryDefault', this.currentWindow)
+       this.startGame()
+     })
    }
 
    /**
     * Starts the memory game.
     */
    startGame () {
+     this.name = window.localStorage.getItem('memoryName')
      this.appContent = this.currentWindow.querySelector('.content')
 
      this.currentWindow.querySelector('.change').addEventListener('click', event => {
@@ -132,7 +151,7 @@
      let element = event.target.closest('img')
 
      if (element !== this.prevBrick && element) {
-       if (!this.timer) { this.timer = setInterval(() => { this.time += 0.1 }, 100) }
+       if (!this.timer) { this.timer = setInterval(() => { this.time += 0.01 }, 10) }
 
        element.src = `image/memory/${element.id.slice(1)}.png`
 
@@ -176,12 +195,43 @@
        setup.editAppContent('#memoryCompleted', this.currentWindow)
 
        clearInterval(this.timer)
+       this.time = this.time.toFixed(2)
 
        this.currentWindow.querySelector('.attempts').textContent += this.attempts
-       this.currentWindow.querySelector('.time').textContent += `${Math.round((this.time * 10) / 10)}s`
+       this.currentWindow.querySelector('.time').textContent += this.time
 
-       this.currentWindow.querySelector('.reset').addEventListener('click', event => this.resetGame())
+       this.loadHighscore()
      }
+   }
+
+   loadHighscore () {
+     let highscore
+
+     if (!setup.checkLocalStorage('bestPlayers')) {
+       let players = [{name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`}]
+       window.localStorage.setItem('bestPlayers', JSON.stringify(players))
+       highscore = players
+     } else {
+       highscore = JSON.parse(window.localStorage.getItem('bestPlayers'))
+       highscore.push({name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`})
+     }
+
+     highscore.sort((a, b) => { return a.time - b.time })
+     highscore = highscore.slice(0, 5)
+
+     let list = this.currentWindow.querySelector('.content ol')
+
+     let template = document.querySelector('#memoryListItem')
+     let liTag
+
+     for (let i = 0; i < highscore.length; i++) {
+       let current = highscore[i]
+       liTag = document.importNode(template.content, true)
+       list.appendChild(liTag)
+       list.querySelectorAll('li')[i].textContent = `${current.name} / ${current.attempts} / ${current.time}s / ${current.size}`
+     }
+
+     window.localStorage.setItem('bestPlayers', JSON.stringify(highscore))
    }
  }
 

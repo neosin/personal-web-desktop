@@ -34,6 +34,14 @@
 
     <!-- Memory -->
 
+    <template id="memoryName">
+        <div class="content">
+                <p>Please enter a nickname for the highscore list:</p>
+                <input type="text" placeholder="nickname...">
+                <button>Start game!</button>
+        </div>
+    </template>
+
     <template id="memoryDefault">
         <div class="controlls">
             <select>
@@ -56,7 +64,11 @@
             <h2>Congratulations!</h2>
             <p class="attempts">Attempts: </p>
             <p class="time">Time: </p>
-            <button class="reset">Play again?</button>
+
+            <h2>Top 5 best players:</h2>
+            <p>NAME / ATTEMPTS / TIME / SIZE</p>
+            <ol class="highscore">
+            </ol>
         </div>
     </template>
 
@@ -64,6 +76,10 @@
         <a href="#">
             <img src="/image/memory/0.png" alt="memory brick">
         </a>
+    </template>
+
+    <template id="memoryListItem">
+        <li></li>
     </template>
 
     <!-- Settings -->

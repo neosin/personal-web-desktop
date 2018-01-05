@@ -93,6 +93,13 @@
    }, 100)
  }
 
+ function checkLocalStorage (id) {
+   let result
+   window.localStorage.getItem(id) ? result = true : result = false
+
+   return result
+ }
+
  // Exports
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
@@ -100,3 +107,4 @@
  module.exports.dynamicScroll = dynamicScroll
  module.exports.toggleLoading = toggleLoading
  module.exports.enableButton = enableButton
+ module.exports.checkLocalStorage = checkLocalStorage

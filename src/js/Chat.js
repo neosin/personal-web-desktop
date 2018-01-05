@@ -43,7 +43,7 @@
     * Checks if the user already has a nickname, if not they get to choose one.
     */
    checkNickname () {
-     if (!window.localStorage.getItem('chatName')) {
+     if (!setup.checkLocalStorage('chatName')) {
        setup.editAppContent('#chatName', this.currentWindow)
 
        let input = this.currentWindow.querySelector('.content input')

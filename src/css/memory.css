@@ -1,7 +1,7 @@
 /* Memory */
 
 .memory {
-    width: 314px;
+    width: 340px;
 }
 
 .memory .windowContent {
@@ -44,4 +44,9 @@
 
 .memory h2 {
     margin: 0px;
+}
+
+.memory ol {
+    list-style: none;
+    padding: 0px;
 }
