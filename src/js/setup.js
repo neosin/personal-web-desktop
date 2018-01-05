@@ -93,11 +93,38 @@
    }, 100)
  }
 
+ /**
+  * Checks if the item with the given name is located in local storage.
+  *
+  * @param {string} id The name of the item.
+  */
  function checkLocalStorage (id) {
-   let result
-   window.localStorage.getItem(id) ? result = true : result = false
+   return window.localStorage.getItem(id)
+ }
 
-   return result
+ /**
+  * Loads a "screen" where you can enter a nickname then execute callback functions.
+  *
+  * @param {string} storageId The name for the item that will be added in local storage.
+  * @param {string} nameTemplate The name of the template with the input and button.
+  * @param {object} currentWindow The window to where the screen will be added.
+  * @param {function} callback1 The first callback function.
+  * @param {string} callbackTemplate A callback template id.
+  */
+ function enterName (storageId, nameTemplate, currentWindow, callback1, callbackTemplate) {
+   editAppContent(nameTemplate, currentWindow)
+
+   let input = currentWindow.querySelector('.content input')
+   let button = currentWindow.querySelector('.content button')
+
+   enableButton(input, button)
+
+   button.addEventListener('click', event => {
+     window.localStorage.setItem(storageId, input.value)
+
+     if (callbackTemplate) { editAppContent(callbackTemplate, currentWindow) }
+     callback1()
+   })
  }
 
  // Exports
@@ -108,3 +135,4 @@
  module.exports.toggleLoading = toggleLoading
  module.exports.enableButton = enableButton
  module.exports.checkLocalStorage = checkLocalStorage
+ module.exports.enterName = enterName

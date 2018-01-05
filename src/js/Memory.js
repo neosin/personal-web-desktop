@@ -44,26 +44,7 @@
     */
    createMemoryWindow () {
      this.createWindow()
-     this.enterNickname()
-   }
-
-   /**
-    * If the user hasn't entered a nickname he/she can do so.
-    */
-   enterNickname () {
-     setup.editAppContent('#memoryName', this.currentWindow)
-
-     let button = this.currentWindow.querySelector('.content button')
-     let input = this.currentWindow.querySelector('.content input')
-
-     setup.enableButton(input, button)
-
-     button.addEventListener('click', event => {
-       window.localStorage.setItem('memoryName', input.value)
-
-       setup.editAppContent('#memoryDefault', this.currentWindow)
-       this.startGame()
-     })
+     setup.enterName('memoryName', '#memoryName', this.currentWindow, this.startGame.bind(this), '#memoryDefault')
    }
 
    /**
@@ -204,6 +185,9 @@
      }
    }
 
+   /**
+    * Loads the highscore list.
+    */
    loadHighscore () {
      let highscore
 

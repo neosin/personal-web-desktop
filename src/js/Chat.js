@@ -44,17 +44,7 @@
     */
    checkNickname () {
      if (!setup.checkLocalStorage('chatName')) {
-       setup.editAppContent('#chatName', this.currentWindow)
-
-       let input = this.currentWindow.querySelector('.content input')
-       let button = this.currentWindow.querySelector('.set')
-
-       setup.enableButton(input, button)
-
-       button.addEventListener('click', event => {
-         window.localStorage.setItem('chatName', input.value)
-         this.loadChat()
-       })
+       setup.enterName('chatName', '#chatName', this.currentWindow, this.loadChat.bind(this))
      } else { this.loadChat() }
    }
 
