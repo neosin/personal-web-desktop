@@ -69,3 +69,7 @@
 .memory .content .startGame:disabled {
     background-color: rgb(170, 170, 170);
 }
+
+.memory table {
+    margin: 0 auto;
+}

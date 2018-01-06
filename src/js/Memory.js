@@ -193,9 +193,7 @@
      let highscore
 
      if (!setup.checkLocalStorage('bestPlayers')) {
-       let players = [{name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`}]
-       window.localStorage.setItem('bestPlayers', JSON.stringify(players))
-       highscore = players
+       highscore = [{name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`}]
      } else {
        highscore = JSON.parse(window.localStorage.getItem('bestPlayers'))
        highscore.push({name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`})
@@ -204,17 +202,16 @@
      highscore.sort((a, b) => { return a.time - b.time })
      highscore = highscore.slice(0, 5)
 
-     let list = this.currentWindow.querySelector('.content ol')
-
-     let template = document.querySelector('#memoryListItem')
-     let liTag
+     let table = this.currentWindow.querySelector('tbody')
+     let template = document.querySelector('#memoryTableRow')
 
      for (let i = 0; i < highscore.length; i++) {
-       let li = highscore[i]
+       table.appendChild(document.importNode(template.content, true))
 
-       liTag = document.importNode(template.content, true)
-       list.appendChild(liTag)
-       list.querySelectorAll('li')[i].textContent = `${li.name} / ${li.attempts} / ${li.time} / ${li.size}`
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[0].textContent = this.name
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[1].textContent = this.attempts
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[2].textContent = this.time
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[3].textContent = `${this.x}x${this.y}`
      }
 
      window.localStorage.setItem('bestPlayers', JSON.stringify(highscore))
