@@ -17,7 +17,8 @@
 }
 
 .memory .controlls .change,
-.memory .reset {
+.memory .reset,
+.memory .startGame {
     border-radius: 0px;
     background-color: #F24C27;
     padding: 10px;
@@ -37,7 +38,7 @@
 
 .memory .controlls .change:focus,
 .memory .controlls select:focus,
-.memory .reset:focus {
+.memory .startGame:focus {
     outline: none;
     outline: 2px solid rgb(201, 201, 201);
 }
@@ -49,4 +50,22 @@
 .memory ol {
     list-style: none;
     padding: 0px;
+}
+
+.memory input {
+    width: 70%;
+    text-align: center;
+    font-size: 14px;
+    height: 35px;
+    background-color: #FEFEFE;
+    margin-bottom: 10px;
+}
+
+.memory input:focus {
+    outline: none;
+    outline: 2px solid #FBBA42;
+}
+
+.memory .content .startGame:disabled {
+    background-color: rgb(170, 170, 170);
 }

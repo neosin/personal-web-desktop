@@ -66,16 +66,17 @@ class PhotoBooth extends DesktopWindow {
   setupPhotoBooth () {
     setup.editAppContent('#photoPreview', this.currentWindow)
 
-    this.videoElement = this.currentWindow.querySelector('video')
+    let content = this.currentWindow.querySelector('.content')
 
+    this.videoElement = this.currentWindow.querySelector('video')
     this.videoElement.srcObject = this.stream
     this.videoElement.play()
 
-    this.currentWindow.querySelectorAll('.thumb img').forEach(current => {
+    content.querySelectorAll('.thumb img').forEach(current => {
       current.style.filter = current.getAttribute('data-filter')
     })
 
-    this.currentWindow.addEventListener('click', event => {
+    content.addEventListener('click', event => {
       if (event.target.closest('.snap')) { this.takenPhoto() }
 
       if (event.target.closest('.thumb')) {
@@ -110,6 +111,7 @@ class PhotoBooth extends DesktopWindow {
    */
   takenPhoto () {
     setup.editAppContent('#photoTaken', this.currentWindow)
+    this.renderPhoto()
 
     this.currentWindow.querySelector('.newPhoto').addEventListener('click', event => {
       this.setupPhotoBooth()
@@ -121,8 +123,6 @@ class PhotoBooth extends DesktopWindow {
       link.href = this.url
       link.download = 'photo'
     })
-
-    this.renderPhoto()
   }
 }
 

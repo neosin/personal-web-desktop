@@ -64,7 +64,7 @@ class Weather extends DesktopWindow {
    * Resets the values that's used in the weather app.
    */
   resetWeatherValues () {
-    setup.editAppContent('#weatherReset', this.currentWindow)
+    setup.editAppContent('#windowReset', this.currentWindow)
 
     this.dateObj = new Date()
     this.currentDay = this.dateObj.getDay()

@@ -63,22 +63,14 @@
 
        let input = this.currentWindow.querySelector('textarea')
        let button = this.currentWindow.querySelector('.send')
+       let emojiSection = this.currentWindow.querySelector('.emojiSection')
 
        setup.enableButton(input, button)
 
        this.currentWindow.addEventListener('click', event => {
-         if (event.target.closest('.emojiBtn')) {
-           this.currentWindow.querySelector('.emojiSection').classList.toggle('emojiToggle')
-         }
-
-         if (event.target.closest('ul a')) {
-           input.value += event.target.getAttribute('data-emoji')
-         }
-
-         if (event.target.closest('.send')) {
-           this.addEmojis()
-           this.sendMessage()
-         }
+         if (event.target.className === 'emojiBtn') { emojiSection.classList.toggle('emojiToggle') }
+         if (event.target.nodeName === 'A') { input.value += event.target.getAttribute('data-emoji') }
+         if (event.target.className === 'send') { this.sendMessage() }
        })
 
        this.currentWindow.querySelector('.close').addEventListener('click', event => this.webSocket.close())
@@ -87,6 +79,7 @@
          this.response = JSON.parse(event.data)
 
          this.addMessageToWindow()
+
          setup.dynamicScroll(this.currentWindow.querySelector('.content'))
        })
      })
@@ -96,6 +89,8 @@
     * Sends a a chat message.
     */
    sendMessage () {
+     this.addEmojis()
+
      let message = this.currentWindow.querySelector('textarea')
 
      let data = {
@@ -142,6 +137,10 @@
      if (message.value.search('/:horns:/')) { message.value = message.value.replace(/:horns:/g, '\uD83E\uDD18') }
      if (message.value.search('/:thinking:/')) { message.value = message.value.replace(/:thinking:/g, '\uD83E\uDD14') }
      if (message.value.search('/:blush:/')) { message.value = message.value.replace(/:blush:/g, '\uD83D\uDE0A') }
+     if (message.value.search('/:joy:/')) { message.value = message.value.replace(/:joy:/g, '\uD83D\uDE02') }
+     if (message.value.search('/:neutral:/')) { message.value = message.value.replace(/:neutral:/g, '\uD83D\uDE10') }
+     if (message.value.search('/:scream:/')) { message.value = message.value.replace(/:scream:/g, '\uD83D\uDE31') }
+     if (message.value.search('/:rage:/')) { message.value = message.value.replace(/:rage:/g, '\uD83D\uDE21') }
    }
 
    /**

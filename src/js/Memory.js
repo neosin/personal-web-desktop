@@ -44,6 +44,7 @@
     */
    createMemoryWindow () {
      this.createWindow()
+
      setup.enterName('memoryName', '#memoryName', this.currentWindow, this.startGame.bind(this), '#memoryDefault')
    }
 
@@ -81,7 +82,7 @@
      clearTimeout(this.timer)
      this.timer = undefined
 
-     setup.editAppContent('#memoryReset', this.currentWindow)
+     setup.editAppContent('#windowReset', this.currentWindow)
 
      this.startGame()
    }
@@ -176,7 +177,7 @@
        setup.editAppContent('#memoryCompleted', this.currentWindow)
 
        clearInterval(this.timer)
-       this.time = this.time.toFixed(2)
+       this.time = `${this.time.toFixed(2)}s`
 
        this.currentWindow.querySelector('.attempts').textContent += this.attempts
        this.currentWindow.querySelector('.time').textContent += this.time
@@ -209,10 +210,11 @@
      let liTag
 
      for (let i = 0; i < highscore.length; i++) {
-       let current = highscore[i]
+       let li = highscore[i]
+
        liTag = document.importNode(template.content, true)
        list.appendChild(liTag)
-       list.querySelectorAll('li')[i].textContent = `${current.name} / ${current.attempts} / ${current.time}s / ${current.size}`
+       list.querySelectorAll('li')[i].textContent = `${li.name} / ${li.attempts} / ${li.time} / ${li.size}`
      }
 
      window.localStorage.setItem('bestPlayers', JSON.stringify(highscore))
