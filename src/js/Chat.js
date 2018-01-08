@@ -85,7 +85,7 @@
    }
 
    /**
-    * Sends a a chat message.
+    * Sends a chat message.
     */
    sendMessage () {
      this.addEmojis()
@@ -116,7 +116,7 @@
 
      if (this.response.type === 'message') {
        let notificationMsg = `${this.response.username}, ${this.response.data}`
-       setup.newNotification(notificationMsg, this.icon)
+       setup.newNotification('New Message!', notificationMsg, this.icon)
 
        if (this.response.user) { messages.innerHTML += `\n<b class="user">${this.response.username}:</b> ${this.response.data}` }
        if (!this.response.user) { messages.innerHTML += `\n<b  class="other">${this.response.username}:</b> ${this.response.data}` }

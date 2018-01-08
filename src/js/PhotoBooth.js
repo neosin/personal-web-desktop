@@ -113,15 +113,17 @@ class PhotoBooth extends DesktopWindow {
     setup.editAppContent('#photoTaken', this.currentWindow)
     this.renderPhoto()
 
-    this.currentWindow.querySelector('.newPhoto').addEventListener('click', event => {
-      this.setupPhotoBooth()
-    })
+    let content = this.currentWindow.querySelector('.content')
 
-    this.currentWindow.querySelector('.savePhoto').addEventListener('click', event => {
-      let link = event.target.closest('A')
+    content.addEventListener('click', event => {
+      if (event.target.closest('.newPhoto')) { this.setupPhotoBooth() }
 
-      link.href = this.url
-      link.download = 'photo'
+      if (event.target.closest('.savePhoto')) {
+        let link = event.target.closest('A')
+
+        link.href = this.url
+        link.download = 'photo'
+      }
     })
   }
 }

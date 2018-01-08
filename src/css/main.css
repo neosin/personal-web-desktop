@@ -40,7 +40,8 @@ a:hover {
 textarea:focus,
 input:focus,
 button:focus,
-div:focus {
+div:focus,
+select:focus {
     outline: none;
 }
 
@@ -55,7 +56,9 @@ input {
     height: 35px;
     background-color: #FEFEFE;
     margin-bottom: 10px;
+    border: 2px solid rgb(44, 44, 44);
 }
+
 
 /* Window */
 
@@ -143,6 +146,7 @@ input {
 .windowContent {
     padding: 10px;
 }
+
 
 /* Chat */
 
@@ -254,6 +258,7 @@ input {
     background-color: rgb(170, 170, 170);
 }
 
+
 /* Memory */
 
 .memory {
@@ -291,7 +296,8 @@ input {
 .memory .controlls button:focus,
 .memory .controlls select:focus,
 .memory .controlls .startGame:focus {
-    border: 1px solid rgb(34, 34, 34);
+    border: 1px solid rgb(2, 2, 2);
+    ;
 }
 
 .memory h2 {
@@ -309,7 +315,7 @@ input {
 }
 
 .memory table td {
-    padding: 5px;
+    padding: 15px;
     word-wrap: break-word;
 }
 
@@ -343,11 +349,13 @@ input {
     background-color: rgb(170, 170, 170);
 }
 
+
 /* Settings */
 
 .settings {
     width: 365px;
 }
+
 
 /* PhotoBooth */
 
@@ -372,22 +380,24 @@ input {
     margin-bottom: 15px;
 }
 
-.photoBooth .content h1,
 .photoBooth .content h2,
 .photoBooth .content p {
     color: #FEFEFE;
 }
 
-.photoBooth .content h1 {
-    padding-top: 10px;
+.photoBooth .content h2 {
     margin-top: 0px;
+    padding-top: 20px;
+    margin-bottom: 0px;
 }
 
 .photoBooth .content p {
     padding-bottom: 10px;
     padding: 5px;
     margin-bottom: 0px;
+    padding-bottom: 20px;
 }
+
 
 /* Weather */
 

@@ -1,5 +1,5 @@
 /**
- * Module for the desktop dock WebComponent.
+ * Module for the desktop-dock WebComponent.
  *
  * @module src/js/desktop-dock
  * @author Rasmus Falk
@@ -52,7 +52,7 @@
 `
 
  /**
-  * Class representing a desktop dock.
+  * Class representing a desktop-dock.
   */
  class Dock extends window.HTMLElement {
   /**

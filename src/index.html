@@ -6,7 +6,6 @@
     <title>PWD | Rasmus Falk</title>
     <link rel="shortcut icon" type="image/ico" href="/image/favicon.ico">
     <link rel="stylesheet" href="/css/main.css">
-    <script src="build.js" defer></script>
 
     <!-- Window -->
 
@@ -76,7 +75,9 @@
     </template>
 
     <template id="memoryBricks">
-        <a href="#"><img src="/image/memory/0.png" alt="memory brick"></a>
+        <a href="#">
+            <img src="/image/memory/0.png" alt="memory brick">
+        </a>
     </template>
 
     <template id="memoryTableRow">
@@ -92,46 +93,102 @@
 
     <template id="settings">
         <div class="content">
-            <a href="#"><img src="/image/wallpapers/bg1prev.jpg" alt="mountains"></a>
-            <a href="#"><img src="/image/wallpapers/bg2prev.jpg" alt="forest"></a>
-            <a href="#"><img src="/image/wallpapers/bg3prev.jpg" alt="tree and leaves"></a>
+            <a href="#">
+                <img src="/image/wallpapers/bg1prev.jpg" alt="mountains">
+            </a>
+            <a href="#">
+                <img src="/image/wallpapers/bg2prev.jpg" alt="forest">
+            </a>
+            <a href="#">
+                <img src="/image/wallpapers/bg3prev.jpg" alt="tree and leaves">
+            </a>
         </div>
     </template>
 
     <!-- Chat -->
 
     <template id="chat">
-        <div class="content chatMessages"><p></p></div>
+        <div class="content chatMessages">
+            <p></p>
+        </div>
         <div class="controlls">
             <textarea></textarea>
             <button class="send">Send</button>
-            <button class="emojiBtn">Emoji</button>
+            <button class="emojiBtn">Emojis</button>
             <div class="emojiSection emojiToggle">
                 <ul>
-                    <li><a href="#" data-emoji=":smile: ">&#x1F642</a></li>
-                    <li><a href="#" data-emoji=":happy: ">&#x1F600</a></li>
-                    <li><a href="#" data-emoji=":cool: ">&#x1F60E</a></li>
-                    <li><a href="#" data-emoji=":surprised: ">&#x1F62E</a></li>
-                    <li><a href="#" data-emoji=":cheeky: ">&#x1F61B</a></li>
-                    <li><a href="#" data-emoji=":horns: ">&#x1F918</a></li>
-                    <li><a href="#" data-emoji=":thinking: ">&#x1F914</a></li>
-                    <li><a href="#" data-emoji=":blush: ">&#x1F60A</a></li>
-                    <li><a href="#" data-emoji=":joy: ">&#x1F602</a></li>
-                    <li><a href="#" data-emoji=":neutral: ">&#x1F610</a></li>
-                    <li><a href="#" data-emoji=":scream: ">&#x1F631</a></li>
-                    <li><a href="#" data-emoji=":rage: ">&#x1F621</a></li>
-                    <li><a href="#" data-emoji=":sleeping: ">&#x1F634</a></li>
-                    <li><a href="#" data-emoji=":halo: ">&#x1F607</a></li>
-                    <li><a href="#" data-emoji=":eyes: ">&#x1F440</a></li>
-                    <li><a href="#" data-emoji=":sick: ">&#x1F912</a></li>
-                    <li><a href="#" data-emoji=":silly: ">&#x1F643</a></li>
-                    <li><a href="#" data-emoji=":confused: ">&#x1F615</a></li>
-                    <li><a href="#" data-emoji=":grimacing: ">&#x1F62C</a></li>
-                    <li><a href="#" data-emoji=":expressionless: ">&#x1F611</a></li>
-                    <li><a href="#" data-emoji=":zipper: ">&#x1F910</a></li>
-                    <li><a href="#" data-emoji=":weary: ">&#x1F629</a></li>
-                    <li><a href="#" data-emoji=":flushed: ">&#x1F633</a></li>
-                    <li><a href="#" data-emoji=":thumbsup: ">&#x1F44D</a></li>
+                    <li>
+                        <a href="#" data-emoji=":smile: ">&#x1F642</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":happy: ">&#x1F600</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":cool: ">&#x1F60E</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":surprised: ">&#x1F62E</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":cheeky: ">&#x1F61B</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":horns: ">&#x1F918</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":thinking: ">&#x1F914</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":blush: ">&#x1F60A</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":joy: ">&#x1F602</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":neutral: ">&#x1F610</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":scream: ">&#x1F631</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":rage: ">&#x1F621</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":sleeping: ">&#x1F634</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":halo: ">&#x1F607</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":eyes: ">&#x1F440</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":sick: ">&#x1F912</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":silly: ">&#x1F643</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":confused: ">&#x1F615</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":grimacing: ">&#x1F62C</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":expressionless: ">&#x1F611</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":zipper: ">&#x1F910</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":weary: ">&#x1F629</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":flushed: ">&#x1F633</a>
+                    </li>
+                    <li>
+                        <a href="#" data-emoji=":thumbsup: ">&#x1F44D</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -177,8 +234,12 @@
     <template id="photoTaken">
         <div class="content">
             <canvas class="canvasRender"></canvas>
-            <a href="#" class="newPhoto"><img src="image/photoBooth/remove.png" alt="new photo"></a>
-            <a href="#" class="savePhoto"><img src="image/photoBooth/save.png" alt="save photo"></a>
+            <a href="#" class="newPhoto">
+                <img src="image/photoBooth/remove.png" alt="new photo">
+            </a>
+            <a href="#" class="savePhoto">
+                <img src="image/photoBooth/save.png" alt="save photo">
+            </a>
         </div>
     </template>
 
@@ -186,28 +247,42 @@
         <div class="content">
             <video class="video"></video>
             <div class="thumb">
-                <a href="#"><img src="/image/photoBooth/filterPreview.png" data-filter="none" alt="no filter"></a>
-                <a href="#"><img src="/image/photoBooth/filterPreview.png" data-filter="grayscale(80%)" alt="grayscale"></a>
-                <a href="#"><img src="/image/photoBooth/filterPreview.png" data-filter="hue-rotate(90deg)" alt="hue-rotate"></a>
-                <a class="snap" href="#"><img src="/image/photoBooth/snap.png"></a>
-                <a href="#"><img src="/image/photoBooth/filterPreview.png" data-filter="contrast(200%)" alt="contrast"></a>
-                <a href="#"><img src="/image/photoBooth/filterPreview.png" data-filter="invert(100%)" alt="invert"></a>
-                <a href="#"><img src="/image/photoBooth/filterPreview.png" data-filter="saturate(8)" alt="saturate"></a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="none" alt="no filter">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="grayscale(80%)" alt="grayscale">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="hue-rotate(90deg)" alt="hue-rotate">
+                </a>
+                <a class="snap" href="#">
+                    <img src="/image/photoBooth/snap.png">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="contrast(200%)" alt="contrast">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="invert(100%)" alt="invert">
+                </a>
+                <a href="#">
+                    <img src="/image/photoBooth/filterPreview.png" data-filter="saturate(8)" alt="saturate">
+                </a>
             </div>
     </template>
 
     <template id="photoBoothError">
         <div class="content">
-            <h1>Sorry...</h1>
-            <h2>We can not find your camera</h2>
-            <p>Your browser maybe don't have support this feature or you don't have a camera connected to your computer.
-                Also check that you have allowed the website access to your camera.</p>
+            <h2>We can't find your camera...</h2>
+            <p>Your browser don't support this feature or you don't have a camera connected to your computer. Also check that
+                you have allowed the website to use your camera.</p>
         </div>
     </template>
 </head>
 
 <body>
     <desktop-dock></desktop-dock>
+    <script src="build.js"></script>
 </body>
 
 </html>

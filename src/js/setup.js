@@ -47,7 +47,6 @@
 
    if (window.querySelector('.content')) {
      let remove = window.querySelector('.content')
-
      windowContent.removeChild(remove)
    }
 
@@ -83,7 +82,7 @@
  /**
   * Toggles the button depending on the content in the input/textarea.
   *
-  * @param {object} input The input or textarea that will be sent using a button.
+  * @param {object} input The input or textarea that will be sent/submited using a button.
   * @param {object} button The button that will be enabled/disabled.
   */
  function enableButton (input, button) {
@@ -97,6 +96,7 @@
   * Checks if the item with the given name is located in local storage.
   *
   * @param {string} id The name of the item.
+  * @returns {boolean} A boolean value that tells you if the item is located in local storage or not.
   */
  function checkLocalStorage (id) {
    return window.localStorage.getItem(id)
@@ -130,13 +130,14 @@
  /**
   * Creates a new notification.
   *
+  * @param {string} title The title of the notification.
   * @param {string} text The text that will be displayed on the notification.
   * @param {string} icon Relative URL to the icon used for the notification.
   */
- function newNotification (text, icon) {
+ function newNotification (title, text, icon) {
    if (!document.hasFocus()) {
      let config = { body: text, icon: '/image/appIcons/chat.png' }
-     let notification = new window.Notification('New Message!', config)
+     let notification = new window.Notification(title, config)
 
      setTimeout(notification.close.bind(notification), 5000)
    }

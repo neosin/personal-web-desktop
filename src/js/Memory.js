@@ -35,7 +35,6 @@
      this.clickedBricks = []
      this.attempts = 0
      this.prevBrick = null
-     this.clickRef = this.clickBrickEvent.bind(this)
      this.name = undefined
      this.clickable = true
    }
@@ -123,7 +122,7 @@
        this.appContent.querySelectorAll('img')[i].id = `b${this.bricks[i] + 1}`
      }
 
-     this.appContent.addEventListener('click', this.clickRef)
+     this.appContent.addEventListener('click', this.clickBrickEvent.bind(this))
    }
 
    /**
@@ -132,11 +131,9 @@
     * @param {object} event The brick that was clicked.
     */
    clickBrickEvent (event) {
-     let element
+     let element = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
 
-     if (event.target.nodeName === 'IMG') { element = event.target }
-
-     if (element !== this.prevBrick && this.clickable && element) {
+     if (element !== this.prevBrick && this.clickable && element.nodeName === 'IMG') {
        if (!this.timer) { this.timer = setInterval(() => { this.time += 0.01 }, 10) }
 
        element.src = `image/memory/${element.id.slice(1)}.png`
@@ -198,12 +195,13 @@
     */
    loadHighscore () {
      let highscore
+     let currentPlayer = {name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`}
 
-     if (!setup.checkLocalStorage('bestPlayers')) {
-       highscore = [{name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`}]
+     if (!setup.checkLocalStorage('highscore')) {
+       highscore = [currentPlayer]
      } else {
-       highscore = JSON.parse(window.localStorage.getItem('bestPlayers'))
-       highscore.push({name: this.name, attempts: this.attempts, time: this.time, size: `${this.x}x${this.y}`})
+       highscore = JSON.parse(window.localStorage.getItem('highscore'))
+       highscore.push(currentPlayer)
      }
 
      highscore.sort((a, b) => { return a.time - b.time })
@@ -222,7 +220,7 @@
        table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[3].textContent = highscoreRow.size
      }
 
-     window.localStorage.setItem('bestPlayers', JSON.stringify(highscore))
+     window.localStorage.setItem('highscore', JSON.stringify(highscore))
    }
  }
 
