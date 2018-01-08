@@ -1,0 +1,460 @@
+/* Global */
+
+body {
+    background-image: url('/image/wallpapers/bg3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.loading {
+    border: 16px solid rgb(226, 226, 226);
+    border-top: 16px solid #56B9D0;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 0.5s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+button:hover,
+select:hover,
+a:hover {
+    opacity: 0.7;
+}
+
+textarea:focus,
+input:focus,
+button:focus,
+div:focus {
+    outline: none;
+}
+
+input:focus {
+    outline: 2px solid #FBBA42;
+}
+
+input {
+    width: 70%;
+    text-align: center;
+    font-size: 14px;
+    height: 35px;
+    background-color: #FEFEFE;
+    margin-bottom: 10px;
+}
+
+/* Window */
+
+.window {
+    background-color: rgb(255, 255, 255);
+    color: rgb(44, 44, 44);
+    border-radius: 5px;
+    position: absolute;
+    box-shadow: 4px 6px 24px 0px rgba(0, 0, 0, 0.75);
+    text-align: center;
+    z-index: 200;
+}
+
+.windowMinimize {
+    display: none;
+}
+
+.windowDrag {
+    opacity: 0.3;
+}
+
+.windowHeader {
+    width: 100%;
+    height: 30px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom: 1px solid rgb(136, 136, 136);
+    background: linear-gradient(#e0e0e0, #bababa);
+    position: relative;
+}
+
+.windowHeader img {
+    padding-top: 2.5px;
+    width: 25px;
+    height: 25px;
+}
+
+.windowHeader p,
+.close,
+.minimize,
+.windowHeader img {
+    display: inline-block;
+}
+
+.close,
+.minimize {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.windowHeader .buttons {
+    vertical-align: top;
+    position: absolute;
+    height: 100%;
+    padding-top: 6.5px;
+}
+
+.windowHeader .center {
+    height: 100%;
+}
+
+.windowHeader p {
+    margin: 0px;
+    vertical-align: top;
+    padding-top: 8px;
+}
+
+.close {
+    background-color: rgb(255, 47, 0);
+    margin-left: 15px;
+}
+
+.minimize {
+    background-color: rgb(255, 208, 0);
+}
+
+.close:hover,
+.minimize:hover {
+    opacity: 0.7;
+}
+
+.windowContent {
+    padding: 10px;
+}
+
+/* Chat */
+
+.chat {
+    width: 450px;
+}
+
+.chat .windowContent {
+    background-color: #3B3F42;
+}
+
+.chat .content {
+    overflow: scroll;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+.chatMessages {
+    border: 1px solid #FEFEFE;
+    height: 200px;
+}
+
+.chat .content p {
+    color: #FEFEFE;
+    margin: 0px;
+    white-space: pre-line;
+    line-height: 1.5;
+}
+
+.chat textarea {
+    margin: 0px;
+    padding: 0px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    overflow: scroll;
+    width: 97%;
+    font-size: 14px;
+    padding: 5px;
+    resize: none;
+    background-color: #FEFEFE;
+}
+
+.chat textarea:focus {
+    outline: 2px solid #FBBA42;
+}
+
+.chat .windowContent button:focus {
+    outline: 2px solid #FEFEFE;
+}
+
+.chat .windowContent button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 42px;
+    width: 100%;
+    font-size: 16px;
+    background-color: #FBBA42;
+}
+
+.chat controlls {
+    height: 50px;
+}
+
+.chat .content .info {
+    text-align: center;
+    margin-bottom: 5px;
+    color: #FEFEFE;
+}
+
+.chat .set,
+.chat input {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    padding: 0px;
+}
+
+.chat ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.chat li {
+    display: inline;
+    margin: 5px;
+}
+
+.emojiToggle {
+    display: none;
+}
+
+.chat li a {
+    font-size: 20px;
+}
+
+.user {
+    color: #56B9D0;
+}
+
+.other {
+    color: #F24C27;
+}
+
+.windowContent button:disabled {
+    background-color: rgb(170, 170, 170);
+}
+
+/* Memory */
+
+.memory {
+    width: 340px;
+}
+
+.memory .windowContent {
+    background-color: rgb(231, 231, 231);
+}
+
+.memory .controlls {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.memory .controlls .change,
+.memory .startGame {
+    border-radius: 0px;
+    background-color: #F24C27;
+    padding: 10px;
+    color: #FEFEFE;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.memory .controlls select {
+    border-radius: 0px;
+    background-color: #FBBA42;
+    padding: 10px;
+    color: rgb(41, 41, 41);
+    font-size: 14px;
+    height: 30px;
+}
+
+.memory .controlls button:focus,
+.memory .controlls select:focus,
+.memory .controlls .startGame:focus {
+    border: 1px solid rgb(34, 34, 34);
+}
+
+.memory h2 {
+    margin: 0px;
+}
+
+.memory ol {
+    list-style: none;
+    padding: 0px;
+}
+
+.memory table {
+    margin: 0 auto;
+    padding-top: 16px;
+}
+
+.memory table td {
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+.memory table td,
+.memory table th {
+    max-width: 70px;
+}
+
+.memory .bg1 {
+    background-color: #FBBA42;
+    margin-bottom: 10px
+}
+
+.memory .bg2 {
+    background-color: #F24C27;
+    color: #FEFEFE;
+}
+
+.memory .bg1 p {
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+}
+
+.memory .bg1,
+.memory .bg2 {
+    padding-top: 5px;
+    border-radius: 10px;
+}
+
+.windowContent button:disabled {
+    background-color: rgb(170, 170, 170);
+}
+
+/* Settings */
+
+.settings {
+    width: 365px;
+}
+
+/* PhotoBooth */
+
+.photoBooth {
+    width: 640px;
+}
+
+.photoBooth .windowContent {
+    padding: 0px;
+    background-color: rgb(41, 41, 41);
+}
+
+.photoBooth .photoToggle {
+    display: none;
+}
+
+.photoBooth .content img {
+    padding: 4px;
+}
+
+.photoBooth .retry {
+    margin-bottom: 15px;
+}
+
+.photoBooth .content h1,
+.photoBooth .content h2,
+.photoBooth .content p {
+    color: #FEFEFE;
+}
+
+.photoBooth .content h1 {
+    padding-top: 10px;
+    margin-top: 0px;
+}
+
+.photoBooth .content p {
+    padding-bottom: 10px;
+    padding: 5px;
+    margin-bottom: 0px;
+}
+
+/* Weather */
+
+.weather {
+    width: 900px;
+    background: linear-gradient(rgb(49, 117, 161), rgb(6, 83, 146))
+}
+
+.weather .content {
+    color: rgb(255, 255, 255);
+    padding: 0px;
+    display: table;
+    margin: 0 auto;
+}
+
+.weather .day {
+    display: table-cell;
+    padding: 15px;
+    text-align: center;
+}
+
+.weather .content h1,
+.weather .content h2,
+.weather .content p,
+.weather .content img {
+    margin: 0px;
+}
+
+.weather .content h1 {
+    font-size: 60px;
+}
+
+.weather .content h2 {
+    font-size: 30px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
+}
+
+.weather .content p {
+    font-size: 20px;
+}
+
+.weather .controlls {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.weather .controlls button {
+    border-radius: 0px;
+    background-color: rgb(255, 196, 0);
+    padding: 10px;
+    color: rgb(41, 41, 41);
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.weather .controlls button:focus,
+.weather .controlls select:focus {
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.weather .controlls select {
+    border-radius: 0px;
+    background-color: rgb(255, 196, 0);
+    padding: 10px;
+    color: rgb(41, 41, 41);
+    font-size: 14px;
+    margin-right: 10px;
+    height: 30px;
+}

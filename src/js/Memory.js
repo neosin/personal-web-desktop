@@ -168,13 +168,12 @@
        }
 
        this.clickable = true
+       this.attempts++
+       this.clickedBricks.length = 0
+       this.prevBrick = null
+
+       this.checkIfCopleted()
      }, 1000)
-
-     this.attempts++
-     this.clickedBricks.length = 0
-     this.prevBrick = null
-
-     this.checkIfCopleted()
    }
 
    /**

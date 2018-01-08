@@ -71,9 +71,8 @@
          if (event.target.className === 'emojiBtn') { emojiSection.classList.toggle('emojiToggle') }
          if (event.target.nodeName === 'A') { input.value += event.target.getAttribute('data-emoji') }
          if (event.target.className === 'send') { this.sendMessage() }
+         if (event.target.className === 'close') { this.webSocket.close() }
        })
-
-       this.currentWindow.querySelector('.close').addEventListener('click', event => this.webSocket.close())
 
        this.webSocket.addEventListener('message', event => {
          this.response = JSON.parse(event.data)
