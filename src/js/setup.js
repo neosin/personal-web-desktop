@@ -90,7 +90,7 @@
    setTimeout(() => {
      input.value.trim() ? button.disabled = false : button.disabled = true
      enableButton(input, button)
-   }, 100)
+   }, 0)
  }
 
  /**
@@ -127,6 +127,21 @@
    })
  }
 
+ /**
+  * Creates a new notification.
+  *
+  * @param {string} text The text that will be displayed on the notification.
+  * @param {string} icon Relative URL to the icon used for the notification.
+  */
+ function newNotification (text, icon) {
+   if (!document.hasFocus()) {
+     let config = { body: text, icon: '/image/appIcons/chat.png' }
+     let notification = new window.Notification('New Message!', config)
+
+     setTimeout(notification.close.bind(notification), 5000)
+   }
+ }
+
  // Exports
  module.exports.addTemplateBody = addTemplateBody
  module.exports.editAppContent = editAppContent
@@ -136,3 +151,4 @@
  module.exports.enableButton = enableButton
  module.exports.checkLocalStorage = checkLocalStorage
  module.exports.enterName = enterName
+ module.exports.newNotification = newNotification

@@ -116,7 +116,8 @@
      if (this.response.type === 'notification') { messages.textContent += `${this.response.data}` }
 
      if (this.response.type === 'message') {
-       if (!document.hasFocus()) { this.newNotification() }
+       let notificationMsg = `${this.response.username}, ${this.response.data}`
+       setup.newNotification(notificationMsg, this.icon)
 
        if (this.response.user) { messages.innerHTML += `\n<b class="user">${this.response.username}:</b> ${this.response.data}` }
        if (!this.response.user) { messages.innerHTML += `\n<b  class="other">${this.response.username}:</b> ${this.response.data}` }
@@ -141,17 +142,18 @@
      if (message.value.search('/:neutral:/')) { message.value = message.value.replace(/:neutral:/g, '\uD83D\uDE10') }
      if (message.value.search('/:scream:/')) { message.value = message.value.replace(/:scream:/g, '\uD83D\uDE31') }
      if (message.value.search('/:rage:/')) { message.value = message.value.replace(/:rage:/g, '\uD83D\uDE21') }
-   }
-
-   /**
-    * Creates a new notification for a chat message.
-    */
-   newNotification () {
-     let message = `${this.response.username}, ${this.response.data}`
-     let config = { body: message, icon: '/image/appIcons/chat.png' }
-     let notification = new window.Notification('New Message!', config)
-
-     setTimeout(notification.close.bind(notification), 5000)
+     if (message.value.search('/:sleeping:/')) { message.value = message.value.replace(/:sleeping:/g, '\uD83D\uDE34') }
+     if (message.value.search('/:halo:/')) { message.value = message.value.replace(/:halo:/g, '\uD83D\uDE07') }
+     if (message.value.search('/:eyes:/')) { message.value = message.value.replace(/:eyes:/g, '\uD83D\uDC40') }
+     if (message.value.search('/:sick:/')) { message.value = message.value.replace(/:sick:/g, '\uD83E\uDD12') }
+     if (message.value.search('/:silly:/')) { message.value = message.value.replace(/:silly:/g, '\uD83D\uDE43') }
+     if (message.value.search('/:confused:/')) { message.value = message.value.replace(/:confused:/g, '\uD83D\uDE15') }
+     if (message.value.search('/:grimacing:/')) { message.value = message.value.replace(/:grimacing:/g, '\uD83D\uDE2C') }
+     if (message.value.search('/:expressionless:/')) { message.value = message.value.replace(/:expressionless:/g, '\uD83D\uDE11') }
+     if (message.value.search('/:zipper:/')) { message.value = message.value.replace(/:zipper:/g, '\uD83E\uDD10') }
+     if (message.value.search('/:weary:/')) { message.value = message.value.replace(/:weary:/g, '\uD83D\uDE29') }
+     if (message.value.search('/:flushed:/')) { message.value = message.value.replace(/:flushed:/g, '\uD83D\uDE33') }
+     if (message.value.search('/:thumbsup:/')) { message.value = message.value.replace(/:thumbsup:/g, '\uD83D\uDC4D') }
    }
  }
 

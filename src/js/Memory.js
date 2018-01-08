@@ -37,6 +37,7 @@
      this.prevBrick = null
      this.clickRef = this.clickBrickEvent.bind(this)
      this.name = undefined
+     this.clickable = true
    }
 
    /**
@@ -78,6 +79,7 @@
      this.bricks.length = 0
      this.time = 0
      this.prevBrick = null
+     this.clickable = true
 
      clearTimeout(this.timer)
      this.timer = undefined
@@ -130,9 +132,11 @@
     * @param {object} event The brick that was clicked.
     */
    clickBrickEvent (event) {
-     let element = event.target.closest('img')
+     let element
 
-     if (element !== this.prevBrick && element) {
+     if (event.target.nodeName === 'IMG') { element = event.target }
+
+     if (element !== this.prevBrick && this.clickable && element) {
        if (!this.timer) { this.timer = setInterval(() => { this.time += 0.01 }, 10) }
 
        element.src = `image/memory/${element.id.slice(1)}.png`
@@ -148,19 +152,23 @@
     * Checks if the bricks that are clicked matches.
     */
    checkClickedBricks () {
+     this.clickable = false
+
      let bricksClicked = this.clickedBricks.slice()
 
-     if (bricksClicked[0].src === bricksClicked[1].src) {
-       bricksClicked[0].closest('a').style.visibility = 'hidden'
-       bricksClicked[1].closest('a').style.visibility = 'hidden'
+     setTimeout(() => {
+       if (bricksClicked[0].src === bricksClicked[1].src) {
+         bricksClicked[0].closest('a').style.visibility = 'hidden'
+         bricksClicked[1].closest('a').style.visibility = 'hidden'
 
-       this.brickCounter += 2
-     } else {
-       setTimeout(() => {
+         this.brickCounter += 2
+       } else {
          bricksClicked[0].src = '/image/memory/0.png'
          bricksClicked[1].src = '/image/memory/0.png'
-       }, 1000)
-     }
+       }
+
+       this.clickable = true
+     }, 1000)
 
      this.attempts++
      this.clickedBricks.length = 0
@@ -177,10 +185,10 @@
        setup.editAppContent('#memoryCompleted', this.currentWindow)
 
        clearInterval(this.timer)
-       this.time = `${this.time.toFixed(2)}s`
+       this.time = `${this.time.toFixed(2)}`
 
        this.currentWindow.querySelector('.attempts').textContent += this.attempts
-       this.currentWindow.querySelector('.time').textContent += this.time
+       this.currentWindow.querySelector('.time').textContent += `${this.time}s`
 
        this.loadHighscore()
      }
@@ -206,12 +214,13 @@
      let template = document.querySelector('#memoryTableRow')
 
      for (let i = 0; i < highscore.length; i++) {
+       let highscoreRow = highscore[i]
        table.appendChild(document.importNode(template.content, true))
 
-       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[0].textContent = this.name
-       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[1].textContent = this.attempts
-       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[2].textContent = this.time
-       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[3].textContent = `${this.x}x${this.y}`
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[0].textContent = highscoreRow.name
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[1].textContent = highscoreRow.attempts
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[2].textContent = `${highscoreRow.time}s`
+       table.querySelectorAll('tr')[i + 1].querySelectorAll('td')[3].textContent = highscoreRow.size
      }
 
      window.localStorage.setItem('bestPlayers', JSON.stringify(highscore))

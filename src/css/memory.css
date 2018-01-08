@@ -5,7 +5,7 @@
 }
 
 .memory .windowContent {
-    background-color: #FEFEFE;
+    background-color: rgb(231, 231, 231);
 }
 
 .memory .content img:hover {
@@ -14,6 +14,7 @@
 
 .memory .controlls {
     margin-bottom: 10px;
+    padding: 10px;
 }
 
 .memory .controlls .change,
@@ -36,11 +37,11 @@
     height: 39px;
 }
 
-.memory .controlls .change:focus,
+.memory .controlls button:focus,
 .memory .controlls select:focus,
-.memory .startGame:focus {
+.memory .controlls .startGame:focus {
     outline: none;
-    outline: 2px solid rgb(201, 201, 201);
+    border: 1px solid rgb(34, 34, 34);
 }
 
 .memory h2 {
@@ -72,4 +73,14 @@
 
 .memory table {
     margin: 0 auto;
+    padding-top: 16px;
+}
+
+.memory table td {
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+.memory table td, .memory table th {
+    max-width: 70px;
 }
