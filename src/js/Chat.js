@@ -16,7 +16,7 @@
   */
  class Chat extends DesktopWindow {
   /**
-   * Creates an instance of Chat
+   * Creates an instance of Chat.
    *
    * @memberof Chat
    */
@@ -40,7 +40,7 @@
    }
 
    /**
-    * Checks if the user already has a nickname, if not they get to choose one.
+    * Checks if the user already has a nickname, if not they get to enter one.
     */
    checkNickname () {
      if (!setup.checkLocalStorage('chatName')) {
@@ -124,7 +124,7 @@
    }
 
    /**
-    * Adds the emojis when sending the message.
+    * Adds the emojis to the message.
     */
    addEmojis () {
      let message = this.currentWindow.querySelector('textarea')

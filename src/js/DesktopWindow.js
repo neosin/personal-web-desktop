@@ -45,7 +45,7 @@
    }
 
    /**
-    * Adds icon, title and class to the opened application.
+    * Adds icon, title and class to the created window.
     */
    addInformation () {
      this.currentWindow.querySelector('p').textContent = this.title

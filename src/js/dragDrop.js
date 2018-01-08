@@ -1,7 +1,7 @@
 /**
  * Module for the drag and drop function.
  *
- * @module src/js/dragDrop.js
+ * @module src/js/dragDrop
  * @author Rasmus Falk
  * @version 1.0.0
  */

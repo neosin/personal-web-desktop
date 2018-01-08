@@ -107,7 +107,7 @@ class PhotoBooth extends DesktopWindow {
   }
 
   /**
-   * Screen for when the photo is taken.
+   * Displays the taken picture, save and new photo buttons.
    */
   takenPhoto () {
     setup.editAppContent('#photoTaken', this.currentWindow)

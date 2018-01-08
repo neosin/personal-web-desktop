@@ -72,7 +72,7 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Makes a request to the SMHI Weather API.
+   * Gets data from the SMHI Weather API.
    */
   getData () {
     setup.toggleLoading(this.currentWindow)
@@ -88,9 +88,9 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Calculates the highest, lowest and current temperature for the current time.
+   * Calculates the highest, lowest and current temperature for the current hour and day.
    *
-   * @param {number} dayCounter The day that will be calculated.
+   * @param {number} [dayCounter = 1] The day that will be calculated.
    */
   calculateWeather (dayCounter = 1) {
     this.dateObj.setDate((this.dateObj.getDate() + dayCounter))
@@ -126,7 +126,7 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Writes out each day to the DOM.
+   * Adds each day to the DOM.
    *
    * @param {number} lowest The coldest temperature of the day.
    * @param {number} highest The warmest temperature of the day.
@@ -164,7 +164,7 @@ class Weather extends DesktopWindow {
   /**
    * Get's the correct weather status for each day.
    *
-   * @param {number} weatherStatus A number representing the weather status of the current time.
+   * @param {number} weatherStatus A number representing the weather status ID of the current hour.
    * @returns {string} A string representing the weather condition for the current time.
    */
   getStatus (weatherStatus) {
@@ -179,11 +179,10 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Check's if there is a time that matches the current hour, else use the last time in the list.
+   * Check's if there is a time that matches the current hour of a day.
    *
-   * @param {object[]} temps The temperatures for each day.
+   * @param {object[]} temps The temperatures for one day.
    * @param {number} start Keeps track of the tested hour values.
-   * @returns {object} The temperature closest to the current time.
    */
   checkCurrentWeatherTime (temps, start) {
     let value = temps.filter(current => {
@@ -201,7 +200,7 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Get's the users long and lat cordinates.
+   * Get's the users long and lat coordinates.
    */
   getCurrentPosition () {
     navigator.geolocation.getCurrentPosition(position => {

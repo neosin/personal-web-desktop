@@ -55,7 +55,7 @@
  }
 
  /**
-  * Keeps the scrollbar at the bottom of the element.
+  * Keeps the scrollbar at the bottom of the given element.
   *
   * @param {object} scrollContent The element containing the scrollbar.
   */
@@ -82,7 +82,7 @@
  /**
   * Toggles the button depending on the content in the input/textarea.
   *
-  * @param {object} input The input or textarea that will be sent/submited using a button.
+  * @param {object} input A textarea or input field.
   * @param {object} button The button that will be enabled/disabled.
   */
  function enableButton (input, button) {
@@ -105,11 +105,11 @@
  /**
   * Loads a "screen" where you can enter a nickname then execute callback functions.
   *
-  * @param {string} storageId The name for the item that will be added in local storage.
+  * @param {string} storageId The ID for the item that will be added in local storage.
   * @param {string} nameTemplate The name of the template with the input and button.
   * @param {object} currentWindow The window to where the screen will be added.
   * @param {function} callback1 The first callback function.
-  * @param {string} callbackTemplate A callback template id.
+  * @param {string} callbackTemplate A callback template ID.
   */
  function enterName (storageId, nameTemplate, currentWindow, callback1, callbackTemplate) {
    editAppContent(nameTemplate, currentWindow)

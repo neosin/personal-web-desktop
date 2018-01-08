@@ -1,7 +1,7 @@
 /**
  * Module for the memory game.
  *
- * @module src/js/Memory.js
+ * @module src/js/Memory
  * @author Rasmus Falk
  * @version 1.0.0
  */
@@ -18,6 +18,8 @@
   /**
    * Creates an instance of MemoryGame.
    *
+   * @param {number} [x = 4] The number of bricks on the X-axis.
+   * @param {number} [y = 4] The number of bricks on the Y-axis.
    * @memberof MemoryGame
    */
    constructor (x = 4, y = 4) {
@@ -146,7 +148,7 @@
    }
 
    /**
-    * Checks if the bricks that are clicked matches.
+    * Checks if the bricks that where clicked matches.
     */
    checkClickedBricks () {
      this.clickable = false
