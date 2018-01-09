@@ -32,7 +32,6 @@ class Settings extends DesktopWindow {
    */
   createSettingsWindow () {
     this.createWindow()
-
     setup.editAppContent('#settings', this.currentWindow)
 
     this.currentWindow.querySelector('.content').addEventListener('click', event => {
