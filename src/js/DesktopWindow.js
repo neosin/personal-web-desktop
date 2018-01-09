@@ -76,6 +76,11 @@
      }
 
      if (this.currentWindow.offsetTop > window.innerHeight - 30) { this.currentWindow.style.top = '8px' }
+
+     if (this.currentWindow.offsetLeft > window.innerWidth - 30) {
+       this.currentWindow.style.top = '8px'
+       this.currentWindow.style.left = '8px'
+     }
    }
 }
 

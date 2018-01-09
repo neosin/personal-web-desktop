@@ -45,8 +45,13 @@ textarea:focus,
 input:focus,
 button:focus,
 div:focus,
-select:focus {
+select:focus,
+a:focus {
     outline: none;
+}
+
+a:focus {
+    opacity: 0.7;
 }
 
 input:focus {
