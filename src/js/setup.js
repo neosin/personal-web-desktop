@@ -37,7 +37,7 @@
  }
 
  /**
-  * changes the content of an application.
+  * Changes the content of an application.
   *
   * @param {string} id The ID of the template that will be added.
   * @param {object} window The window containing the content.
@@ -103,7 +103,7 @@
  }
 
  /**
-  * Loads a "screen" where you can enter a nickname then execute callback functions.
+  * Loads a "screen" where you can enter a nickname then executes callback functions.
   *
   * @param {string} storageId The ID for the item that will be added in local storage.
   * @param {string} nameTemplate The name of the template with the input and button.
@@ -123,6 +123,7 @@
      window.localStorage.setItem(storageId, input.value)
 
      if (callbackTemplate) { editAppContent(callbackTemplate, currentWindow) }
+
      callback1()
    })
  }
@@ -130,8 +131,8 @@
  /**
   * Creates a new notification.
   *
-  * @param {string} title The title of the notification.
-  * @param {string} text The text that will be displayed on the notification.
+  * @param {string} title The title-text for the notification.
+  * @param {string} text The description that will be displayed on the notification.
   * @param {string} icon Relative URL to the icon used for the notification.
   */
  function newNotification (title, text, icon) {

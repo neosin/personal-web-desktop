@@ -45,7 +45,7 @@ class Weather extends DesktopWindow {
   }
 
   /**
-   * Updates the location for the weather.
+   * Updates the location for the weather API.
    */
   changeLocation () {
     let selected = this.currentWindow.querySelector('select').value
