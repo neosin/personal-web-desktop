@@ -136,7 +136,7 @@
   */
  function newNotification (title, text, icon) {
    if (!document.hasFocus()) {
-     let config = { body: text, icon: '/image/appIcons/chat.png' }
+     let config = { body: text, icon: icon }
      let notification = new window.Notification(title, config)
 
      setTimeout(notification.close.bind(notification), 5000)

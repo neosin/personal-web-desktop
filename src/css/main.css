@@ -1,5 +1,9 @@
 /* Global */
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     background-image: url('/image/wallpapers/bg3.jpg');
     background-repeat: no-repeat;
@@ -164,9 +168,6 @@ input {
     padding: 10px;
     font-size: 14px;
     word-wrap: break-word;
-}
-
-.chatMessages {
     border: 1px solid #FEFEFE;
     height: 200px;
 }

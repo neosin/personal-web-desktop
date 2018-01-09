@@ -27,6 +27,13 @@
      if (event.target.nodeName === 'DIV') {
        event.target.style.left = `${event.clientX - offsetX}px`
        event.target.style.top = `${event.clientY - offsetY}px`
+
+       let rect = event.target.getBoundingClientRect()
+
+       if (rect.top < 0) { event.target.style.top = '0px' }
+       if (rect.left < 0) { event.target.style.left = '0px' }
+       if (rect.right > window.innerWidth) { event.target.style.left = `${window.innerWidth - rect.width}px` }
+       if (rect.bottom > window.innerHeight) { event.target.style.top = `${window.innerHeight - rect.height}px` }
      }
    })
 
