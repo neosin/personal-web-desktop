@@ -143,7 +143,7 @@
        this.clickedBricks.push(element)
        this.prevBrick = element
 
-       if (this.clickedBricks.length === 2) { this.checkClickedBricks(element) }
+       if (this.clickedBricks.length === 2) { this.checkClickedBricks() }
      }
    }
 
