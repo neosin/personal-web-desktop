@@ -13,31 +13,35 @@
   */
  function dragDrop () {
    let offsetX, offsetY
+   let currentWindow
 
    document.addEventListener('dragstart', event => {
+     event.dataTransfer.setData('x', 'x')
+
      event.dataTransfer.effectAllowed = 'move'
 
      offsetX = event.clientX - event.target.offsetLeft
      offsetY = event.clientY - event.target.offsetTop
 
      event.target.classList.add('windowDrag')
+
+     currentWindow = event.target
    })
 
-   document.addEventListener('drag', event => {
-     if (event.target.nodeName === 'DIV') {
-       event.target.style.left = `${event.clientX - offsetX}px`
-       event.target.style.top = `${event.clientY - offsetY}px`
+   document.addEventListener('dragover', event => {
+     currentWindow.style.left = `${event.clientX - offsetX}px`
+     currentWindow.style.top = `${event.clientY - offsetY}px`
 
-       let rect = event.target.getBoundingClientRect()
+     let rect = currentWindow.getBoundingClientRect()
 
-       if (rect.top < 0) { event.target.style.top = '0px' }
-       if (rect.left < 0) { event.target.style.left = '0px' }
-       if (rect.right > window.innerWidth) { event.target.style.left = `${window.innerWidth - rect.width}px` }
-       if (rect.bottom > window.innerHeight) { event.target.style.top = `${window.innerHeight - rect.height}px` }
-     }
+     if (rect.top < 0) { currentWindow.style.top = '0px' }
+     if (rect.left < 0) { currentWindow.style.left = '0px' }
+     if (rect.right > window.innerWidth) { currentWindow.style.left = `${window.innerWidth - rect.width}px` }
+     if (rect.bottom > window.innerHeight) { currentWindow.style.top = `${window.innerHeight - rect.height}px` }
+
+     event.preventDefault()
    })
 
-   document.addEventListener('dragover', event => event.preventDefault())
    document.addEventListener('dragend', event => event.target.classList.remove('windowDrag'))
  }
 
